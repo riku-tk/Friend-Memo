@@ -29,7 +29,7 @@
     <ion-list>
       <div class="ion-text-center ion-padding">
         <ion-avatar style="display: inline-block">
-          <img [src]="photo || profileObject.profilePhotoDataUrl || '/assets/shapes.svg'" />
+          <img [src]="photo || profileObject?.profilePhotoDataUrl || '/assets/shapes.svg'" />
         </ion-avatar>
       </div>
       <div class="ion-text-center">
@@ -42,6 +42,7 @@
           type="text"
           [(ngModel)]="profileObject[item]"
           [ngModelOptions]="{ standalone: true }"
+          name="item"
           required
         ></ion-input>
         <!-- <ion-input

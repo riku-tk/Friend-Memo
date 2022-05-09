@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { FirestoreService, IProfile, IUser, profileColumn, ProfileObject } from '../firestore.service';
 import { Observable } from 'rxjs';
 import { Camera, CameraResultType } from '@capacitor/camera';
+import { ulid } from 'ulid';
 
 @Component({
   selector: 'app-create',
@@ -49,6 +50,7 @@ export class CreatePage implements OnInit {
     console.log(this.profileObject);
     this.firestore.profileAdd({
       uid: this.uid,
+      profileId: ulid(),
       timeStamp: Date.now(),
       name: this.profileObject['name'],
       profilePhotoDataUrl: this.profileObject['profilePhotoDataUrl'],
@@ -59,13 +61,6 @@ export class CreatePage implements OnInit {
     });
     this.modalController.dismiss();
   }
-
-  // postMessage() {
-  //   this.firestore.profileAdd({
-  //     uid: this.uid,
-  //     timeStamp: Date.now(),
-  //   });
-  // }
 
   trackByFn(index: number, item) {
     return item.messageId;

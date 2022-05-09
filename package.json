@@ -45,6 +45,7 @@
     "lint-staged": "^12.4.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
+    "ulid": "^2.3.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

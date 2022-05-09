@@ -23,17 +23,19 @@ export interface IUser {
 export const profileColumn: Array<string> = ['name', 'age', 'gender', 'hobby', 'favoriteFood'];
 
 export interface IProfile {
-  uid?: string;
+  uid: string;
+  profileId: string;
   name?: string;
   profilePhotoDataUrl?: string;
   age?: string;
   gender?: string;
   hobby?: string;
   favoriteFood?: string;
-  timeStamp?: number;
+  timeStamp: number;
 }
 export class ProfileObject implements IProfile {
   uid = '';
+  profileId = '';
   name = '';
   profilePhotoDataUrl = '';
   age = '';
