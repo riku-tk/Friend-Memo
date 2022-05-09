@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FirestoreService, IProfile, IUser, profileColumn, ProfileObject } from '../firestore.service';
 import { Observable } from 'rxjs';
+import { Camera, CameraResultType } from '@capacitor/camera';
 
 @Component({
   selector: 'app-create',
@@ -70,11 +71,11 @@ export class CreatePage implements OnInit {
     return item.messageId;
   }
 
-  // async takePicture() {
-  //   const image = await Camera.getPhoto({
-  //     quality: 100,
-  //     resultType: CameraResultType.DataUrl,
-  //   });
-  //   this.photo = image && image.dataUrl;
-  // }
+  async takePicture() {
+    const image = await Camera.getPhoto({
+      quality: 100,
+      resultType: CameraResultType.DataUrl,
+    });
+    this.profileObject['profilePhotoDataUrl'] = image && image.dataUrl;
+  }
 }

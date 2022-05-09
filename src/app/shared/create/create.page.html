@@ -27,9 +27,14 @@
 
   <form #f="ngForm">
     <ion-list>
-      <script>
-        console.log(profileTmp);
-      </script>
+      <div class="ion-text-center ion-padding">
+        <ion-avatar style="display: inline-block">
+          <img [src]="photo || profileObject.profilePhotoDataUrl || '/assets/shapes.svg'" />
+        </ion-avatar>
+      </div>
+      <div class="ion-text-center">
+        <ion-button (click)="takePicture()" fill="clear" size="default"> 画像変更 </ion-button>
+      </div>
       <!-- <ion-item> -->
       <ion-item *ngFor="let item of profileTmp">
         <ion-label class="floating">{{ item }}</ion-label>

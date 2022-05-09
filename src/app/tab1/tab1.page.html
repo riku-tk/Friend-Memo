@@ -15,5 +15,16 @@
     <ion-icon name="add-circle-sharp"></ion-icon>
   </ion-button>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-list class="ion-padding-top">
+    <ion-item *ngFor="let c of profile | async; trackBy: trackByFn">
+      <ion-avatar slot="start" style="width: 36px; height: 36px">
+        <ion-img [src]="c?.profilePhotoDataUrl || '/assets/shapes.svg'"></ion-img>
+      </ion-avatar>
+      <ion-label class="ion-padding ion-text-wrap">
+        <div class="ion-text-nowrap">
+          <strong>{{ c.name }}</strong>
+        </div>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
