@@ -16,7 +16,7 @@
   </ion-button>
 
   <ion-list class="ion-padding-top">
-    <ion-item *ngFor="let c of profile | async; trackBy: trackByFn">
+    <ion-item *ngFor="let c of profile | async">
       <ion-avatar slot="start" style="width: 36px; height: 36px">
         <ion-img [src]="c?.profilePhotoDataUrl || '/assets/shapes.svg'"></ion-img>
       </ion-avatar>
