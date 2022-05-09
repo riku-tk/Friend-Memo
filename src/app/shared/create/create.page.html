@@ -2,9 +2,7 @@
   <ion-toolbar>
     <ion-title>create profile</ion-title>
     <ion-buttons slot="start">
-      <ion-button (click)="modalDismiss()"
-        ><ion-icon name="close" slot="icon-only"></ion-icon
-      ></ion-button>
+      <ion-button (click)="modalDismiss()"><ion-icon name="close" slot="icon-only"></ion-icon></ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-button (click)="updateProfile()">登録</ion-button>
@@ -34,7 +32,7 @@
       </script>
       <!-- <ion-item> -->
       <ion-item *ngFor="let item of profileTmp">
-        <ion-label class="floating">{{item}}</ion-label>
+        <ion-label class="floating">{{ item }}</ion-label>
         <ion-input type="text" required></ion-input>
         <!-- <ion-input
           type="text"

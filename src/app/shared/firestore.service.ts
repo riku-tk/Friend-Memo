@@ -20,14 +20,7 @@ export interface IUser {
   // photoDataUrl: string;
 }
 
-export const profileColumn: Array<string> = [
-  'name',
-  'age',
-  'gender',
-  'hobby',
-  'favoriteFood',
-  'timeStamp',
-];
+export const profileColumn: Array<string> = ['name', 'age', 'gender', 'hobby', 'favoriteFood'];
 
 export interface IProfile {
   uid?: string;
@@ -38,6 +31,9 @@ export interface IProfile {
   hobby?: string;
   favoriteFood?: string;
   timeStamp?: number;
+}
+export class ProfileObject implements IProfile {
+  name = 'B';
 }
 
 export interface IProfileList extends IUser, IProfile {}
@@ -52,14 +48,8 @@ export class FirestoreService {
   profileTmp: IProfile;
 
   constructor(public af: Firestore) {
-    this.profileCollection = collection(
-      this.af,
-      'profile'
-    ) as CollectionReference<IProfile>;
-    this.userCollection = collection(
-      this.af,
-      'users'
-    ) as CollectionReference<IUser>;
+    this.profileCollection = collection(this.af, 'profile') as CollectionReference<IProfile>;
+    this.userCollection = collection(this.af, 'users') as CollectionReference<IUser>;
   }
 
   getProfileKey(): object {
@@ -80,12 +70,9 @@ export class FirestoreService {
   }
 
   profileInit(): Observable<IProfileList[]> {
-    return collectionData(
-      query(this.profileCollection, orderBy('timeStamp', 'desc')),
-      {
-        idField: 'profileId',
-      }
-    ).pipe(
+    return collectionData(query(this.profileCollection, orderBy('timeStamp', 'desc')), {
+      idField: 'profileId',
+    }).pipe(
       concatMap(async (profiles) => {
         const users = (await collectionData(this.userCollection, {
           idField: 'uid',
@@ -97,7 +84,7 @@ export class FirestoreService {
           const user = users.find((u) => u.uid === profile.uid);
           return Object.assign(profile, user);
         });
-      })
+      }),
     );
   }
 }

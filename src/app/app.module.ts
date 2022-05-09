@@ -10,12 +10,7 @@ import { AppComponent } from './app.component';
 // Firebase
 import { provideFirebaseApp, initializeApp, getApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import {
-  provideAuth,
-  getAuth,
-  initializeAuth,
-  indexedDBLocalPersistence,
-} from '@angular/fire/auth';
+import { provideAuth, getAuth, initializeAuth, indexedDBLocalPersistence } from '@angular/fire/auth';
 import { AuthGuard } from '@angular/fire/auth-guard';
 
 // import { SplashScreen } from '@ionic-native/splash-screen/ngx';

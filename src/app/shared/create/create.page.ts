@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
-import {
-  FirestoreService,
-  IProfile,
-  IUser,
-  profileColumn,
-} from '../firestore.service';
+import { FirestoreService, IProfile, IUser, profileColumn } from '../firestore.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -22,12 +17,13 @@ export class CreatePage implements OnInit {
   };
   photo: string;
   profile: Observable<IProfile[]>;
+
   profileTmp: Array<string>;
 
   constructor(
     public modalController: ModalController,
     public authService: AuthService,
-    public firestore: FirestoreService
+    public firestore: FirestoreService,
   ) {}
 
   ngOnInit() {}
@@ -43,30 +39,24 @@ export class CreatePage implements OnInit {
       this.user = user;
     }
     this.profile = this.firestore.profileInit();
-
-    this.firestore.profileAdd({
-      uid: this.uid,
-      timeStamp: Date.now(),
-    });
-
     this.profileTmp = profileColumn;
     console.log(this.profileTmp);
   }
 
   async updateProfile() {
-    // if (this.photo) {
-    //   this.user.photoDataUrl = this.photo;
-    // }
-    // await this.firestore.userSet(this.user);
-    this.modalController.dismiss();
-  }
-
-  postMessage() {
     this.firestore.profileAdd({
       uid: this.uid,
       timeStamp: Date.now(),
     });
+    this.modalController.dismiss();
   }
+
+  // postMessage() {
+  //   this.firestore.profileAdd({
+  //     uid: this.uid,
+  //     timeStamp: Date.now(),
+  //   });
+  // }
 
   trackByFn(index: number, item) {
     return item.messageId;

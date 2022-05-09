@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
 // import { AngularFireAuth } from '@angular/fire/compat/auth';
-import {
-  Auth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-} from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { NavController, AlertController } from '@ionic/angular';
 import { firebaseError } from './firebase.error';
 
@@ -13,22 +8,14 @@ import { firebaseError } from './firebase.error';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(
-    public afAuth: Auth,
-    public navController: NavController,
-    public alertController: AlertController
-  ) {}
+  constructor(public afAuth: Auth, public navController: NavController, public alertController: AlertController) {}
 
   async getUserId(): Promise<string> {
     return (await this.afAuth.currentUser).uid;
   }
 
   authSignUp(login: { email: string; password: string }) {
-    return createUserWithEmailAndPassword(
-      this.afAuth,
-      login.email,
-      login.password
-    ).then(() => {
+    return createUserWithEmailAndPassword(this.afAuth, login.email, login.password).then(() => {
       this.navController.navigateForward('/').catch((error) => {
         console.log(error.message);
         this.alertError(error);
@@ -38,11 +25,7 @@ export class AuthService {
   }
 
   authSignIn(login: { email: string; password: string }) {
-    return signInWithEmailAndPassword(
-      this.afAuth,
-      login.email,
-      login.password
-    ).then(() => {
+    return signInWithEmailAndPassword(this.afAuth, login.email, login.password).then(() => {
       this.navController.navigateForward('/').catch((error) => {
         console.log(error.message);
         this.alertError(error);

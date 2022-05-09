@@ -9,12 +9,7 @@ import { SigninPageRoutingModule } from './signin-routing.module';
 import { SigninPage } from './signin.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    SigninPageRoutingModule
-  ],
-  declarations: [SigninPage]
+  imports: [CommonModule, FormsModule, IonicModule, SigninPageRoutingModule],
+  declarations: [SigninPage],
 })
 export class SigninPageModule {}

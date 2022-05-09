@@ -4,14 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { CreatePage } from './create/create.page';
 
-
 @NgModule({
   declarations: [CreatePage],
-  entryComponents:[CreatePage],
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-  ]
+  entryComponents: [CreatePage],
+  imports: [CommonModule, FormsModule, IonicModule],
 })
-export class SharedModule { }
+export class SharedModule {}
