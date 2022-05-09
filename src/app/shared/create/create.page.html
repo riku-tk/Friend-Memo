@@ -33,7 +33,12 @@
       <!-- <ion-item> -->
       <ion-item *ngFor="let item of profileTmp">
         <ion-label class="floating">{{ item }}</ion-label>
-        <ion-input type="text" required></ion-input>
+        <ion-input
+          type="text"
+          [(ngModel)]="profileObject[item]"
+          [ngModelOptions]="{ standalone: true }"
+          required
+        ></ion-input>
         <!-- <ion-input
           type="text"
           [(ngModel)]="user.displayName"

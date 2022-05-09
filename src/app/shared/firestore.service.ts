@@ -33,7 +33,14 @@ export interface IProfile {
   timeStamp?: number;
 }
 export class ProfileObject implements IProfile {
-  name = 'B';
+  uid = '';
+  name = '';
+  profilePhotoDataUrl = '';
+  age = '';
+  gender = '';
+  hobby = '';
+  favoriteFood = '';
+  timeStamp = Date.now();
 }
 
 export interface IProfileList extends IUser, IProfile {}

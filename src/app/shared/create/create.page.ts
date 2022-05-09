@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
-import { FirestoreService, IProfile, IUser, profileColumn } from '../firestore.service';
+import { FirestoreService, IProfile, IUser, profileColumn, ProfileObject } from '../firestore.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -17,7 +17,7 @@ export class CreatePage implements OnInit {
   };
   photo: string;
   profile: Observable<IProfile[]>;
-
+  profileObject: ProfileObject;
   profileTmp: Array<string>;
 
   constructor(
@@ -40,13 +40,21 @@ export class CreatePage implements OnInit {
     }
     this.profile = this.firestore.profileInit();
     this.profileTmp = profileColumn;
+    this.profileObject = new ProfileObject();
     console.log(this.profileTmp);
   }
 
   async updateProfile() {
+    console.log(this.profileObject);
     this.firestore.profileAdd({
       uid: this.uid,
       timeStamp: Date.now(),
+      name: this.profileObject['name'],
+      profilePhotoDataUrl: this.profileObject['profilePhotoDataUrl'],
+      age: this.profileObject['age'],
+      gender: this.profileObject['gender'],
+      hobby: this.profileObject['hobby'],
+      favoriteFood: this.profileObject['favoriteFood'],
     });
     this.modalController.dismiss();
   }
