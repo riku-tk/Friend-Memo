@@ -18,6 +18,10 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedIn },
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then((m) => m.ProfilePageModule),
+  },
 ];
 @NgModule({
   imports: [
