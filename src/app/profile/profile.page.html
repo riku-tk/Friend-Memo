@@ -3,10 +3,19 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
     </ion-buttons>
-    <ion-title>profile</ion-title>
+    <ion-avatar *ngIf="profile_data" slot="start" style="width: 36px; height: 36px">
+      <ion-img [src]="profile_data?.profilePhotoDataUrl || '/assets/shapes.svg'"></ion-img>
+    </ion-avatar>
+    <ion-title *ngIf="profile_data" size="large">{{ profile_data.name }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-item *ngIf="profile_data">{{ profile_data.name }}</ion-item>
+<!-- ['name', 'age', 'gender', 'hobby', 'favoriteFood'] -->
+<ion-content *ngIf="profile_data">
+  <ion-item> 年齢: {{ profile_data.age }} </ion-item>
+  <ion-item> 性別: {{ profile_data.gender }} </ion-item>
+  <ion-item> 趣味: {{ profile_data.hobby }} </ion-item>
+  <ion-item> 好きな食べ物: {{ profile_data.favoriteFood }} </ion-item>
+  <!-- <ion-item> : {{profile_data.}} </ion-item> -->
+  <!-- <ion-item> : {{profile_data.}} </ion-item> -->
 </ion-content>
