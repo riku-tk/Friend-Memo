@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class Tab1Page implements OnInit {
   uid: string;
+  email: string;
   user: IUser;
   profile: Observable<IProfile[]>;
 
@@ -19,6 +20,8 @@ export class Tab1Page implements OnInit {
 
   async ngOnInit() {
     const user = await this.firestore.userInit(await this.auth.getUserId());
+    console.log(user);
+
     // if (!user) {
     //   const modal = await this.modalController.create({
     //     component: ProfilePage,

@@ -5,11 +5,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Setting</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-list class="ion-padding-top">
+    <ion-item lines="none"> ログイン中のアカウント: {{ email }} </ion-item>
+    <ion-item lines="none"
+      ><ion-button color="danger" (click)="signOut()" button="true">ログアウト</ion-button></ion-item
+    >
+  </ion-list>
 </ion-content>

@@ -14,7 +14,7 @@ import { ulid } from 'ulid';
 export class CreatePage implements OnInit {
   uid: string;
   user: IUser = {
-    displayName: null,
+    email: null,
     // photoDataUrl: null,
   };
   photo: string;

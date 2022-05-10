@@ -14,6 +14,10 @@ export class AuthService {
     return (await this.afAuth.currentUser).uid;
   }
 
+  async getUserEmail(): Promise<string> {
+    return (await this.afAuth.currentUser).email;
+  }
+
   authSignUp(login: { email: string; password: string }) {
     return createUserWithEmailAndPassword(this.afAuth, login.email, login.password).then(() => {
       this.navController.navigateForward('/').catch((error) => {

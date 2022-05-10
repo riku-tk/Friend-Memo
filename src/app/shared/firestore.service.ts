@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 import { first, concatMap } from 'rxjs/operators';
 
 export interface IUser {
-  displayName: string;
+  email: string;
   // photoDataUrl: string;
 }
 
