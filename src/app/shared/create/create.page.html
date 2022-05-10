@@ -11,20 +11,6 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-item>
-    <ion-label class="ion-text-center"> RIKU </ion-label>
-    <ion-avatar class="center">
-      <ion-img
-        [src]="photo || user.photoDataUrl || '/assets/shapes.svg'"
-      ></ion-img>
-    </ion-avatar>
-    <div class="ion-text-center">
-      <ion-button (click)="takePicture()" fill="clear" size="small"
-        >画像変更</ion-button
-      >
-    </div>
-  </ion-item> -->
-
   <form #f="ngForm">
     <ion-list>
       <div class="ion-text-center ion-padding">
@@ -35,58 +21,79 @@
       <div class="ion-text-center">
         <ion-button (click)="takePicture()" fill="clear" size="default"> 画像変更 </ion-button>
       </div>
-      <!-- <ion-item> -->
-      <ion-item *ngFor="let item of profileTmp">
-        <ion-label class="floating">{{ item }}</ion-label>
+      <ion-item>
+        <ion-label class="floating">名前: </ion-label>
         <ion-input
           type="text"
-          [(ngModel)]="profileObject[item]"
+          [(ngModel)]="profileObject['name']"
           [ngModelOptions]="{ standalone: true }"
-          name="item"
+          name="name"
           required
-        ></ion-input>
-        <!-- <ion-input
-          type="text"
-          [(ngModel)]="user.displayName"
-          name="displayName"
-          required
-        ></ion-input> -->
-
-        <!-- <ion-item
-        lines="none"
-        *ngFor="let p of profile | async; trackBy: trackByFn"
-      > -->
-        <!-- <ion-avatar slot="start">
-          <img
-            [src]="p?.photoDataUrl || '/assets/shapes.svg'"
-            *ngIf="c.uid !== uid"
-          />
-        </ion-avatar>
-        <ion-label
-          class="ion-padding ion-text-wrap"
-          style="
-            background-color: var(--ion-color-light-tint);
-            border-radius: 12px;
-          "
-          [class.ion-margin-end]="c.uid !== uid"
-          [class.ion-margin-start]="c.uid === uid"
-        >
-          <div class="ion-text-nowrap">
-            <strong>{{ p.displayName }}</strong>
-          </div>
-          メッセージ {{ p.message }}
-        </ion-label> -->
-      </ion-item>
-
-      <!-- <ion-item>
-        <ion-label class="floating">名前</ion-label>
+        ></ion-input></ion-item
+      ><ion-item>
+        <ion-label class="floating">年齢: </ion-label>
         <ion-input
           type="text"
-          [(ngModel)]="user.displayName"
-          name="displayName"
+          [(ngModel)]="profileObject['age']"
+          [ngModelOptions]="{ standalone: true }"
+          name="age"
           required
-        ></ion-input>
-      </ion-item> -->
+        ></ion-input></ion-item
+      ><ion-item>
+        <ion-label class="floating">誕生日: </ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="profileObject['birthDay']"
+          [ngModelOptions]="{ standalone: true }"
+          name="birthDay"
+          required
+        ></ion-input></ion-item
+      ><ion-item>
+        <ion-label class="floating">性別: </ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="profileObject['gender']"
+          [ngModelOptions]="{ standalone: true }"
+          name="gender"
+          required
+        ></ion-input></ion-item
+      ><ion-item>
+        <ion-label class="floating">出身地: </ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="profileObject['birthPlace']"
+          [ngModelOptions]="{ standalone: true }"
+          name="birthPlace"
+          required
+        ></ion-input></ion-item
+      ><ion-item>
+        <ion-label class="floating">趣味: </ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="profileObject['hobby']"
+          [ngModelOptions]="{ standalone: true }"
+          name="hobby"
+          required
+        ></ion-input></ion-item
+      ><ion-item>
+        <ion-label class="floating">好きな食べ物: </ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="profileObject['favoriteFood']"
+          [ngModelOptions]="{ standalone: true }"
+          name="favoriteFood"
+          required
+        ></ion-input></ion-item
+      ><ion-item>
+        <ion-label class="floating">嫌いなもの: </ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="profileObject['dislikes']"
+          [ngModelOptions]="{ standalone: true }"
+          name="dislikes"
+          required
+        ></ion-input></ion-item
+      ><ion-item> </ion-item>
     </ion-list>
   </form>
 </ion-content>

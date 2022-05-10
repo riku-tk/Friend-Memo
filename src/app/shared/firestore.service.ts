@@ -31,6 +31,9 @@ export interface IProfile {
   gender?: string;
   hobby?: string;
   favoriteFood?: string;
+  birthDay?: string;
+  birthPlace?: string;
+  dislikes?: string;
   timeStamp: number;
 }
 export class ProfileObject implements IProfile {
@@ -42,6 +45,9 @@ export class ProfileObject implements IProfile {
   gender = '';
   hobby = '';
   favoriteFood = '';
+  birthDay = '';
+  birthPlace = '';
+  dislikes = '';
   timeStamp = Date.now();
 }
 

@@ -58,6 +58,9 @@ export class CreatePage implements OnInit {
       gender: this.profileObject['gender'],
       hobby: this.profileObject['hobby'],
       favoriteFood: this.profileObject['favoriteFood'],
+      birthDay: this.profileObject['birthDay'],
+      birthPlace: this.profileObject['birthPlace'],
+      dislikes: this.profileObject['dislikes'],
     });
     this.modalController.dismiss();
   }

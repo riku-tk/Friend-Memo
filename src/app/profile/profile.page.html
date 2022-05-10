@@ -10,12 +10,12 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- ['name', 'age', 'gender', 'hobby', 'favoriteFood'] -->
 <ion-content *ngIf="profile_data">
-  <ion-item> 年齢: {{ profile_data.age }} </ion-item>
-  <ion-item> 性別: {{ profile_data.gender }} </ion-item>
-  <ion-item> 趣味: {{ profile_data.hobby }} </ion-item>
-  <ion-item> 好きな食べ物: {{ profile_data.favoriteFood }} </ion-item>
-  <!-- <ion-item> : {{profile_data.}} </ion-item> -->
-  <!-- <ion-item> : {{profile_data.}} </ion-item> -->
+  <ion-item><ion-icon name="happy-outline"></ion-icon>　年齢: {{ profile_data.age }} </ion-item>
+  <ion-item><ion-icon name="gift-outline"></ion-icon>　誕生日: {{ profile_data.birthDay }} </ion-item>
+  <ion-item><ion-icon name="male-female-outline"></ion-icon>　性別: {{ profile_data.gender }} </ion-item>
+  <ion-item><ion-icon name="home-outline"></ion-icon>　出身地: {{ profile_data.birthPlace }} </ion-item>
+  <ion-item><ion-icon name="game-controller-outline"></ion-icon>　趣味: {{ profile_data.hobby }} </ion-item>
+  <ion-item><ion-icon name="thumbs-up-outline"></ion-icon>　好きな食べ物: {{ profile_data.favoriteFood }} </ion-item>
+  <ion-item><ion-icon name="sad-outline"></ion-icon>　嫌いなもの: {{ profile_data.dislikes }} </ion-item>
 </ion-content>

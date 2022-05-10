@@ -12,8 +12,7 @@ import { filter } from 'rxjs/operators';
 })
 export class ProfilePage implements OnInit {
   profileId: string;
-  profile: Observable<IProfile[]>;
-  profile_data: object;
+  profile_data: IProfile;
 
   constructor(public route: ActivatedRoute, public firestore: FirestoreService, public tab1Class: Tab1Page) {}
 
@@ -21,17 +20,12 @@ export class ProfilePage implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.profileId = params.get('profileId');
     });
-    console.log(this.profileId);
-
-    // this.profile_data = this.tab1Class.getProfileData(this.profileId);
 
     this.tab1Class.getProfiles().subscribe((profiles) => {
       console.log(profiles);
       this.profile_data = profiles.find((v) => v.profileId === this.profileId);
-      // this.profile_data = profiles[0];
     });
-
-    console.log(this.profile_data);
-    console.log(typeof this.profile_data);
+    // console.log(this.profile_data);
+    // console.log(typeof this.profile_data);
   }
 }
