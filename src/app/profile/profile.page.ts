@@ -16,10 +16,12 @@ export class ProfilePage implements OnInit {
   id: string;
   birthMonthArray: Array<number>;
   birthDayArray: Array<number>;
+  ageArray: Array<number>;
 
   constructor(public route: ActivatedRoute, public firestore: FirestoreService, public tab1Class: Tab1Page) {
     this.birthMonthArray = [...Array(12).keys()].map((i) => ++i);
     this.birthDayArray = [...Array(31).keys()].map((i) => ++i);
+    this.ageArray = [...Array(124).keys()];
   }
 
   ngOnInit() {

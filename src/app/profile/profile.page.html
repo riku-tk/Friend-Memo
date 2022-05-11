@@ -17,11 +17,14 @@
   <form #f="ngForm">
     <ion-item
       ><ion-icon name="happy-outline"></ion-icon>　年齢:
-      <ion-input
+      <ion-select value="31" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileData['age']">
+        <ion-select-option *ngFor="let age of ageArray">{{ age }}</ion-select-option>
+      </ion-select>
+      <!-- <ion-input
         [value]="profileData.age"
         [(ngModel)]="profileData['age']"
         [ngModelOptions]="{ standalone: true }"
-      ></ion-input>
+      ></ion-input> -->
     </ion-item>
     <ion-item>
       <ion-icon name="gift-outline"></ion-icon>
@@ -37,28 +40,15 @@
         </ion-select>
         日
       </ion-item>
-      <!-- <ion-icon name="gift-outline"></ion-icon>　誕生日:
-      <ion-input
-        [value]="profileData.birthMonth"
-        [(ngModel)]="profileData['birthMonth']"
-        [ngModelOptions]="{ standalone: true }"
-      ></ion-input
-      >月
-      <ion-input
-        [value]="profileData.birthDay"
-        [(ngModel)]="profileData['birthDay']"
-        [ngModelOptions]="{ standalone: true }"
-      ></ion-input -->
-      <!-- >日 -->
     </ion-item>
     <ion-item
       ><ion-icon name="male-female-outline"></ion-icon>　性別:
-      <ion-input
-        [value]="profileData.gender"
-        [(ngModel)]="profileData['gender']"
-        [ngModelOptions]="{ standalone: true }"
-      ></ion-input
-    ></ion-item>
+      <ion-select [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileData['gender']">
+        <ion-select-option>男性</ion-select-option>
+        <ion-select-option>女性</ion-select-option>
+        <ion-select-option>その他</ion-select-option>
+      </ion-select></ion-item
+    >
     <ion-item
       ><ion-icon name="home-outline"></ion-icon>　出身地:
       <ion-input

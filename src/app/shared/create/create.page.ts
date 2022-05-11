@@ -21,6 +21,7 @@ export class CreatePage implements OnInit {
   profileObject: ProfileObject;
   birthMonthArray: Array<number>;
   birthDayArray: Array<number>;
+  ageArray: Array<number>;
 
   constructor(
     public modalController: ModalController,
@@ -29,6 +30,7 @@ export class CreatePage implements OnInit {
   ) {
     this.birthMonthArray = [...Array(12).keys()].map((i) => ++i);
     this.birthDayArray = [...Array(31).keys()].map((i) => ++i);
+    this.ageArray = [...Array(124).keys()];
     this.profileObject = new ProfileObject();
   }
 
