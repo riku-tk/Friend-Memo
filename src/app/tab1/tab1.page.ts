@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { CreatePage } from '../shared/create/create.page';
 import { SharedModule } from '../shared/shared.module';
 import { AuthService } from '../auth/auth.service';
-import { FirestoreService, IProfile, IUser, profileColumn, ProfileObject } from '../shared/firestore.service';
+import { FirestoreService, IProfile, IUser, ProfileObject } from '../shared/firestore.service';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { filter, take } from 'rxjs/operators';

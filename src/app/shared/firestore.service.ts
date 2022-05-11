@@ -20,8 +20,6 @@ export interface IUser {
   // photoDataUrl: string;
 }
 
-export const profileColumn: Array<string> = ['name', 'age', 'gender', 'hobby', 'favoriteFood'];
-
 export interface IProfile {
   uid: string;
   profileId: string;
@@ -31,6 +29,8 @@ export interface IProfile {
   gender?: string;
   hobby?: string;
   favoriteFood?: string;
+  birthMonthAndDay?: string;
+  birthMonth?: string;
   birthDay?: string;
   birthPlace?: string;
   dislikes?: string;
@@ -45,6 +45,8 @@ export class ProfileObject implements IProfile {
   gender = '';
   hobby = '';
   favoriteFood = '';
+  birthMonthAndDay = '';
+  birthMonth = '';
   birthDay = '';
   birthPlace = '';
   dislikes = '';

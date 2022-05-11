@@ -39,15 +39,27 @@
           name="age"
           required
         ></ion-input></ion-item
-      ><ion-item>
+      ><ion-item slot="end">
         <ion-label class="floating">誕生日: </ion-label>
-        <ion-input
+        <ion-item lines="none">
+          <ion-select value="12" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileObject['birthMonth']">
+            <ion-select-option *ngFor="let month of birthMonthArray">{{ month }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        月
+        <ion-item lines="none">
+          <ion-select value="31" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileObject['birthDay']">
+            <ion-select-option *ngFor="let day of birthDayArray">{{ day }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        日
+        <!-- <ion-input
           type="text"
           [(ngModel)]="profileObject['birthDay']"
           [ngModelOptions]="{ standalone: true }"
           name="birthDay"
           required
-        ></ion-input></ion-item
+        ></ion-input> --> </ion-item
       ><ion-item>
         <ion-label class="floating">性別: </ion-label>
         <ion-input

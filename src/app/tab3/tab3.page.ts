@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FirestoreService, IProfile, IUser, profileColumn, ProfileObject } from '../shared/firestore.service';
+import { FirestoreService, IProfile, IUser, ProfileObject } from '../shared/firestore.service';
 import { SharedModule } from '../shared/shared.module';
 import { AuthService } from '../auth/auth.service';
 import { Observable } from 'rxjs';

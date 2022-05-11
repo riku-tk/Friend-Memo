@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
-import { FirestoreService, IProfile, IUser, profileColumn, ProfileObject } from '../firestore.service';
+import { FirestoreService, IProfile, IUser, ProfileObject } from '../firestore.service';
 import { Observable } from 'rxjs';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { ulid } from 'ulid';
@@ -20,13 +20,18 @@ export class CreatePage implements OnInit {
   photo: string;
   profile: Observable<IProfile[]>;
   profileObject: ProfileObject;
-  profileTmp: Array<string>;
+  birthMonthArray: Array<number>;
+  birthDayArray: Array<number>;
 
   constructor(
     public modalController: ModalController,
     public authService: AuthService,
     public firestore: FirestoreService,
-  ) {}
+  ) {
+    this.birthMonthArray = [...Array(12).keys()].map((i) => ++i);
+    this.birthDayArray = [...Array(31).keys()].map((i) => ++i);
+    this.profileObject = new ProfileObject();
+  }
 
   ngOnInit() {}
 
@@ -41,13 +46,17 @@ export class CreatePage implements OnInit {
       this.user = user;
     }
     this.profile = this.firestore.profileInit();
-    this.profileTmp = profileColumn;
-    this.profileObject = new ProfileObject();
-    console.log(this.profileTmp);
   }
 
   async updateProfile() {
     console.log(this.profileObject);
+    if (this.profileObject['birthMonth'] !== '' && this.profileObject['birthDay'] !== '') {
+      this.profileObject['birthMonthAndDay'] = this.profileObject['birthMonth'] + '/' + this.profileObject['birthDay'];
+    } else if (this.profileObject['birthDay'] !== '') {
+      this.profileObject['birthMonthAndDay'] = '??月' + this.profileObject['birthDay'] + '日';
+    } else if (this.profileObject['birthMonth'] !== '') {
+      this.profileObject['birthMonthAndDay'] = this.profileObject['birthMonth'] + '月' + '??日';
+    }
     this.firestore.profileAdd({
       uid: this.uid,
       profileId: ulid(),
@@ -58,7 +67,7 @@ export class CreatePage implements OnInit {
       gender: this.profileObject['gender'],
       hobby: this.profileObject['hobby'],
       favoriteFood: this.profileObject['favoriteFood'],
-      birthDay: this.profileObject['birthDay'],
+      birthDay: this.profileObject['birthMonthAndDay'],
       birthPlace: this.profileObject['birthPlace'],
       dislikes: this.profileObject['dislikes'],
     });

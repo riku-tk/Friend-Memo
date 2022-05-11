@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FirestoreService, IProfile, IUser, profileColumn, ProfileObject } from '../shared/firestore.service';
+import { FirestoreService, IProfile, IUser, ProfileObject } from '../shared/firestore.service';
 import { Observable } from 'rxjs';
 import { Tab1Page } from '../tab1/tab1.page';
 import { filter } from 'rxjs/operators';
