@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FirestoreService, IProfile, IUser, ProfileObject } from '../shared/firestore.service';
 import { Tab1Page } from '../tab1/tab1.page';
 import { Camera, CameraResultType } from '@capacitor/camera';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -24,6 +24,7 @@ export class ProfilePage implements OnInit {
     public tab1Class: Tab1Page,
     public alertController: AlertController,
     public navController: NavController,
+    private toastCtrl: ToastController,
   ) {
     this.birthMonthArray = [...Array(12).keys()].map((i) => ++i);
     this.birthDayArray = [...Array(31).keys()].map((i) => ++i);
@@ -54,6 +55,7 @@ export class ProfilePage implements OnInit {
       this.profileData['birthMonthAndDay'] = this.profileData['birthMonth'] + '月' + '??日';
     }
     this.firestore.profileSet(this.id, this.profileData);
+    this.presentToast();
   }
 
   deleteProfile() {
@@ -90,7 +92,15 @@ export class ProfilePage implements OnInit {
         },
       ],
     });
-
     await alert.present();
+  }
+
+  async presentToast() {
+    let toast = await this.toastCtrl.create({
+      message: '編集しました。',
+      duration: 2000,
+      position: 'bottom',
+    });
+    toast.present();
   }
 }
