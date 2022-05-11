@@ -21,6 +21,7 @@ export interface IUser {
 }
 
 export interface IProfile {
+  id?: string;
   uid: string;
   profileId: string;
   name?: string;
@@ -78,13 +79,21 @@ export class FirestoreService {
     return setDoc(this.userDoc, user);
   }
 
+  getProfileDoc(id: string): DocumentReference<IProfile> {
+    return doc(this.af, 'profile/' + id) as DocumentReference<IProfile>;
+  }
+
+  profileSet(id: string, profile: IProfile): Promise<void> {
+    return setDoc(this.getProfileDoc(id), profile);
+  }
+
   profileAdd(profile: IProfile) {
     return addDoc(this.profileCollection, profile);
   }
 
   profileInit(): Observable<IProfileList[]> {
     return collectionData(query(this.profileCollection, orderBy('timeStamp', 'desc')), {
-      idField: 'profileId',
+      idField: 'id',
     }).pipe(
       concatMap(async (profiles) => {
         const users = (await collectionData(this.userCollection, {

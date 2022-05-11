@@ -46,41 +46,8 @@ export class Tab1Page implements OnInit {
     return this.profile.subscribe((x) => {
       y = x.find((v) => v.profileId === pid);
       return y;
-
-      // if (typeof y !== undefined) {
-      //   return y;
-      // }
     });
-    // return {};
-
-    // let y = {};
-    // let a = {};
-    // y = this.profile.subscribe((x) => {
-    //   a = x.find((v) => v.profileId === pid);
-    // });
-    // console.log('test');
-    // console.log(y);
-    // console.log('test');
-    // console.log(a);
   }
-
-  // postMessage() {
-  //   if (!this.user) {
-  //     alert('プロフィール登録が必要です');
-  //     return;
-  //   }
-  //   this.firestore.messageAdd({
-  //     uid: this.uid,
-  //     message: this.message,
-  //     timestamp: Date.now(),
-  //   });
-  //   this.message = '';
-  //   this.content.scrollToTop(100);
-  // }
-
-  // trackByFn(index, item) {
-  //   return item.messageId;
-  // }
 
   async openCreatePage() {
     const modal = await this.modalController.create({

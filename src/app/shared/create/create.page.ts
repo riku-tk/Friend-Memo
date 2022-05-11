@@ -15,7 +15,6 @@ export class CreatePage implements OnInit {
   uid: string;
   user: IUser = {
     email: null,
-    // photoDataUrl: null,
   };
   photo: string;
   profile: Observable<IProfile[]>;
@@ -67,15 +66,13 @@ export class CreatePage implements OnInit {
       gender: this.profileObject['gender'],
       hobby: this.profileObject['hobby'],
       favoriteFood: this.profileObject['favoriteFood'],
-      birthDay: this.profileObject['birthMonthAndDay'],
+      birthMonthAndDay: this.profileObject['birthMonthAndDay'],
+      birthMonth: this.profileObject['birthMonth'],
+      birthDay: this.profileObject['birthDay'],
       birthPlace: this.profileObject['birthPlace'],
       dislikes: this.profileObject['dislikes'],
     });
     this.modalController.dismiss();
-  }
-
-  trackByFn(index: number, item) {
-    return item.messageId;
   }
 
   async takePicture() {

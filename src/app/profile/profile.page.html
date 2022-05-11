@@ -3,19 +3,93 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
     </ion-buttons>
-    <ion-avatar *ngIf="profile_data" slot="start" style="width: 36px; height: 36px">
-      <ion-img [src]="profile_data?.profilePhotoDataUrl || '/assets/shapes.svg'"></ion-img>
+    <ion-avatar *ngIf="profileData" slot="start" style="width: 36px; height: 36px">
+      <ion-img [src]="profileData?.profilePhotoDataUrl || '/assets/shapes.svg'"></ion-img>
     </ion-avatar>
-    <ion-title *ngIf="profile_data" size="large">{{ profile_data.name }}</ion-title>
+    <ion-title *ngIf="profileData" size="large">{{ profileData.name }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="secondary" (click)="setProfileData()">編集</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="profile_data">
-  <ion-item><ion-icon name="happy-outline"></ion-icon>　年齢: {{ profile_data.age }} </ion-item>
-  <ion-item><ion-icon name="gift-outline"></ion-icon>　誕生日: {{ profile_data.birthDay }} </ion-item>
-  <ion-item><ion-icon name="male-female-outline"></ion-icon>　性別: {{ profile_data.gender }} </ion-item>
-  <ion-item><ion-icon name="home-outline"></ion-icon>　出身地: {{ profile_data.birthPlace }} </ion-item>
-  <ion-item><ion-icon name="game-controller-outline"></ion-icon>　趣味: {{ profile_data.hobby }} </ion-item>
-  <ion-item><ion-icon name="thumbs-up-outline"></ion-icon>　好きな食べ物: {{ profile_data.favoriteFood }} </ion-item>
-  <ion-item><ion-icon name="sad-outline"></ion-icon>　嫌いなもの: {{ profile_data.dislikes }} </ion-item>
+<ion-content *ngIf="profileData">
+  <form #f="ngForm">
+    <ion-item
+      ><ion-icon name="happy-outline"></ion-icon>　年齢:
+      <ion-input
+        [value]="profileData.age"
+        [(ngModel)]="profileData['age']"
+        [ngModelOptions]="{ standalone: true }"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="gift-outline"></ion-icon>
+      <ion-item lines="none">
+        <ion-select value="12" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileData['birthMonth']">
+          <ion-select-option *ngFor="let month of birthMonthArray">{{ month }}</ion-select-option>
+        </ion-select>
+        月
+      </ion-item>
+      <ion-item lines="none">
+        <ion-select value="31" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileData['birthDay']">
+          <ion-select-option *ngFor="let day of birthDayArray">{{ day }}</ion-select-option>
+        </ion-select>
+        日
+      </ion-item>
+      <!-- <ion-icon name="gift-outline"></ion-icon>　誕生日:
+      <ion-input
+        [value]="profileData.birthMonth"
+        [(ngModel)]="profileData['birthMonth']"
+        [ngModelOptions]="{ standalone: true }"
+      ></ion-input
+      >月
+      <ion-input
+        [value]="profileData.birthDay"
+        [(ngModel)]="profileData['birthDay']"
+        [ngModelOptions]="{ standalone: true }"
+      ></ion-input -->
+      <!-- >日 -->
+    </ion-item>
+    <ion-item
+      ><ion-icon name="male-female-outline"></ion-icon>　性別:
+      <ion-input
+        [value]="profileData.gender"
+        [(ngModel)]="profileData['gender']"
+        [ngModelOptions]="{ standalone: true }"
+      ></ion-input
+    ></ion-item>
+    <ion-item
+      ><ion-icon name="home-outline"></ion-icon>　出身地:
+      <ion-input
+        [value]="profileData.birthPlace"
+        [(ngModel)]="profileData['birthPlace']"
+        [ngModelOptions]="{ standalone: true }"
+      ></ion-input
+    ></ion-item>
+    <ion-item
+      ><ion-icon name="game-controller-outline"></ion-icon>　趣味:
+      <ion-input
+        [value]="profileData.hobby"
+        [(ngModel)]="profileData['hobby']"
+        [ngModelOptions]="{ standalone: true }"
+      ></ion-input
+    ></ion-item>
+    <ion-item
+      ><ion-icon name="thumbs-up-outline"></ion-icon>　好きな食べ物:
+      <ion-input
+        [value]="profileData.favoriteFood"
+        [(ngModel)]="profileData['favoriteFood']"
+        [ngModelOptions]="{ standalone: true }"
+      ></ion-input
+    ></ion-item>
+    <ion-item
+      ><ion-icon name="sad-outline"></ion-icon>　嫌いなもの:
+      <ion-input
+        [value]="profileData.dislikes"
+        [(ngModel)]="profileData['dislikes']"
+        [ngModelOptions]="{ standalone: true }"
+      ></ion-input
+    ></ion-item>
+  </form>
 </ion-content>
