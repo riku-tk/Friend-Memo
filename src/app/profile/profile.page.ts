@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FirestoreService, IProfile, IUser, ProfileObject } from '../shared/firestore.service';
 import { Tab1Page } from '../tab1/tab1.page';
 import { Camera, CameraResultType } from '@capacitor/camera';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +18,13 @@ export class ProfilePage implements OnInit {
   birthDayArray: Array<number>;
   ageArray: Array<number>;
 
-  constructor(public route: ActivatedRoute, public firestore: FirestoreService, public tab1Class: Tab1Page) {
+  constructor(
+    public route: ActivatedRoute,
+    public firestore: FirestoreService,
+    public tab1Class: Tab1Page,
+    public alertController: AlertController,
+    public navController: NavController,
+  ) {
     this.birthMonthArray = [...Array(12).keys()].map((i) => ++i);
     this.birthDayArray = [...Array(31).keys()].map((i) => ++i);
     this.ageArray = [...Array(124).keys()];
@@ -49,11 +56,41 @@ export class ProfilePage implements OnInit {
     this.firestore.profileSet(this.id, this.profileData);
   }
 
+  deleteProfile() {
+    this.firestore.deleteProfile(this.id);
+  }
+
   async takePicture() {
     const image = await Camera.getPhoto({
       quality: 100,
       resultType: CameraResultType.DataUrl,
     });
     this.profileData['profilePhotoDataUrl'] = image && image.dataUrl;
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: '本当に削除しますか？',
+      buttons: [
+        {
+          text: 'いいえ',
+          role: 'cancel',
+          cssClass: 'secondary',
+          id: 'cancel-button',
+          handler: (blah) => {},
+        },
+        {
+          text: 'はい',
+          id: 'confirm-button',
+          handler: () => {
+            this.deleteProfile();
+            this.navController.back();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }

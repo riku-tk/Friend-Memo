@@ -11,6 +11,7 @@ import {
   orderBy,
   setDoc,
   addDoc,
+  deleteDoc,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { first, concatMap } from 'rxjs/operators';
@@ -85,6 +86,10 @@ export class FirestoreService {
 
   profileSet(id: string, profile: IProfile): Promise<void> {
     return setDoc(this.getProfileDoc(id), profile);
+  }
+
+  deleteProfile(id: string): Promise<void> {
+    return deleteDoc(this.getProfileDoc(id));
   }
 
   profileAdd(profile: IProfile) {

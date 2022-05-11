@@ -4,7 +4,11 @@
       <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
     </ion-buttons>
     <ion-avatar [button]="true" *ngIf="profileData" slot="start" style="width: 36px; height: 36px">
-      <ion-img (click)="takePicture()" [src]="profileData?.profilePhotoDataUrl || '/assets/shapes.svg'"></ion-img>
+      <ion-img
+        button="true"
+        (click)="takePicture()"
+        [src]="profileData?.profilePhotoDataUrl || '/assets/shapes.svg'"
+      ></ion-img>
     </ion-avatar>
     <ion-title *ngIf="profileData"
       ><ion-input
@@ -13,8 +17,8 @@
         [ngModelOptions]="{ standalone: true }"
       ></ion-input
     ></ion-title>
-    <ion-buttons slot="end">
-      <ion-button color="secondary" (click)="setProfileData()">編集</ion-button>
+    <ion-buttons slot="primary">
+      <ion-button (click)="setProfileData()" color="secondary" button="true">編集</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -87,5 +91,6 @@
         [ngModelOptions]="{ standalone: true }"
       ></ion-input
     ></ion-item>
+    <ion-button (click)="presentAlertConfirm()" color="danger" button="true">削除</ion-button>
   </form>
 </ion-content>
