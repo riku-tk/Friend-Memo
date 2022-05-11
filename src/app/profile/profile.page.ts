@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FirestoreService, IProfile, IUser, ProfileObject } from '../shared/firestore.service';
-import { Observable } from 'rxjs';
 import { Tab1Page } from '../tab1/tab1.page';
-import { filter } from 'rxjs/operators';
+import { Camera, CameraResultType } from '@capacitor/camera';
 
 @Component({
   selector: 'app-profile',
@@ -48,5 +47,13 @@ export class ProfilePage implements OnInit {
       this.profileData['birthMonthAndDay'] = this.profileData['birthMonth'] + '月' + '??日';
     }
     this.firestore.profileSet(this.id, this.profileData);
+  }
+
+  async takePicture() {
+    const image = await Camera.getPhoto({
+      quality: 100,
+      resultType: CameraResultType.DataUrl,
+    });
+    this.profileData['profilePhotoDataUrl'] = image && image.dataUrl;
   }
 }

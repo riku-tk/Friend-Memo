@@ -3,18 +3,24 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
     </ion-buttons>
-    <ion-avatar *ngIf="profileData" slot="start" style="width: 36px; height: 36px">
-      <ion-img [src]="profileData?.profilePhotoDataUrl || '/assets/shapes.svg'"></ion-img>
+    <ion-avatar [button]="true" *ngIf="profileData" slot="start" style="width: 36px; height: 36px">
+      <ion-img (click)="takePicture()" [src]="profileData?.profilePhotoDataUrl || '/assets/shapes.svg'"></ion-img>
     </ion-avatar>
-    <ion-title *ngIf="profileData" size="large">{{ profileData.name }}</ion-title>
+    <ion-title *ngIf="profileData"
+      ><ion-input
+        [value]="profileData.name"
+        [(ngModel)]="profileData['name']"
+        [ngModelOptions]="{ standalone: true }"
+      ></ion-input
+    ></ion-title>
     <ion-buttons slot="end">
       <ion-button color="secondary" (click)="setProfileData()">編集</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="profileData">
-  <form #f="ngForm">
+<ion-content>
+  <form #f="ngForm" *ngIf="profileData">
     <ion-item
       ><ion-icon name="happy-outline"></ion-icon>　年齢:
       <ion-select value="31" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileData['age']">
@@ -55,8 +61,8 @@
         [value]="profileData.birthPlace"
         [(ngModel)]="profileData['birthPlace']"
         [ngModelOptions]="{ standalone: true }"
-      ></ion-input
-    ></ion-item>
+      ></ion-input>
+    </ion-item>
     <ion-item
       ><ion-icon name="game-controller-outline"></ion-icon>　趣味:
       <ion-input
