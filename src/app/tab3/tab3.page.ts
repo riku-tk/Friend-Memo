@@ -13,15 +13,16 @@ export class Tab3Page implements OnInit {
   uid: string;
   email: string;
   user: IUser;
+
   constructor(public firestore: FirestoreService, public auth: AuthService) {}
 
   async ngOnInit() {
     this.uid = await this.auth.getUserId();
     this.user = await this.firestore.userInit(this.uid);
-    this.email = await this.auth.getUserEmail();
   }
 
-  signOut() {
+  async signOut() {
+    this.email = await this.auth.getUserEmail();
     this.auth.authSignOut();
   }
 }

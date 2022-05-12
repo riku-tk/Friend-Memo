@@ -109,6 +109,26 @@
     <div *ngSwitchCase="'memo'">
       <ion-card>
         <ion-item>
+          <ion-input
+            placeholder="メモを追加"
+            [(ngModel)]="memoData['text']"
+            [ngModelOptions]="{ standalone: true }"
+          ></ion-input>
+          <ion-button slot="end" name="add-circle-outline" (click)="addMemoData()">
+            <ion-icon name="add-circle-sharp"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-card>
+      <ion-card *ngFor="let memo of memoList | async">
+        <script>
+          console.log(memo);
+        </script>
+        <ion-item>
+          <ion-card-content> {{ memo.text }} </ion-card-content>
+        </ion-item>
+      </ion-card>
+      <!-- <ion-card>
+        <ion-item>
           <ion-card-content> 麻雀の好きな役は平和 </ion-card-content>
         </ion-item>
       </ion-card>
@@ -121,7 +141,7 @@
         <ion-item>
           <ion-card-content> いつも眠そう </ion-card-content>
         </ion-item>
-      </ion-card>
+      </ion-card> -->
     </div>
   </div>
 </ion-content>
@@ -140,17 +160,6 @@
         >
       </ion-toolbar>
     </div>
-    <div *ngSwitchCase="'memo'">
-      <ion-toolbar>
-        <ion-button
-          slot="end"
-          name="add-circle-outline"
-          style="display: block; margin-right: 20px; margin-bottom: 10px"
-        >
-          <ion-icon name="add-circle-sharp"></ion-icon>
-        </ion-button>
-        <ion-icon></ion-icon>
-      </ion-toolbar>
-    </div>
+    <div *ngSwitchCase="'memo'"></div>
   </div>
 </ion-footer>

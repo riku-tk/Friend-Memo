@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
-import { FirestoreService, IProfile, IUser, ProfileObject } from '../firestore.service';
+import { FirestoreService, IProfile, ProfileObject } from '../firestore.service';
 import { Observable } from 'rxjs';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { ulid } from 'ulid';
@@ -13,9 +13,6 @@ import { ulid } from 'ulid';
 })
 export class CreatePage implements OnInit {
   uid: string;
-  user: IUser = {
-    email: null,
-  };
   photo: string;
   profile: Observable<IProfile[]>;
   profileObject: ProfileObject;
@@ -42,11 +39,6 @@ export class CreatePage implements OnInit {
 
   async ionViewWillEnter() {
     this.uid = await this.authService.getUserId();
-    const user = await this.firestore.userInit(this.uid);
-    if (user) {
-      this.user = user;
-    }
-    this.profile = this.firestore.profileInit();
   }
 
   async updateProfile() {

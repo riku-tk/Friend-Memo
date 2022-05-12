@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FirestoreService, IProfile, IUser, ProfileObject } from '../shared/firestore.service';
+import { FirestoreService, IProfile, IMemo, ProfileObject } from '../shared/firestore.service';
 import { Tab1Page } from '../tab1/tab1.page';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { AlertController, NavController, ToastController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,6 +19,9 @@ export class ProfilePage implements OnInit {
   birthDayArray: Array<number>;
   ageArray: Array<number>;
   scene: string;
+  memoData: IMemo;
+  memoList: Observable<IMemo[]>;
+  uid: string;
 
   constructor(
     public route: ActivatedRoute,
@@ -25,26 +30,36 @@ export class ProfilePage implements OnInit {
     public alertController: AlertController,
     public navController: NavController,
     private toastCtrl: ToastController,
+    public auth: AuthService,
   ) {
     this.birthMonthArray = [...Array(12).keys()].map((i) => ++i);
     this.birthDayArray = [...Array(31).keys()].map((i) => ++i);
     this.ageArray = [...Array(124).keys()];
+    this.memoData = { profileId: '', text: '' };
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.scene = 'profile';
     this.route.paramMap.subscribe((params) => {
       this.profileId = params.get('id');
     });
+    this.uid = await this.auth.getUserId();
 
-    this.tab1Class.getProfiles().subscribe((profiles) => {
+    this.firestore.profileInit(this.uid).subscribe((profiles) => {
       console.log(profiles);
       this.profileData = profiles.find((v) => v.id === this.profileId);
       this.profileId = this.profileData.id;
       console.log(this.profileData);
+      this.memoList = this.firestore.memoInit(this.profileId);
     });
-    // console.log(this.profileData);
-    // console.log(typeof this.profileData);
+
+    // .subscribe((profiles) => {
+    //   console.log(profiles);
+    //   this.profileData = profiles.find((v) => v.id === this.profileId);
+    //   this.profileId = this.profileData.id;
+    //   console.log(this.profileData);
+    //   this.memoList = this.firestore.memoInit(this.profileId);
+    // });
   }
 
   setProfileData() {
@@ -57,6 +72,12 @@ export class ProfilePage implements OnInit {
     }
     this.firestore.profileSet(this.profileId, this.profileData);
     this.presentToast();
+  }
+
+  addMemoData() {
+    this.memoData['profileId'] = this.profileId;
+    this.firestore.memoAdd(this.memoData);
+    this.memoData['text'] = '';
   }
 
   deleteProfile() {
