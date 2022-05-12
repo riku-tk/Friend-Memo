@@ -29,20 +29,22 @@
           [ngModelOptions]="{ standalone: true }"
           name="name"
           required
-        ></ion-input></ion-item
-      ><ion-item>
+        ></ion-input
+      ></ion-item>
+      <!-- <ion-item>
         <ion-label class="floating">年齢: </ion-label>
         <ion-select value="31" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileObject['age']">
           <ion-select-option *ngFor="let age of ageArray">{{ age }}</ion-select-option>
-        </ion-select>
-        <!-- <ion-input
+        </ion-select> -->
+      <!-- <ion-input
           type="text"
           [(ngModel)]="profileObject['age']"
           [ngModelOptions]="{ standalone: true }"
           name="age"
           required
-        ></ion-input> --> </ion-item
-      ><ion-item slot="end">
+        ></ion-input> -->
+      <!-- </ion-item> -->
+      <ion-item slot="end">
         <ion-label class="floating">誕生日: </ion-label>
         <ion-item lines="none">
           <ion-select value="12" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileObject['birthMonth']">
@@ -63,14 +65,18 @@
           <ion-select-option>女性</ion-select-option>
           <ion-select-option>その他</ion-select-option>
         </ion-select>
-        <!-- <ion-input
+      </ion-item>
+      <ion-item>
+        <ion-label class="floating">職業: </ion-label>
+        <ion-input
           type="text"
-          [(ngModel)]="profileObject['gender']"
+          [(ngModel)]="profileObject['profession']"
           [ngModelOptions]="{ standalone: true }"
-          name="gender"
+          name="profession"
           required
-        ></ion-input> --> </ion-item
-      ><ion-item>
+        ></ion-input
+      ></ion-item>
+      <ion-item>
         <ion-label class="floating">出身地: </ion-label>
         <ion-input
           type="text"
@@ -89,7 +95,7 @@
           required
         ></ion-input></ion-item
       ><ion-item>
-        <ion-label class="floating">好きな食べ物: </ion-label>
+        <ion-label class="floating">好きなもの: </ion-label>
         <ion-input
           type="text"
           [(ngModel)]="profileObject['favoriteFood']"

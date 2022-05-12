@@ -27,7 +27,8 @@ export interface IProfile {
   profileId: string;
   name?: string;
   profilePhotoDataUrl?: string;
-  age?: string;
+  // age?: string;
+  profession: string;
   gender?: string;
   hobby?: string;
   favoriteFood?: string;
@@ -43,7 +44,8 @@ export class ProfileObject implements IProfile {
   profileId = '';
   name = '';
   profilePhotoDataUrl = '';
-  age = '';
+  // age = '';
+  profession = '';
   gender = '';
   hobby = '';
   favoriteFood = '';
