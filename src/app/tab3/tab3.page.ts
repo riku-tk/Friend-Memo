@@ -18,9 +18,7 @@ export class Tab3Page implements OnInit {
   async ngOnInit() {
     this.uid = await this.auth.getUserId();
     this.user = await this.firestore.userInit(this.uid);
-    console.log(this.user);
     this.email = await this.auth.getUserEmail();
-    console.log(this.email);
   }
 
   signOut() {

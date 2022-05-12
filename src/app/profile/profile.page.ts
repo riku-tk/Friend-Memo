@@ -17,6 +17,7 @@ export class ProfilePage implements OnInit {
   birthMonthArray: Array<number>;
   birthDayArray: Array<number>;
   ageArray: Array<number>;
+  scene: string;
 
   constructor(
     public route: ActivatedRoute,
@@ -32,6 +33,7 @@ export class ProfilePage implements OnInit {
   }
 
   ngOnInit() {
+    this.scene = 'profile';
     this.route.paramMap.subscribe((params) => {
       this.profileId = params.get('profileId');
     });
