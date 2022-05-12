@@ -13,7 +13,6 @@ import { AlertController, NavController, ToastController } from '@ionic/angular'
 export class ProfilePage implements OnInit {
   profileId: string;
   profileData: IProfile;
-  id: string;
   birthMonthArray: Array<number>;
   birthDayArray: Array<number>;
   ageArray: Array<number>;
@@ -35,13 +34,13 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     this.scene = 'profile';
     this.route.paramMap.subscribe((params) => {
-      this.profileId = params.get('profileId');
+      this.profileId = params.get('id');
     });
 
     this.tab1Class.getProfiles().subscribe((profiles) => {
       console.log(profiles);
-      this.profileData = profiles.find((v) => v.profileId === this.profileId);
-      this.id = this.profileData.id;
+      this.profileData = profiles.find((v) => v.id === this.profileId);
+      this.profileId = this.profileData.id;
       console.log(this.profileData);
     });
     // console.log(this.profileData);
@@ -56,12 +55,12 @@ export class ProfilePage implements OnInit {
     } else if (this.profileData['birthMonth'] !== '') {
       this.profileData['birthMonthAndDay'] = this.profileData['birthMonth'] + '月' + '??日';
     }
-    this.firestore.profileSet(this.id, this.profileData);
+    this.firestore.profileSet(this.profileId, this.profileData);
     this.presentToast();
   }
 
   deleteProfile() {
-    this.firestore.deleteProfile(this.id);
+    this.firestore.deleteProfile(this.profileId);
   }
 
   async takePicture() {

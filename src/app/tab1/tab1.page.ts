@@ -44,7 +44,7 @@ export class Tab1Page implements OnInit {
   getProfileData(pid: string): any {
     let y: {};
     return this.profile.subscribe((x) => {
-      y = x.find((v) => v.profileId === pid);
+      y = x.find((v) => v.id === pid);
       return y;
     });
   }

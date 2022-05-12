@@ -24,7 +24,6 @@ export interface IUser {
 export interface IProfile {
   id?: string;
   uid: string;
-  profileId: string;
   name?: string;
   profilePhotoDataUrl?: string;
   // age?: string;
@@ -39,9 +38,13 @@ export interface IProfile {
   dislikes?: string;
   timeStamp: number;
 }
+
+export interface IMemo {
+  id?: string;
+  profileId: string;
+}
 export class ProfileObject implements IProfile {
   uid = '';
-  profileId = '';
   name = '';
   profilePhotoDataUrl = '';
   // age = '';

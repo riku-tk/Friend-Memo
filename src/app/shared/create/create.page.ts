@@ -60,7 +60,6 @@ export class CreatePage implements OnInit {
     }
     this.firestore.profileAdd({
       uid: this.uid,
-      profileId: ulid(),
       timeStamp: Date.now(),
       name: this.profileObject['name'],
       profilePhotoDataUrl: this.profileObject['profilePhotoDataUrl'],
