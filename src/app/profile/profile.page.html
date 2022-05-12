@@ -10,8 +10,8 @@
         [ngModelOptions]="{ standalone: true }"
       ></ion-input
     ></ion-title>
-    <ion-buttons slot="primary">
-      <ion-button (click)="setProfileData()" color="secondary" button="true">保存</ion-button>
+    <ion-buttons slot="primary" [ngSwitch]="scene">
+      <ion-button *ngSwitchCase="'profile'" (click)="setProfileData()" color="secondary" button="true">保存</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -104,9 +104,53 @@
             [ngModelOptions]="{ standalone: true }"
           ></ion-input
         ></ion-item>
-        <ion-button (click)="presentAlertConfirm()" color="danger" button="true">削除</ion-button>
       </form>
     </div>
-    <div *ngSwitchCase="'memo'">メモ</div>
+    <div *ngSwitchCase="'memo'">
+      <ion-card>
+        <ion-item>
+          <ion-card-content> 麻雀の好きな役は平和 </ion-card-content>
+        </ion-item>
+      </ion-card>
+      <ion-card>
+        <ion-item>
+          <ion-card-content> 毎日ラーメン食べてる </ion-card-content>
+        </ion-item>
+      </ion-card>
+      <ion-card>
+        <ion-item>
+          <ion-card-content> いつも眠そう </ion-card-content>
+        </ion-item>
+      </ion-card>
+    </div>
   </div>
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <div [ngSwitch]="scene">
+    <div *ngSwitchCase="'profile'">
+      <ion-toolbar *ngIf="profileData">
+        <ion-button
+          slot="end"
+          (click)="presentAlertConfirm()"
+          color="danger"
+          button="true"
+          style="display: block; margin-right: 20px; margin-bottom: 10px"
+          >削除</ion-button
+        >
+      </ion-toolbar>
+    </div>
+    <div *ngSwitchCase="'memo'">
+      <ion-toolbar>
+        <ion-button
+          slot="end"
+          name="add-circle-outline"
+          style="display: block; margin-right: 20px; margin-bottom: 10px"
+        >
+          <ion-icon name="add-circle-sharp"></ion-icon>
+        </ion-button>
+        <ion-icon></ion-icon>
+      </ion-toolbar>
+    </div>
+  </div>
+</ion-footer>
