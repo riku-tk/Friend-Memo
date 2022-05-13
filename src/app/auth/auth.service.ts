@@ -15,7 +15,6 @@ export class AuthService {
   }
 
   async getUserEmail(): Promise<string> {
-    await console.log(this.afAuth.currentUser.email);
     return (await this.afAuth.currentUser).email;
   }
 

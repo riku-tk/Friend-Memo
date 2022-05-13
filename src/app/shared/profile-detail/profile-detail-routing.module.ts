@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ProfileDetailPage } from './profile-detail.page';
-
 const routes: Routes = [];
 
 @NgModule({

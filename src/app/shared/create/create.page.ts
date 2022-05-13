@@ -4,7 +4,6 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { FirestoreService, IProfile, ProfileObject } from '../firestore.service';
 import { Observable } from 'rxjs';
 import { Camera, CameraResultType } from '@capacitor/camera';
-import { ulid } from 'ulid';
 
 @Component({
   selector: 'app-create',
@@ -56,7 +55,6 @@ export class CreatePage implements OnInit {
       name: this.profileObject['name'],
       profilePhotoDataUrl: this.profileObject['profilePhotoDataUrl'],
       profession: this.profileObject['profession'],
-      // age: this.profileObject['age'],
       gender: this.profileObject['gender'],
       hobby: this.profileObject['hobby'],
       favoriteFood: this.profileObject['favoriteFood'],

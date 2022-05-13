@@ -15,17 +15,11 @@ import {
   where,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { first, concatMap } from 'rxjs/operators';
-export interface IUser {
-  email: string;
-  // photoDataUrl: string;
-}
 export interface IProfile {
   id?: string;
   uid: string;
   name?: string;
   profilePhotoDataUrl?: string;
-  // age?: string;
   profession: string;
   gender?: string;
   hobby?: string;
@@ -47,7 +41,6 @@ export class ProfileObject implements IProfile {
   uid = '';
   name = '';
   profilePhotoDataUrl = '';
-  // age = '';
   profession = '';
   gender = '';
   hobby = '';
@@ -60,33 +53,16 @@ export class ProfileObject implements IProfile {
   timeStamp = Date.now();
 }
 
-export interface Imemolist extends IProfile, IMemo {}
-export interface IProfileList extends IUser, IProfile {}
-
 @Injectable({
   providedIn: 'root',
 })
 export class FirestoreService {
-  userDoc: DocumentReference<IUser>;
   profileCollection: CollectionReference<IProfile>;
-  userCollection: CollectionReference<IUser>;
-
   memoCollection: CollectionReference<IMemo>;
-  profileTmp: IProfile;
 
   constructor(public af: Firestore) {
     this.profileCollection = collection(this.af, 'profile') as CollectionReference<IProfile>;
     this.memoCollection = collection(this.af, 'memo') as CollectionReference<IMemo>;
-    this.userCollection = collection(this.af, 'users') as CollectionReference<IUser>;
-  }
-
-  userInit(uid: string): Promise<IUser> {
-    this.userDoc = doc(this.af, `users/${uid}`) as DocumentReference<IUser>;
-    return docData<IUser>(this.userDoc).pipe(first()).toPromise(Promise);
-  }
-
-  userSet(user: IUser): Promise<void> {
-    return setDoc(this.userDoc, user);
   }
 
   getProfileDoc(id: string): DocumentReference<IProfile> {
@@ -122,42 +98,4 @@ export class FirestoreService {
       idField: 'id',
     });
   }
-
-  // profileInit(): Observable<IProfile[]> {
-  //   return collectionData(query(this.profileCollection, orderBy('timeStamp', 'desc')), {
-  //     idField: 'id',
-  //   }).pipe(
-  //     concatMap(async (profiles) => {
-  //       const users = (await collectionData(this.userCollection, {
-  //         idField: 'uid',
-  //       })
-  //         .pipe(first())
-  //         .toPromise(Promise)) as (IUser & { uid: string })[];
-
-  //       return profiles.map((profile) => {
-  //         const user = users.find((u) => u.uid === profile.uid);
-  //         return Object.assign(profile, user);
-  //       });
-  //     }),
-  //   );
-  // }
-
-  // getProfileData(profileId: string): Observable<IProfileList[]> {
-  //   return collectionData(query(this.profileCollection, orderBy('timeStamp', 'desc')), {
-  //     idField: 'profileId',
-  //   }).pipe(
-  //     concatMap(async (profiles) => {
-  //       const users = (await collectionData(this.userCollection, {
-  //         idField: 'uid',
-  //       })
-  //         .pipe(first())
-  //         .toPromise(Promise)) as (IUser & { uid: string })[];
-
-  //       return profiles.map((profile) => {
-  //         const user = users.find((u) => u.uid === profile.uid);
-  //         return Object.assign(profile, user);
-  //       });
-  //     }),
-  //   );
-  // }
 }

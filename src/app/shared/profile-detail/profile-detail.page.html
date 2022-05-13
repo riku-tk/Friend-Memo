@@ -35,12 +35,6 @@
         >
           <ion-img (click)="takePicture()" [src]="profileData?.profilePhotoDataUrl || '/assets/shapes.svg'"> ></ion-img>
         </ion-avatar>
-        <!-- <ion-item
-        ><ion-icon name="happy-outline"></ion-icon>年齢:
-        <ion-select value="31" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileData['age']">
-          <ion-select-option *ngFor="let age of ageArray">{{ age }}</ion-select-option>
-        </ion-select>
-      </ion-item> -->
         <ion-item>
           <ion-icon class="profileIcon" name="gift-outline"></ion-icon>
           <ion-item lines="none">
@@ -127,21 +121,6 @@
           <ion-card-content> {{ memo.text }} </ion-card-content>
         </ion-item>
       </ion-card>
-      <!-- <ion-card>
-        <ion-item>
-          <ion-card-content> 麻雀の好きな役は平和 </ion-card-content>
-        </ion-item>
-      </ion-card>
-      <ion-card>
-        <ion-item>
-          <ion-card-content> 毎日ラーメン食べてる </ion-card-content>
-        </ion-item>
-      </ion-card>
-      <ion-card>
-        <ion-item>
-          <ion-card-content> いつも眠そう </ion-card-content>
-        </ion-item>
-      </ion-card> -->
     </div>
   </div>
 </ion-content>

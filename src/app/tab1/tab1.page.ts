@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
 import { CreatePage } from '../shared/create/create.page';
 import { ProfileDetailPage } from '../shared/profile-detail/profile-detail.page';
-import { SharedModule } from '../shared/shared.module';
 import { AuthService } from '../auth/auth.service';
-import { FirestoreService, IProfile, ProfileObject, IMemo } from '../shared/firestore.service';
+import { FirestoreService, IProfile, IMemo } from '../shared/firestore.service';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { filter, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tab1',
@@ -18,7 +16,6 @@ import { filter, take } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class Tab1Page implements OnInit {
-  uid: string;
   email: string;
   profile: Observable<IProfile[]>;
   profileData: IProfile;
@@ -29,37 +26,17 @@ export class Tab1Page implements OnInit {
     public auth: AuthService,
     public firestore: FirestoreService,
     public navController: NavController,
-  ) {
-    // this.uid = localStorage.getItem('uid');
-    // console.log(this.uid);
-    // this.profile = this.firestore.profileInit();
-  }
+  ) {}
 
-  async ngOnInit() {
-    this.uid = await this.auth.getUserId();
+  async ngOnInit() {}
 
-    // this.uid = (this.auth.currentUser).uid
-    // this.profile = this.firestore.profileInit(this.uid);
-    // console.log(this.profile);
-  }
-
-  ionViewWillEnter() {
-    localStorage.getItem('uid');
-    this.profile = this.firestore.profileInit(this.uid);
+  async ionViewWillEnter() {
+    this.profile = this.firestore.profileInit(await this.auth.getUserId());
   }
 
   async getProfiles() {
     return await this.profile;
   }
-
-  // getProfiles(uid: string) {
-  //   let y;
-  //   const userProfile = this.profile.subscribe((x) => {
-  //     y = x.find((v) => v.id === uid);
-  //     return y;
-  //   });
-  //   return userProfile;
-  // }
 
   async openCreatePage() {
     const modal = await this.modalController.create({
@@ -69,12 +46,6 @@ export class Tab1Page implements OnInit {
   }
 
   async openDetailPage(profileData: IProfile) {
-    // this.profile.forEach((profiles) => {
-    //   console.log(profiles);
-    // const profileData = profiles.find((v) => v.id === profileId);
-    // console.log(this.profileData);
-    //   const memoList = this.firestore.memoInit(profileId);
-    // });
     const modal = await this.modalController.create({
       component: ProfileDetailPage,
       componentProps: {
@@ -84,17 +55,6 @@ export class Tab1Page implements OnInit {
     });
     await modal.present();
   }
-
-  // async onPresentModal(taskId?: number) {
-  //   const modal = await this.modalController.create({
-  //     component: TaskModalComponent,
-  //     componentProps: {
-  //       taskId: taskId,
-  //       isEdit: !!taskId,
-  //     },
-  //   });
-  //   return await modal.present();
-  // }
 
   public openItem(itemId: string): void {
     this.navController.navigateForward(['profile', itemId]);

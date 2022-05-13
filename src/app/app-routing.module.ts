@@ -19,8 +19,8 @@ const routes: Routes = [
     data: { authGuardPipe: redirectLoggedIn },
   },
   {
-    path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then((m) => m.ProfilePageModule),
+    path: 'profile-detail',
+    loadChildren: () => import('./shared/profile-detail/profile-detail.module').then((m) => m.ProfileDetailPageModule),
   },
 ];
 @NgModule({

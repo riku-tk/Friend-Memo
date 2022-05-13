@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FirestoreService, IProfile, IUser, ProfileObject } from '../shared/firestore.service';
+import { FirestoreService, IProfile, ProfileObject } from '../shared/firestore.service';
 import { SharedModule } from '../shared/shared.module';
 import { AuthService } from '../auth/auth.service';
 import { Observable } from 'rxjs';
@@ -12,13 +12,11 @@ import { Observable } from 'rxjs';
 export class Tab3Page implements OnInit {
   uid: string;
   email: string;
-  user: IUser;
 
   constructor(public firestore: FirestoreService, public auth: AuthService) {}
 
   async ngOnInit() {
     this.uid = await this.auth.getUserId();
-    this.user = await this.firestore.userInit(this.uid);
   }
 
   async signOut() {

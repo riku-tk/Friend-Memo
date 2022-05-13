@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
-import { FirestoreService, IProfile, IMemo, ProfileObject } from '../firestore.service';
+import { FirestoreService, IProfile, IMemo } from '../firestore.service';
 import { Tab1Page } from '../../tab1/tab1.page';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { AlertController, NavController, ToastController } from '@ionic/angular';
@@ -43,12 +43,6 @@ export class ProfileDetailPage implements OnInit {
 
   ngOnInit() {
     this.scene = 'profile';
-    // this.route.paramMap.subscribe((params) => {
-    //   this.profileId = params.get('id');
-    // });
-    // this.uid = await this.auth.getUserId();
-    // this.profile = this.tab1Class.getProfiles();
-    // console.log(this.profile);
   }
 
   modalDismiss() {
