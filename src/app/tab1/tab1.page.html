@@ -16,15 +16,11 @@
   </ion-button>
 
   <ion-list>
-    <ion-item *ngFor="let c of profile | async" (click)="openDetailPage(c)">
+    <ion-item lines="full" *ngFor="let c of profile | async" (click)="openDetailPage(c)">
       <ion-avatar slot="start" style="width: 36px; height: 36px">
         <ion-img [src]="c?.profilePhotoDataUrl || '/assets/shapes.svg'"></ion-img>
       </ion-avatar>
-      <ion-label class="ion-padding ion-text-wrap">
-        <div class="ion-text-nowrap">
-          <strong>{{ c.name }}</strong>
-        </div>
-      </ion-label>
+      <div class="ion-text-nowrap" style="padding-top: 10px; padding-bottom: 10px">{{ c.name }}</div>
     </ion-item>
   </ion-list>
 </ion-content>
