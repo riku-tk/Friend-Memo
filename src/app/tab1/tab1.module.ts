@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { SharedModule } from '../shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { ProfilePageModule } from '../profile/profile.module';
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 
@@ -16,6 +18,7 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
     SharedModule,
+    RouterModule.forChild([{ path: '', component: ProfilePageModule }]),
   ],
   declarations: [Tab1Page],
 })
