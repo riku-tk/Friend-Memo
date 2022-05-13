@@ -58,13 +58,18 @@ export class ProfileDetailPage implements OnInit {
       this.profileData['birthMonthAndDay'] = this.profileData['birthMonth'] + '月' + '??日';
     }
     this.firestore.profileSet(this.profileData.id, this.profileData);
-    this.presentToast();
+    this.presentToast('編集しました。');
   }
 
   addMemoData() {
-    this.memoData['profileId'] = this.profileData.id;
-    this.firestore.memoAdd(this.memoData);
-    this.memoData['text'] = '';
+    if (this.memoData['text'] === '') {
+      this.presentToast('1文字以上入力して下さい。');
+    } else {
+      this.memoData['profileId'] = this.profileData.id;
+      this.memoData['timeStamp'] = Date.now();
+      this.firestore.memoAdd(this.memoData);
+      this.memoData['text'] = '';
+    }
   }
 
   deleteProfile() {
@@ -104,9 +109,9 @@ export class ProfileDetailPage implements OnInit {
     await alert.present();
   }
 
-  async presentToast() {
+  async presentToast(message: string) {
     let toast = await this.toastCtrl.create({
-      message: '編集しました。',
+      message: message,
       duration: 2000,
       position: 'bottom',
     });

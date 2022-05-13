@@ -133,9 +133,6 @@
         </ion-item>
       </ion-card>
       <ion-card *ngFor="let memo of memoList | async">
-        <script>
-          console.log(memo);
-        </script>
         <ion-item>
           <ion-card-content> {{ memo.text }} </ion-card-content>
         </ion-item>
