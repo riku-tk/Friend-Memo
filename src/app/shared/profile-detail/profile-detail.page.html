@@ -10,8 +10,8 @@
         [ngModelOptions]="{ standalone: true }"
       ></ion-input
     ></ion-title>
-    <ion-buttons slot="primary" [ngSwitch]="scene">
-      <ion-button *ngSwitchCase="'profile'" (click)="setProfileData()" color="secondary" button="true">保存</ion-button>
+    <ion-buttons slot="end" [ngSwitch]="scene">
+      <ion-button *ngSwitchCase="'profile'" (click)="setProfileData()" color="primary" button="true">保存</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -132,7 +132,7 @@
           </ion-button>
         </ion-item>
       </ion-card>
-      <ion-card *ngFor="let memo of memoList | async">
+      <ion-card *ngFor="let memo of memoList | async" (click)="changeTask(memo.id, memo.text)">
         <ion-item>
           <ion-card-content> {{ memo.text }} </ion-card-content>
         </ion-item>

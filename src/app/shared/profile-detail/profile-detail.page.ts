@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { FirestoreService, IProfile, IMemo } from '../firestore.service';
 import { Tab1Page } from '../../tab1/tab1.page';
@@ -33,6 +33,7 @@ export class ProfileDetailPage implements OnInit {
     public navController: NavController,
     private toastCtrl: ToastController,
     public auth: AuthService,
+    public actionSheetController: ActionSheetController,
   ) {
     console.log('test');
     this.birthMonthArray = [...Array(12).keys()].map((i) => ++i);
@@ -58,7 +59,7 @@ export class ProfileDetailPage implements OnInit {
       this.profileData['birthMonthAndDay'] = this.profileData['birthMonth'] + '月' + '??日';
     }
     this.firestore.profileSet(this.profileData.id, this.profileData);
-    this.presentToast('編集しました。');
+    this.presentToast('編集を保存しました。');
   }
 
   addMemoData() {
@@ -116,5 +117,66 @@ export class ProfileDetailPage implements OnInit {
       position: 'bottom',
     });
     toast.present();
+  }
+
+  async changeTask(id: string, text: string) {
+    const actionSheet = await this.actionSheetController.create({
+      header: text,
+      buttons: [
+        {
+          text: '削除',
+          icon: 'trash-outline',
+          handler: () => {
+            this.firestore.deleteMemo(id);
+            this.presentToast('「' + text + '」を削除しました。');
+          },
+        },
+        {
+          text: '編集',
+          icon: 'create-outline',
+          handler: () => {
+            this._renameTask(id, text);
+          },
+        },
+        {
+          text: '閉じる',
+          icon: 'close-outline',
+          handler: () => {},
+        },
+      ],
+    });
+    actionSheet.present();
+  }
+
+  async _renameTask(id: string, text: string) {
+    const prompt = await this.alertController.create({
+      inputs: [
+        {
+          name: 'memo',
+          placeholder: 'メモ',
+          value: text,
+        },
+      ],
+      buttons: [
+        {
+          text: '閉じる',
+        },
+        {
+          text: '保存',
+          handler: (data) => {
+            if (data.memo === '') {
+              this.presentToast('1文字以上入力して下さい。');
+            } else {
+              this.memoData['profileId'] = this.profileData.id;
+              this.memoData['timeStamp'] = Date.now();
+              this.memoData['text'] = data.memo;
+              this.firestore.memoSet(id, this.memoData);
+              this.memoData['text'] = '';
+            }
+          },
+        },
+      ],
+    });
+    prompt.present();
   }
 }

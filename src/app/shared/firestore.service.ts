@@ -82,6 +82,18 @@ export class FirestoreService {
     return addDoc(this.profileCollection, profile);
   }
 
+  getMemoDoc(id: string): DocumentReference<IMemo> {
+    return doc(this.af, 'memo/' + id) as DocumentReference<IMemo>;
+  }
+
+  memoSet(id: string, memo: IMemo): Promise<void> {
+    return setDoc(this.getMemoDoc(id), memo);
+  }
+
+  deleteMemo(id: string): Promise<void> {
+    return deleteDoc(this.getMemoDoc(id));
+  }
+
   memoAdd(memo: IMemo) {
     return addDoc(this.memoCollection, memo);
   }
