@@ -17,15 +17,50 @@
 </ion-header>
 <ion-content>
   <ion-segment [(ngModel)]="scene">
-    <ion-segment-button value="profile" checked>
-      <ion-icon name="person-circle-outline"></ion-icon>
-    </ion-segment-button>
     <ion-segment-button value="memo">
       <ion-icon name="chatbubbles-outline"></ion-icon>
+    </ion-segment-button>
+
+    <ion-segment-button value="profile">
+      <ion-icon name="person-circle-outline"></ion-icon>
     </ion-segment-button>
   </ion-segment>
 
   <div [ngSwitch]="scene">
+    <div *ngSwitchCase="'memo'">
+      <ion-card style="margin: 8px 8px; box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px">
+        <ion-item lines="none">
+          <ion-input
+            placeholder="メモを追加"
+            [(ngModel)]="memoData['text']"
+            [ngModelOptions]="{ standalone: true }"
+          ></ion-input>
+          <ion-button slot="end" name="add-circle-outline" (click)="addMemoData()">
+            <ion-icon name="add-circle-sharp"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-card>
+      <ion-card
+        *ngFor="let memo of memoList | async"
+        style="margin: 16px 8px; box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px"
+      >
+        <ion-card-header style="padding: 3px 3px 0 0; text-align: right">
+          <ion-icon
+            style="font-size: 20px"
+            name="pin-outline"
+            *ngIf="memo.pinningFlg === false"
+            (click)="pinningMemo(memo)"
+          ></ion-icon>
+          <ion-icon
+            style="font-size: 20px"
+            name="pin-sharp"
+            *ngIf="memo.pinningFlg"
+            (click)="removePinMemo(memo)"
+          ></ion-icon>
+        </ion-card-header>
+        <ion-card-content (click)="changeMemo(memo.id, memo.text)">{{ memo.text }}</ion-card-content>
+      </ion-card>
+    </div>
     <div *ngSwitchCase="'profile'">
       <form #f="ngForm" *ngIf="profileDataCopy">
         <ion-item lines="full">
@@ -145,25 +180,6 @@
           ></ion-input
         ></ion-item>
       </form>
-    </div>
-    <div *ngSwitchCase="'memo'">
-      <ion-card>
-        <ion-item lines="none">
-          <ion-input
-            placeholder="メモを追加"
-            [(ngModel)]="memoData['text']"
-            [ngModelOptions]="{ standalone: true }"
-          ></ion-input>
-          <ion-button slot="end" name="add-circle-outline" (click)="addMemoData()">
-            <ion-icon name="add-circle-sharp"></ion-icon>
-          </ion-button>
-        </ion-item>
-      </ion-card>
-      <ion-card *ngFor="let memo of memoList | async" (click)="changeMemo(memo.id, memo.text)">
-        <ion-item lines="none">
-          <ion-card-content> {{ memo.text }} </ion-card-content>
-        </ion-item>
-      </ion-card>
     </div>
   </div>
 </ion-content>

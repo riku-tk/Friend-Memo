@@ -44,7 +44,7 @@ export class ProfileDetailPage implements OnInit {
   }
 
   async ngOnInit() {
-    this.scene = 'profile';
+    this.scene = 'memo';
     this.profileDataCopy = await Object.assign({}, this.profileData);
   }
 
@@ -75,6 +75,7 @@ export class ProfileDetailPage implements OnInit {
     } else {
       this.memoData['profileId'] = this.profileData.id;
       this.memoData['timeStamp'] = Date.now();
+      this.memoData['pinningFlg'] = false;
       this.firestore.memoAdd(this.memoData);
       this.memoData['text'] = '';
     }
@@ -195,6 +196,17 @@ export class ProfileDetailPage implements OnInit {
   removePin(profileData: IProfile) {
     profileData['pinningFlg'] = false;
     this.firestore.profileSet(profileData.id, profileData);
+    this.presentToast('ピン留めを外しました');
+  }
+
+  pinningMemo(memoData: IMemo) {
+    memoData['pinningFlg'] = true;
+    this.firestore.memoSet(memoData.id, memoData);
+    this.presentToast('ピン留めしました');
+  }
+  removePinMemo(memoData: IMemo) {
+    memoData['pinningFlg'] = false;
+    this.firestore.memoSet(memoData.id, memoData);
     this.presentToast('ピン留めを外しました');
   }
 }

@@ -38,6 +38,7 @@ export interface IMemo {
   profileId?: string;
   text?: string;
   timeStamp?: number;
+  pinningFlg?: boolean;
 }
 export class ProfileObject implements IProfile {
   uid = '';
@@ -101,7 +102,12 @@ export class FirestoreService {
 
   memoInit(profileId: string): Observable<IMemo[]> {
     return collectionData(
-      query(this.memoCollection, where('profileId', '==', profileId), orderBy('timeStamp', 'desc')),
+      query(
+        this.memoCollection,
+        where('profileId', '==', profileId),
+        orderBy('pinningFlg', 'desc'),
+        orderBy('timeStamp', 'desc'),
+      ),
       {
         idField: 'id',
       },
