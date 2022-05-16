@@ -72,7 +72,7 @@ export class Tab1Page implements OnInit {
 
   removePin(profileData: IProfile) {
     profileData['pinningFlg'] = false;
-    this.presentToast('ピン留めを外しました。');
+    this.presentToast('ピン留めを外しました');
     this.firestore.profileSet(profileData.id, profileData);
   }
 }

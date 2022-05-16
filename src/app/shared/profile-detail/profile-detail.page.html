@@ -3,10 +3,10 @@
     <ion-buttons slot="start">
       <ion-button (click)="modalDismiss()"><ion-icon name="close" slot="icon-only"></ion-icon></ion-button>
     </ion-buttons>
-    <ion-title *ngIf="profileData"
+    <ion-title *ngIf="profileDataCopy"
       ><ion-input
-        [value]="profileData.name"
-        [(ngModel)]="profileData['name']"
+        [value]="profileDataCopy.name"
+        [(ngModel)]="profileDataCopy['name']"
         [ngModelOptions]="{ standalone: true }"
       ></ion-input
     ></ion-title>
@@ -27,11 +27,11 @@
 
   <div [ngSwitch]="scene">
     <div *ngSwitchCase="'profile'">
-      <form #f="ngForm" *ngIf="profileData">
+      <form #f="ngForm" *ngIf="profileDataCopy">
         <ion-item lines="full">
           <div slot="start"></div>
           <ion-avatar
-            *ngIf="profileData"
+            *ngIf="profileDataCopy"
             style="width: 60px; height: 60px; display: block; margin-left: auto; margin-right: auto; margin-top: 5px"
           >
             <ion-img (click)="takePicture()" [src]="profileData?.profilePhotoDataUrl || '/assets/shapes.svg'">
@@ -58,13 +58,13 @@
         <ion-item lines="full">
           <ion-icon slot="start" size="small" class="profileIcon" name="gift-outline"></ion-icon>
           <ion-item lines="none">
-            <ion-select value="12" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileData['birthMonth']">
+            <ion-select value="12" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileDataCopy['birthMonth']">
               <ion-select-option *ngFor="let month of birthMonthArray">{{ month }}</ion-select-option>
             </ion-select>
           </ion-item>
           月
           <ion-item lines="none">
-            <ion-select value="31" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileData['birthDay']">
+            <ion-select value="31" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileDataCopy['birthDay']">
               <ion-select-option *ngFor="let day of birthDayArray">{{ day }}</ion-select-option>
             </ion-select>
           </ion-item>
@@ -74,7 +74,7 @@
           <ion-label position="floating">
             <ion-icon slot="start" class="profileIcon" name="transgender-outline"></ion-icon>性別</ion-label
           >
-          <ion-select [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileData['gender']">
+          <ion-select [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileDataCopy['gender']">
             <ion-select-option>男性</ion-select-option>
             <ion-select-option>女性</ion-select-option>
             <ion-select-option>その他</ion-select-option>
@@ -86,8 +86,8 @@
             職業
           </ion-label>
           <ion-input
-            [value]="profileData.profession"
-            [(ngModel)]="profileData['profession']"
+            [value]="profileDataCopy.profession"
+            [(ngModel)]="profileDataCopy['profession']"
             [ngModelOptions]="{ standalone: true }"
             placeholder="職業"
           ></ion-input>
@@ -97,8 +97,8 @@
             ><ion-icon slot="start" class="profileIcon" name="home-outline"></ion-icon>出身地</ion-label
           >
           <ion-input
-            [value]="profileData.birthPlace"
-            [(ngModel)]="profileData['birthPlace']"
+            [value]="profileDataCopy.birthPlace"
+            [(ngModel)]="profileDataCopy['birthPlace']"
             [ngModelOptions]="{ standalone: true }"
             placeholder="出身地"
           ></ion-input>
@@ -108,8 +108,8 @@
             ><ion-icon slot="start" class="profileIcon" name="game-controller-outline"></ion-icon>趣味</ion-label
           >
           <ion-input
-            [value]="profileData.hobby"
-            [(ngModel)]="profileData['hobby']"
+            [value]="profileDataCopy.hobby"
+            [(ngModel)]="profileDataCopy['hobby']"
             [ngModelOptions]="{ standalone: true }"
             placeholder="趣味"
           ></ion-input
@@ -119,8 +119,8 @@
             ><ion-icon slot="start" class="profileIcon" name="thumbs-up-outline"></ion-icon>好きなもの</ion-label
           >
           <ion-input
-            [value]="profileData.favoriteFood"
-            [(ngModel)]="profileData['favoriteFood']"
+            [value]="profileDataCopy.favoriteFood"
+            [(ngModel)]="profileDataCopy['favoriteFood']"
             [ngModelOptions]="{ standalone: true }"
             placeholder="好きなもの"
           ></ion-input
@@ -130,8 +130,8 @@
             ><ion-icon slot="start" class="profileIcon" name="sad-outline"></ion-icon>嫌いなもの</ion-label
           >
           <ion-input
-            [value]="profileData.dislikes"
-            [(ngModel)]="profileData['dislikes']"
+            [value]="profileDataCopy.dislikes"
+            [(ngModel)]="profileDataCopy['dislikes']"
             [ngModelOptions]="{ standalone: true }"
             placeholder="嫌いなもの"
           ></ion-input
@@ -151,7 +151,7 @@
           </ion-button>
         </ion-item>
       </ion-card>
-      <ion-card *ngFor="let memo of memoList | async" (click)="changeTask(memo.id, memo.text)">
+      <ion-card *ngFor="let memo of memoList | async" (click)="changeMemo(memo.id, memo.text)">
         <ion-item>
           <ion-card-content> {{ memo.text }} </ion-card-content>
         </ion-item>
@@ -165,7 +165,7 @@
     <div *ngSwitchCase="'profile'">
       <ion-toolbar>
         <ion-button
-          *ngIf="profileData"
+          *ngIf="profileDataCopy"
           slot="end"
           (click)="presentAlertConfirm()"
           color="danger"

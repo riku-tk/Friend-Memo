@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FirestoreService, IProfile, ProfileObject } from '../firestore.service';
 import { Observable } from 'rxjs';
@@ -23,6 +23,7 @@ export class CreatePage implements OnInit {
     public modalController: ModalController,
     public authService: AuthService,
     public firestore: FirestoreService,
+    public toastCtrl: ToastController,
   ) {
     this.birthMonthArray = [...Array(12).keys()].map((i) => ++i);
     this.birthDayArray = [...Array(31).keys()].map((i) => ++i);
@@ -40,6 +41,15 @@ export class CreatePage implements OnInit {
     this.uid = await this.authService.getUserId();
   }
 
+  async presentToast(message: string) {
+    let toast = await this.toastCtrl.create({
+      message: message,
+      duration: 2000,
+      position: 'bottom',
+    });
+    toast.present();
+  }
+
   async updateProfile() {
     console.log(this.profileObject);
     if (this.profileObject['birthMonth'] !== '' && this.profileObject['birthDay'] !== '') {
@@ -49,23 +59,27 @@ export class CreatePage implements OnInit {
     } else if (this.profileObject['birthMonth'] !== '') {
       this.profileObject['birthMonthAndDay'] = this.profileObject['birthMonth'] + '月' + '??日';
     }
-    this.firestore.profileAdd({
-      uid: this.uid,
-      timeStamp: Date.now(),
-      name: this.profileObject['name'],
-      profilePhotoDataUrl: this.profileObject['profilePhotoDataUrl'],
-      profession: this.profileObject['profession'],
-      gender: this.profileObject['gender'],
-      hobby: this.profileObject['hobby'],
-      favoriteFood: this.profileObject['favoriteFood'],
-      birthMonthAndDay: this.profileObject['birthMonthAndDay'],
-      birthMonth: this.profileObject['birthMonth'],
-      birthDay: this.profileObject['birthDay'],
-      birthPlace: this.profileObject['birthPlace'],
-      dislikes: this.profileObject['dislikes'],
-      pinningFlg: false,
-    });
-    this.modalController.dismiss();
+    if (this.profileObject['name'] === '') {
+      this.presentToast('名前に1文字以上、入力して下さい');
+    } else {
+      this.firestore.profileAdd({
+        uid: this.uid,
+        timeStamp: Date.now(),
+        name: this.profileObject['name'],
+        profilePhotoDataUrl: this.profileObject['profilePhotoDataUrl'],
+        profession: this.profileObject['profession'],
+        gender: this.profileObject['gender'],
+        hobby: this.profileObject['hobby'],
+        favoriteFood: this.profileObject['favoriteFood'],
+        birthMonthAndDay: this.profileObject['birthMonthAndDay'],
+        birthMonth: this.profileObject['birthMonth'],
+        birthDay: this.profileObject['birthDay'],
+        birthPlace: this.profileObject['birthPlace'],
+        dislikes: this.profileObject['dislikes'],
+        pinningFlg: false,
+      });
+      this.modalController.dismiss();
+    }
   }
 
   async takePicture() {
