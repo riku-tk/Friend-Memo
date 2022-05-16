@@ -63,6 +63,7 @@ export class CreatePage implements OnInit {
       birthDay: this.profileObject['birthDay'],
       birthPlace: this.profileObject['birthPlace'],
       dislikes: this.profileObject['dislikes'],
+      pinningFlg: false,
     });
     this.modalController.dismiss();
   }

@@ -29,6 +29,7 @@ export interface IProfile {
   birthDay?: string;
   birthPlace?: string;
   dislikes?: string;
+  pinningFlg?: boolean;
   timeStamp: number;
 }
 
@@ -110,8 +111,16 @@ export class FirestoreService {
   profileInit(uid: string): Observable<IProfile[]> {
     console.log(uid);
     console.log(collectionData(this.profileCollection));
-    return collectionData(query(this.profileCollection, where('uid', '==', uid), orderBy('timeStamp', 'desc')), {
-      idField: 'id',
-    });
+    return collectionData(
+      query(
+        this.profileCollection,
+        where('uid', '==', uid),
+        orderBy('pinningFlg', 'desc'),
+        orderBy('timeStamp', 'desc'),
+      ),
+      {
+        idField: 'id',
+      },
+    );
   }
 }

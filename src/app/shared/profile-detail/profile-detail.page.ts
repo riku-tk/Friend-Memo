@@ -58,6 +58,7 @@ export class ProfileDetailPage implements OnInit {
     } else if (this.profileData['birthMonth'] !== '') {
       this.profileData['birthMonthAndDay'] = this.profileData['birthMonth'] + '月' + '??日';
     }
+    this.profileData['pinningFlg'] = true;
     this.firestore.profileSet(this.profileData.id, this.profileData);
     this.presentToast('編集を保存しました。');
   }
@@ -178,5 +179,16 @@ export class ProfileDetailPage implements OnInit {
       ],
     });
     prompt.present();
+  }
+
+  pinning(profileData: IProfile) {
+    profileData['pinningFlg'] = true;
+    this.firestore.profileSet(profileData.id, profileData);
+    this.presentToast('ピン留めしました。');
+  }
+  removePin(profileData: IProfile) {
+    profileData['pinningFlg'] = false;
+    this.firestore.profileSet(profileData.id, profileData);
+    this.presentToast('ピン留めを外しました。');
   }
 }
