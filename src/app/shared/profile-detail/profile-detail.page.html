@@ -61,19 +61,18 @@
             <ion-select value="12" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileData['birthMonth']">
               <ion-select-option *ngFor="let month of birthMonthArray">{{ month }}</ion-select-option>
             </ion-select>
-            月
           </ion-item>
+          月
           <ion-item lines="none">
             <ion-select value="31" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileData['birthDay']">
               <ion-select-option *ngFor="let day of birthDayArray">{{ day }}</ion-select-option>
             </ion-select>
-            日
           </ion-item>
+          日
         </ion-item>
         <ion-item>
           <ion-label position="floating">
-            <ion-icon size="small" slot="start" class="profileIcon" name="transgender-outline"></ion-icon
-            >性別</ion-label
+            <ion-icon slot="start" class="profileIcon" name="transgender-outline"></ion-icon>性別</ion-label
           >
           <ion-select [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileData['gender']">
             <ion-select-option>男性</ion-select-option>

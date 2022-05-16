@@ -21,7 +21,7 @@
         <ion-button (click)="takePicture()" fill="clear" size="default"> 画像変更 </ion-button>
       </div>
       <ion-item>
-        <ion-label class="floating">名前: </ion-label>
+        <ion-label>名前: </ion-label>
         <ion-input
           type="text"
           [(ngModel)]="profileObject['name']"
@@ -31,8 +31,8 @@
         ></ion-input
       ></ion-item>
 
-      <ion-item slot="end">
-        <ion-label class="floating">誕生日: </ion-label>
+      <ion-item lines="full">
+        <ion-label>誕生日: </ion-label>
         <ion-item lines="none">
           <ion-select value="12" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileObject['birthMonth']">
             <ion-select-option *ngFor="let month of birthMonthArray">{{ month }}</ion-select-option>
@@ -46,7 +46,7 @@
         </ion-item>
         日 </ion-item
       ><ion-item>
-        <ion-label class="floating">性別: </ion-label>
+        <ion-label>性別: </ion-label>
         <ion-select [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileObject['gender']">
           <ion-select-option>男性</ion-select-option>
           <ion-select-option>女性</ion-select-option>
@@ -54,7 +54,7 @@
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label class="floating">職業: </ion-label>
+        <ion-label>職業: </ion-label>
         <ion-input
           type="text"
           [(ngModel)]="profileObject['profession']"
@@ -64,7 +64,7 @@
         ></ion-input
       ></ion-item>
       <ion-item>
-        <ion-label class="floating">出身地: </ion-label>
+        <ion-label>出身地: </ion-label>
         <ion-input
           type="text"
           [(ngModel)]="profileObject['birthPlace']"
@@ -73,7 +73,7 @@
           required
         ></ion-input></ion-item
       ><ion-item>
-        <ion-label class="floating">趣味: </ion-label>
+        <ion-label>趣味: </ion-label>
         <ion-input
           type="text"
           [(ngModel)]="profileObject['hobby']"
@@ -82,7 +82,7 @@
           required
         ></ion-input></ion-item
       ><ion-item>
-        <ion-label class="floating">好きなもの: </ion-label>
+        <ion-label>好きなもの: </ion-label>
         <ion-input
           type="text"
           [(ngModel)]="profileObject['favoriteFood']"
@@ -92,7 +92,7 @@
         ></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label class="floating">嫌いなもの: </ion-label>
+        <ion-label>嫌いなもの: </ion-label>
         <ion-input
           type="text"
           [(ngModel)]="profileObject['dislikes']"
