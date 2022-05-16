@@ -32,7 +32,15 @@
           <div slot="start"></div>
           <ion-avatar
             *ngIf="profileDataCopy"
-            style="width: 60px; height: 60px; display: block; margin-left: auto; margin-right: auto; margin-top: 5px"
+            style="
+              width: 60px;
+              height: 60px;
+              display: block;
+              margin-left: auto;
+              margin-right: auto;
+              margin-top: 5px;
+              margin-bottom: 5px;
+            "
           >
             <ion-img (click)="takePicture()" [src]="profileData?.profilePhotoDataUrl || '/assets/shapes.svg'">
               ></ion-img
@@ -70,7 +78,7 @@
           </ion-item>
           日
         </ion-item>
-        <ion-item>
+        <ion-item lines="full">
           <ion-label position="floating">
             <ion-icon slot="start" class="profileIcon" name="transgender-outline"></ion-icon>性別</ion-label
           >
@@ -80,7 +88,7 @@
             <ion-select-option>その他</ion-select-option>
           </ion-select></ion-item
         >
-        <ion-item>
+        <ion-item lines="full">
           <ion-label position="floating">
             <ion-icon slot="start" class="profileIcon" name="business-outline"></ion-icon>
             職業
@@ -92,7 +100,7 @@
             placeholder="職業"
           ></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item lines="full">
           <ion-label position="floating"
             ><ion-icon slot="start" class="profileIcon" name="home-outline"></ion-icon>出身地</ion-label
           >
@@ -103,7 +111,7 @@
             placeholder="出身地"
           ></ion-input>
         </ion-item>
-        <ion-item
+        <ion-item lines="full"
           ><ion-label position="floating"
             ><ion-icon slot="start" class="profileIcon" name="game-controller-outline"></ion-icon>趣味</ion-label
           >
@@ -114,7 +122,7 @@
             placeholder="趣味"
           ></ion-input
         ></ion-item>
-        <ion-item
+        <ion-item lines="full"
           ><ion-label position="floating"
             ><ion-icon slot="start" class="profileIcon" name="thumbs-up-outline"></ion-icon>好きなもの</ion-label
           >
@@ -125,7 +133,7 @@
             placeholder="好きなもの"
           ></ion-input
         ></ion-item>
-        <ion-item
+        <ion-item lines="full"
           ><ion-label position="floating"
             ><ion-icon slot="start" class="profileIcon" name="sad-outline"></ion-icon>嫌いなもの</ion-label
           >
@@ -140,7 +148,7 @@
     </div>
     <div *ngSwitchCase="'memo'">
       <ion-card>
-        <ion-item>
+        <ion-item lines="none">
           <ion-input
             placeholder="メモを追加"
             [(ngModel)]="memoData['text']"
@@ -152,7 +160,7 @@
         </ion-item>
       </ion-card>
       <ion-card *ngFor="let memo of memoList | async" (click)="changeMemo(memo.id, memo.text)">
-        <ion-item>
+        <ion-item lines="none">
           <ion-card-content> {{ memo.text }} </ion-card-content>
         </ion-item>
       </ion-card>

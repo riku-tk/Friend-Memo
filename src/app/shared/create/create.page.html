@@ -20,7 +20,7 @@
       <div class="ion-text-center">
         <ion-button (click)="takePicture()" fill="clear" size="default"> 画像変更 </ion-button>
       </div>
-      <ion-item>
+      <ion-item lines="full">
         <ion-label>名前: </ion-label>
         <ion-input
           type="text"
@@ -45,7 +45,7 @@
           </ion-select>
         </ion-item>
         日 </ion-item
-      ><ion-item>
+      ><ion-item lines="full">
         <ion-label>性別: </ion-label>
         <ion-select [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileObject['gender']">
           <ion-select-option>男性</ion-select-option>
@@ -53,7 +53,7 @@
           <ion-select-option>その他</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item>
+      <ion-item lines="full">
         <ion-label>職業: </ion-label>
         <ion-input
           type="text"
@@ -63,7 +63,7 @@
           required
         ></ion-input
       ></ion-item>
-      <ion-item>
+      <ion-item lines="full">
         <ion-label>出身地: </ion-label>
         <ion-input
           type="text"
@@ -72,7 +72,7 @@
           name="birthPlace"
           required
         ></ion-input></ion-item
-      ><ion-item>
+      ><ion-item lines="full">
         <ion-label>趣味: </ion-label>
         <ion-input
           type="text"
@@ -81,7 +81,7 @@
           name="hobby"
           required
         ></ion-input></ion-item
-      ><ion-item>
+      ><ion-item lines="full">
         <ion-label>好きなもの: </ion-label>
         <ion-input
           type="text"
@@ -91,7 +91,7 @@
           required
         ></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item lines="full">
         <ion-label>嫌いなもの: </ion-label>
         <ion-input
           type="text"
