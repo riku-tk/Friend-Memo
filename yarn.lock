@@ -198,6 +198,13 @@
     "@angular-eslint/bundled-angular-compiler" "13.0.1"
     "@typescript-eslint/experimental-utils" "5.3.0"
 
+"@angular/animations@^13.3.8":
+  version "13.3.8"
+  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-13.3.8.tgz#b81308ec5ba88781e01168c94b4f511a6bc802df"
+  integrity sha512-zHQPFy2iW8Eqqm4vDTcri89zBg3UbSlOzREaUk1j6+ulFcNK50vmzqkUvcW/hy8x31+6VXkNvNDn2+Q2BWBxzA==
+  dependencies:
+    tslib "^2.3.0"
+
 "@angular/cli@~13.2.3":
   version "13.2.6"
   resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-13.2.6.tgz#d532375ac65b7e6204f979756bf12dda8392cd74"
@@ -1745,6 +1752,11 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@igniteui/material-icons-extended@^2.10.0":
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/@igniteui/material-icons-extended/-/material-icons-extended-2.11.0.tgz#7cceb289df4094af155afda0a2bd5d8070cae0df"
+  integrity sha512-lhNBCsFqYWowhrfuhqFx/gfX8G6hGOLNSaDZju7OaDuGyIc9Nsu8/qmZrkoVe1IVKet3Hr09k92Vq4zo3iSxHA==
+
 "@ionic/angular-toolkit@^6.0.0":
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/@ionic/angular-toolkit/-/angular-toolkit-6.1.0.tgz#8b2235f91fc510c49b0e6faf5a8b73a860b1bf6a"
@@ -2254,6 +2266,18 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@mattlewis92/dom-autoscroller@^2.4.2":
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/@mattlewis92/dom-autoscroller/-/dom-autoscroller-2.4.2.tgz#ccb753fbcf6b3672b0273e0c3bda7924fe238013"
+  integrity sha512-YbrUWREPGEjE/FU6foXcAT1YbVwqD/jkYnY1dFb0o4AxtP3s4xKBthlELjndZih8uwsDWgQZx1eNskRNe2BgZQ==
+
+"@ng-bootstrap/ng-bootstrap@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-5.0.0.tgz#93abf17b9d10680ca89b9dae3d50113df6f0fa3e"
+  integrity sha512-B3jLrJ2Fm6cP3IghG9PJQQw0J8BDXx1zh2XFHmm3S1K19UXKQTtL8Ta0TMfjSsIHqEeZmQ1gtlMBGk/+ucbYzg==
+  dependencies:
+    tslib "^1.9.0"
+
 "@ngtools/webpack@13.2.6":
   version "13.2.6"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-13.2.6.tgz#8fe9c54dce13ec291eeef352ed773b77d1d0bed0"
@@ -2407,6 +2431,11 @@
     node-addon-api "^3.2.1"
     node-gyp-build "^4.3.0"
 
+"@popperjs/core@^2.11.5":
+  version "2.11.5"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.5.tgz#db5a11bf66bdab39569719555b0f76e138d7bd64"
+  integrity sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==
+
 "@protobufjs/aspromise@^1.1.1", "@protobufjs/aspromise@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@protobufjs/aspromise/-/aspromise-1.1.2.tgz#9b8b0cc663d669a7d8f6f5d0893a14d348f30fbf"
@@ -2459,6 +2488,11 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
+
+"@scarf/scarf@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@scarf/scarf/-/scarf-1.1.1.tgz#d8b9f20037b3a37dbf8dcdc4b3b72f9285bfce35"
+  integrity sha512-VGbKDbk1RFIaSmdVb0cNjjWJoRWRI/Weo23AjRCC2nryO0iAS8pzsToJfPVPtVs74WHw4L1UTADNdIYRLkirZQ==
 
 "@schematics/angular@13.2.6":
   version "13.2.6"
@@ -2697,6 +2731,11 @@
     "@types/express-serve-static-core" "^4.17.18"
     "@types/qs" "*"
     "@types/serve-static" "*"
+
+"@types/hammerjs@^2.0.40":
+  version "2.0.41"
+  resolved "https://registry.yarnpkg.com/@types/hammerjs/-/hammerjs-2.0.41.tgz#f6ecf57d1b12d2befcce00e928a6a097c22980aa"
+  integrity sha512-ewXv/ceBaJprikMcxCmWU1FKyMAQ2X7a9Gtmzw8fcg2kIePI1crERDM818W+XYrxqdBBOdlf2rm137bU+BltCA==
 
 "@types/http-proxy@^1.17.8":
   version "1.17.8"
@@ -3147,6 +3186,40 @@ ajv@^8.0.0, ajv@^8.0.1, ajv@^8.8.0:
     json-schema-traverse "^1.0.0"
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
+
+angular-calendar@^0.29.0:
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/angular-calendar/-/angular-calendar-0.29.0.tgz#b6f3df4752b495205dbba32794618fd4880fed71"
+  integrity sha512-TK4yUNsOhCUVrBRTJhGvVgGkQHgR0DTDFnPUTv0YSeDAuq5+irWjH23UrHmrhBCwFPelGLrTHjxsbMwjuzrJjw==
+  dependencies:
+    "@scarf/scarf" "^1.1.1"
+    angular-draggable-droppable "^6.0.0"
+    angular-resizable-element "^5.0.0"
+    calendar-utils "^0.9.0"
+    positioning "^2.0.1"
+    tslib "^2.0.0"
+
+angular-draggable-droppable@^6.0.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/angular-draggable-droppable/-/angular-draggable-droppable-6.1.0.tgz#439d3de118eca8f9f46432a875f39ec28f3b7171"
+  integrity sha512-axf3YMZ1ovhVZXnydP5iatNT5V05uK1wrUIhlJy4XGFVzIfTOGPn6d0E4r43lyDPj1r6daz3ODm8UNXzjWgcCg==
+  dependencies:
+    "@mattlewis92/dom-autoscroller" "^2.4.2"
+    tslib "^2.3.1"
+
+angular-resizable-element@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/angular-resizable-element/-/angular-resizable-element-5.0.0.tgz#c292cfd537a8e8c3850b6dc1a66ffcc1462864d1"
+  integrity sha512-GbV8myA2x8aUU8CK7siTi1QMjtilzQzIgClqUVpE/YM1WAp0/OnioBV12oLcOT24eEwP3zDqPTHL+D1Kv2rNAw==
+  dependencies:
+    tslib "^2.2.0"
+
+angularx-flatpickr@^6.6.0:
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/angularx-flatpickr/-/angularx-flatpickr-6.6.0.tgz#3bb4b9f7c606d546486ecd35159ec60fce27df86"
+  integrity sha512-n/csZmAwfL32P7pUv52FXihSbPjVAjiKglbY8WO9hsBKvAk7mw8PKNjiovln4+fuscJwKo0wSsw+s7A+JpetQg==
+  dependencies:
+    tslib "^1.9.0"
 
 ansi-colors@4.1.1, ansi-colors@^4.1.1:
   version "4.1.1"
@@ -3668,6 +3741,11 @@ cacache@^16.0.2:
     ssri "^9.0.0"
     tar "^6.1.11"
     unique-filename "^1.1.1"
+
+calendar-utils@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/calendar-utils/-/calendar-utils-0.9.0.tgz#d0b2e0bb5a2238d30afde4fe774c0afd89366c6b"
+  integrity sha512-QxMf/I+y/it02EoFvla7Fq9n4SIOK9T97wT4W0VfvbFTbhf92AYHm9IBXGWDJiARNM2pvrGCFtI8AFB0D4OuWw==
 
 call-bind@^1.0.0, call-bind@^1.0.2:
   version "1.0.2"
@@ -4253,6 +4331,11 @@ data-uri-to-buffer@3:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/data-uri-to-buffer/-/data-uri-to-buffer-3.0.1.tgz#594b8973938c5bc2c33046535785341abc4f3636"
   integrity sha512-WboRycPNsVw3B3TL559F7kuBUM4d8CgMEvk6xEJlOp7OBPjt6G7z8WMWlD2rOFZLk6OYfFIUGsCOWzcQH9K2og==
+
+date-fns@^2.28.0:
+  version "2.28.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.28.0.tgz#9570d656f5fc13143e50c975a3b6bbeb46cd08b2"
+  integrity sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==
 
 date-format@^4.0.9:
   version "4.0.9"
@@ -5385,6 +5468,11 @@ flat@^5.0.2:
   resolved "https://registry.yarnpkg.com/flat/-/flat-5.0.2.tgz#8ca6fe332069ffa9d324c327198c598259ceb241"
   integrity sha512-b6suED+5/3rTpUBdG1gupIl8MPFCAMA0QXwmljLhvCUKcUvdE4gWky9zpuGCcXHOsz4J9wPGNWq6OKpmIzz3hQ==
 
+flatpickr@^4.6.13:
+  version "4.6.13"
+  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.6.13.tgz#8a029548187fd6e0d670908471e43abe9ad18d94"
+  integrity sha512-97PMG/aywoYpB4IvbvUJi0RQi8vearvU0oov1WW3k0WZPBMrTQVqekSX5CjSG/M4Q3i6A/0FKXC7RyAoAUUSPw==
+
 flatted@^3.1.0, flatted@^3.2.5:
   version "3.2.5"
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.2.5.tgz#76c8584f4fc843db64702a6bd04ab7a8bd666da3"
@@ -5735,6 +5823,11 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.4, 
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.10.tgz#147d3a006da4ca3ce14728c7aefc287c367d7a6c"
   integrity sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==
 
+hammerjs@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/hammerjs/-/hammerjs-2.0.8.tgz#04ef77862cff2bb79d30f7692095930222bf60f1"
+  integrity sha1-BO93hiz/K7edMPdpIJWTAiK/YPE=
+
 handle-thing@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-2.0.1.tgz#857f79ce359580c340d43081cc648970d0bb234e"
@@ -6000,6 +6093,25 @@ ieee754@^1.1.13:
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.2.1.tgz#8eb7a10a63fff25d15a57b001586d177d1b0d352"
   integrity sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==
 
+igniteui-angular@^13.1.14:
+  version "13.1.14"
+  resolved "https://registry.yarnpkg.com/igniteui-angular/-/igniteui-angular-13.1.14.tgz#c3db92920235b8e3f4202f61a2e6c446a25da796"
+  integrity sha512-BXwAWXrwMatKGSOE8YezpLb7qOwAC8+1Z9zrjaDMPdi5Evg67DLsHI+0WLp598YioFLr3xoTEZLFfUqLCaq4kg==
+  dependencies:
+    "@igniteui/material-icons-extended" "^2.10.0"
+    "@types/hammerjs" "^2.0.40"
+    hammerjs "^2.0.8"
+    igniteui-trial-watermark "^1.0.3"
+    jszip "^3.7.1"
+    lodash.mergewith "^4.6.2"
+    tslib "^2.3.0"
+    uuid "^8.3.0"
+
+igniteui-trial-watermark@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/igniteui-trial-watermark/-/igniteui-trial-watermark-1.0.3.tgz#6f7b8628144dd848c32b6d863f6e0b37d5ce9956"
+  integrity sha512-q6thtu+7R6MOB+i9GorFPCcWeOImW43BzCAtKnDAYWwaoueb8Lg1EhBkIhAyfEIH+yZ/9c5lnZdU61/GRPoP+g==
+
 ignore-walk@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/ignore-walk/-/ignore-walk-4.0.1.tgz#fc840e8346cf88a3a9380c5b17933cd8f4d39fa3"
@@ -6162,6 +6274,11 @@ internal-slot@^1.0.3:
     get-intrinsic "^1.1.0"
     has "^1.0.3"
     side-channel "^1.0.4"
+
+ionic2-calendar@^0.6.9:
+  version "0.6.9"
+  resolved "https://registry.yarnpkg.com/ionic2-calendar/-/ionic2-calendar-0.6.9.tgz#80502b090994d6c0658fd671c25fc104ea6d00fd"
+  integrity sha512-s1TFCxeFeZkwBY7Gno6L57id1CGIHXk9eRjB0TU1MqgRTiXBOvkXYm9mJa5S7UyN1VTKhcbuk5U27eEG9QmOAA==
 
 ionic@^5.4.16:
   version "5.4.16"
@@ -6715,7 +6832,7 @@ jsprim@^1.2.2:
     json-schema "0.4.0"
     verror "1.10.0"
 
-jszip@^3.1.3, jszip@^3.6.0:
+jszip@^3.1.3, jszip@^3.6.0, jszip@^3.7.1:
   version "3.9.1"
   resolved "https://registry.yarnpkg.com/jszip/-/jszip-3.9.1.tgz#784e87f328450d1e8151003a9c67733e2b901051"
   integrity sha512-H9A60xPqJ1CuC4Ka6qxzXZeU8aNmgOeP5IFqwJbQQwtu2EUYxota3LdsiZWplF7Wgd9tkAd0mdu36nceSaPuYw==
@@ -7068,6 +7185,11 @@ lodash.merge@^4.6.2:
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
+
+lodash.mergewith@^4.6.2:
+  version "4.6.2"
+  resolved "https://registry.yarnpkg.com/lodash.mergewith/-/lodash.mergewith-4.6.2.tgz#617121f89ac55f59047c7aec1ccd6654c6590f55"
+  integrity sha512-GK3g5RPZWTRSeLSpgP8Xhra+pnjBC56q9FZYe1d5RN3TJ35dbkGy3YqBSMbyCrlbi+CM9Z3Jk5yTL7RCsqboyQ==
 
 lodash.restparam@^3.0.0:
   version "3.6.1"
@@ -8263,6 +8385,11 @@ portfinder@^1.0.28:
     async "^2.6.2"
     debug "^3.1.1"
     mkdirp "^0.5.5"
+
+positioning@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/positioning/-/positioning-2.0.1.tgz#4f1b3a65ed4b830e0922a3fcdf6de58a545bd398"
+  integrity sha512-DsAgM42kV/ObuwlRpAzDTjH9E8fGKkMDJHWFX+kfNXSxh7UCCQxEmdjv/Ws5Ft1XDnt3JT8fIDYeKNSE2TbttA==
 
 postcss-attribute-case-insensitive@^5.0.0:
   version "5.0.0"
@@ -10293,7 +10420,7 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
 
-uuid@8.3.2, uuid@^8.3.2:
+uuid@8.3.2, uuid@^8.3.0, uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
