@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavController, ToastController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { CreatePage } from '../create/create.page';
 import { ProfileDetailPage } from '../profile-detail/profile-detail.page';
+import { ToastService } from '../shared/toast.service';
 import { AuthService } from '../auth/auth.service';
 import { FirestoreService, IProfile, IMemo } from '../shared/firestore.service';
 import { Observable } from 'rxjs';
@@ -26,7 +27,7 @@ export class Tab1Page implements OnInit {
     public auth: AuthService,
     public firestore: FirestoreService,
     public navController: NavController,
-    public toastCtrl: ToastController,
+    private toastService: ToastService,
   ) {}
 
   async ngOnInit() {}
@@ -61,18 +62,9 @@ export class Tab1Page implements OnInit {
     this.navController.navigateForward(['profile', itemId]);
   }
 
-  async presentToast(message: string) {
-    let toast = await this.toastCtrl.create({
-      message: message,
-      duration: 2000,
-      position: 'bottom',
-    });
-    toast.present();
-  }
-
   removePin(profileData: IProfile) {
     profileData['pinningFlg'] = false;
-    this.presentToast('ピン留めを外しました');
+    this.toastService.presentToast('ピン留めを外しました');
     this.firestore.profileSet(profileData.id, profileData);
   }
 }

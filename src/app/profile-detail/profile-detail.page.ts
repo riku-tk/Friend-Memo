@@ -2,9 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActionSheetController, ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { FirestoreService, IProfile, IMemo } from '../shared/firestore.service';
+import { ToastService } from '../shared/toast.service';
 import { Tab1Page } from '../tab1/tab1.page';
 import { Camera, CameraResultType } from '@capacitor/camera';
-import { AlertController, NavController, ToastController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
@@ -32,7 +33,7 @@ export class ProfileDetailPage implements OnInit {
     public tab1Class: Tab1Page,
     public alertController: AlertController,
     public navController: NavController,
-    private toastCtrl: ToastController,
+    private toastService: ToastService,
     public auth: AuthService,
     public actionSheetController: ActionSheetController,
   ) {
@@ -61,16 +62,16 @@ export class ProfileDetailPage implements OnInit {
       this.profileDataCopy['birthMonthAndDay'] = this.profileDataCopy['birthMonth'] + '月' + '??日';
     }
     if (this.profileDataCopy['name'] === '') {
-      this.presentToast('名前に1文字以上入力して下さい');
+      this.toastService.presentToast('名前に1文字以上入力して下さい');
     } else {
       this.firestore.profileSet(this.profileDataCopy.id, this.profileDataCopy);
-      this.presentToast('編集を保存しました');
+      this.toastService.presentToast('編集を保存しました');
     }
   }
 
   addMemoData() {
     if (this.memoData['text'] === '') {
-      this.presentToast('1文字以上入力して下さい');
+      this.toastService.presentToast('1文字以上入力して下さい');
     } else {
       this.memoData['profileId'] = this.profileData.id;
       this.memoData['timeStamp'] = Date.now();
@@ -117,15 +118,6 @@ export class ProfileDetailPage implements OnInit {
     await alert.present();
   }
 
-  async presentToast(message: string) {
-    let toast = await this.toastCtrl.create({
-      message: message,
-      duration: 2000,
-      position: 'bottom',
-    });
-    toast.present();
-  }
-
   async changeMemo(id: string, text: string) {
     const actionSheet = await this.actionSheetController.create({
       header: text,
@@ -135,7 +127,7 @@ export class ProfileDetailPage implements OnInit {
           icon: 'trash-outline',
           handler: () => {
             this.firestore.deleteMemo(id);
-            this.presentToast('「' + text + '」を削除しました');
+            this.toastService.presentToast('「' + text + '」を削除しました');
           },
         },
         {
@@ -172,7 +164,7 @@ export class ProfileDetailPage implements OnInit {
           text: '保存',
           handler: (data) => {
             if (data.memo === '') {
-              this.presentToast('1文字以上入力して下さい');
+              this.toastService.presentToast('1文字以上入力して下さい');
             } else {
               this.memoData['profileId'] = this.profileData.id;
               this.memoData['timeStamp'] = Date.now();
@@ -190,22 +182,22 @@ export class ProfileDetailPage implements OnInit {
   pinning(profileData: IProfile) {
     profileData['pinningFlg'] = true;
     this.firestore.profileSet(profileData.id, profileData);
-    this.presentToast('ピン留めしました');
+    this.toastService.presentToast('ピン留めしました');
   }
   removePin(profileData: IProfile) {
     profileData['pinningFlg'] = false;
     this.firestore.profileSet(profileData.id, profileData);
-    this.presentToast('ピン留めを外しました');
+    this.toastService.presentToast('ピン留めを外しました');
   }
 
   pinningMemo(memoData: IMemo) {
     memoData['pinningFlg'] = true;
     this.firestore.memoSet(memoData.id, memoData);
-    this.presentToast('ピン留めしました');
+    this.toastService.presentToast('ピン留めしました');
   }
   removePinMemo(memoData: IMemo) {
     memoData['pinningFlg'] = false;
     this.firestore.memoSet(memoData.id, memoData);
-    this.presentToast('ピン留めを外しました');
+    this.toastService.presentToast('ピン留めを外しました');
   }
 }

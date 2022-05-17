@@ -58,7 +58,7 @@
             (click)="removePinMemo(memo)"
           ></ion-icon>
         </ion-card-header>
-        <ion-card-content (click)="changeMemo(memo.id, memo.text)">{{ memo.text }}</ion-card-content>
+        <ion-card-content (click)="changeMemo(memo)">{{ memo.text }}</ion-card-content>
       </ion-card>
     </div>
     <div *ngSwitchCase="'profile'">

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FirestoreService, IProfile } from '../shared/firestore.service';
+import { ToastService } from '../shared/toast.service';
 import { Observable } from 'rxjs';
 import { Camera, CameraResultType } from '@capacitor/camera';
 
@@ -36,7 +37,7 @@ export class CreatePage implements OnInit {
     public modalController: ModalController,
     public authService: AuthService,
     public firestore: FirestoreService,
-    public toastCtrl: ToastController,
+    private toastService: ToastService,
   ) {
     this.birthMonthArray = [...Array(12).keys()].map((i) => ++i);
     this.birthDayArray = [...Array(31).keys()].map((i) => ++i);
@@ -52,15 +53,6 @@ export class CreatePage implements OnInit {
     this.uid = await this.authService.getUserId();
   }
 
-  async presentToast(message: string) {
-    let toast = await this.toastCtrl.create({
-      message: message,
-      duration: 2000,
-      position: 'bottom',
-    });
-    toast.present();
-  }
-
   async updateProfile() {
     console.log(this.profileObject);
     if (this.profileObject['birthMonth'] !== '' && this.profileObject['birthDay'] !== '') {
@@ -71,7 +63,7 @@ export class CreatePage implements OnInit {
       this.profileObject['birthMonthAndDay'] = this.profileObject['birthMonth'] + '月' + '??日';
     }
     if (this.profileObject['name'] === '') {
-      this.presentToast('名前に1文字以上、入力して下さい');
+      this.toastService.presentToast('名前に1文字以上、入力して下さい');
     } else {
       this.profileObject['uid'] = this.uid;
       this.firestore.profileAdd(this.profileObject);
