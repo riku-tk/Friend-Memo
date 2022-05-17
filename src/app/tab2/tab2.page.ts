@@ -4,11 +4,11 @@ import { AuthService } from '../auth/auth.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss'],
+  selector: 'app-tab2',
+  templateUrl: 'tab2.page.html',
+  styleUrls: ['tab2.page.scss'],
 })
-export class Tab3Page implements OnInit {
+export class Tab2Page implements OnInit {
   uid: string;
   email: string;
 
