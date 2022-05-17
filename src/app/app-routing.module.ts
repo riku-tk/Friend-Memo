@@ -18,10 +18,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedIn },
   },
-  // {
-  //   path: 'profile-detail',
-  //   loadChildren: () => import('./shared/profile-detail/profile-detail.module').then((m) => m.ProfileDetailPageModule),
-  // },
 ];
 @NgModule({
   imports: [
