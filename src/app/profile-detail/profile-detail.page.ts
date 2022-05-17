@@ -20,11 +20,11 @@ export class ProfileDetailPage implements OnInit {
   profileId: string;
   birthMonthArray: Array<number>;
   birthDayArray: Array<number>;
-  ageArray: Array<number>;
   scene: string;
   memoData: IMemo;
   uid: string;
   profile: Promise<Observable<IProfile[]>>;
+
   constructor(
     public modalController: ModalController,
     public route: ActivatedRoute,
@@ -37,14 +37,13 @@ export class ProfileDetailPage implements OnInit {
     public actionSheetController: ActionSheetController,
   ) {
     console.log('test');
+    this.memoData = { profileId: '', text: '' };
+    this.scene = 'memo';
     this.birthMonthArray = [...Array(12).keys()].map((i) => ++i);
     this.birthDayArray = [...Array(31).keys()].map((i) => ++i);
-    this.ageArray = [...Array(124).keys()];
-    this.memoData = { profileId: '', text: '' };
   }
 
   async ngOnInit() {
-    this.scene = 'memo';
     this.profileDataCopy = await Object.assign({}, this.profileData);
   }
 

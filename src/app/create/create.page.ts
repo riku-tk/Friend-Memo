@@ -16,7 +16,6 @@ export class CreatePage implements OnInit {
   profile: Observable<IProfile[]>;
   birthMonthArray: Array<number>;
   birthDayArray: Array<number>;
-  ageArray: Array<number>;
   profileObject: IProfile = {
     uid: '',
     name: '',
@@ -41,7 +40,6 @@ export class CreatePage implements OnInit {
   ) {
     this.birthMonthArray = [...Array(12).keys()].map((i) => ++i);
     this.birthDayArray = [...Array(31).keys()].map((i) => ++i);
-    this.ageArray = [...Array(124).keys()];
   }
 
   ngOnInit() {}
