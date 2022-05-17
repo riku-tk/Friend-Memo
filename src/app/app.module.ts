@@ -7,14 +7,11 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-// Firebase
 import { provideFirebaseApp, initializeApp, getApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth, initializeAuth, indexedDBLocalPersistence } from '@angular/fire/auth';
 import { AuthGuard } from '@angular/fire/auth-guard';
 
-// import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-// import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { environment } from 'src/environments/environment';
 import { Capacitor } from '@capacitor/core';
 
@@ -41,11 +38,6 @@ import { Capacitor } from '@capacitor/core';
 
     provideFirestore(() => getFirestore()),
   ],
-  providers: [
-    // StatusBar,
-    // SplashScreen,
-    AuthGuard,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-  ],
+  providers: [AuthGuard, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
 })
 export class AppModule {}

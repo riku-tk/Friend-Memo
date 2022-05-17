@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FirestoreService, IProfile, ProfileObject } from '../shared/firestore.service';
+import { FirestoreService } from '../shared/firestore.service';
 import { AuthService } from '../auth/auth.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tab2',
