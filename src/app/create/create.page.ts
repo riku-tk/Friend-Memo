@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
-import { FirestoreService, IProfile, ProfileObject } from '../firestore.service';
+import { FirestoreService, IProfile, ProfileObject } from '../shared/firestore.service';
 import { Observable } from 'rxjs';
 import { Camera, CameraResultType } from '@capacitor/camera';
 

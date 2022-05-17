@@ -4,9 +4,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { ProfileDetailPage } from '../profile-detail/profile-detail.page';
+import { CreatePage } from '../create/create.page';
 
 @NgModule({
   imports: [
@@ -20,8 +21,12 @@ import { ProfileDetailPage } from '../profile-detail/profile-detail.page';
         path: 'profile-detail',
         component: ProfileDetailPage,
       },
+      {
+        path: 'create',
+        component: CreatePage,
+      },
     ]),
   ],
-  declarations: [Tab1Page, ProfileDetailPage],
+  declarations: [Tab1Page, ProfileDetailPage, CreatePage],
 })
 export class Tab1PageModule {}
