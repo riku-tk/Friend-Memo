@@ -38,7 +38,7 @@ export class ProfileDetailPage implements OnInit {
     public actionSheetController: ActionSheetController,
   ) {
     console.log('test');
-    this.memoData = { profileId: '', text: '' };
+    this.memoData = { profileId: '', text: '', pinningFlg: false };
     this.scene = 'memo';
     this.birthMonthArray = [...Array(12).keys()].map((i) => ++i);
     this.birthDayArray = [...Array(31).keys()].map((i) => ++i);
@@ -75,7 +75,6 @@ export class ProfileDetailPage implements OnInit {
     } else {
       this.memoData['profileId'] = this.profileData.id;
       this.memoData['timeStamp'] = Date.now();
-      this.memoData['pinningFlg'] = false;
       this.firestore.memoAdd(this.memoData);
       this.memoData['text'] = '';
     }
@@ -118,23 +117,23 @@ export class ProfileDetailPage implements OnInit {
     await alert.present();
   }
 
-  async changeMemo(id: string, text: string) {
+  async changeMemo(memo: IMemo) {
     const actionSheet = await this.actionSheetController.create({
-      header: text,
+      header: memo.text,
       buttons: [
         {
           text: '削除',
           icon: 'trash-outline',
           handler: () => {
-            this.firestore.deleteMemo(id);
-            this.toastService.presentToast('「' + text + '」を削除しました');
+            this.firestore.deleteMemo(memo.id);
+            this.toastService.presentToast('「' + memo.text + '」を削除しました');
           },
         },
         {
           text: '編集',
           icon: 'create-outline',
           handler: () => {
-            this._renameMemo(id, text);
+            this._renameMemo(memo);
           },
         },
         {
@@ -147,13 +146,13 @@ export class ProfileDetailPage implements OnInit {
     actionSheet.present();
   }
 
-  async _renameMemo(id: string, text: string) {
+  async _renameMemo(memo: IMemo) {
     const prompt = await this.alertController.create({
       inputs: [
         {
-          name: 'memo',
+          name: 'text',
           placeholder: 'メモ',
-          value: text,
+          value: memo.text,
         },
       ],
       buttons: [
@@ -163,14 +162,12 @@ export class ProfileDetailPage implements OnInit {
         {
           text: '保存',
           handler: (data) => {
-            if (data.memo === '') {
+            if (data.text === '') {
               this.toastService.presentToast('1文字以上入力して下さい');
             } else {
-              this.memoData['profileId'] = this.profileData.id;
-              this.memoData['timeStamp'] = Date.now();
-              this.memoData['text'] = data.memo;
-              this.firestore.memoSet(id, this.memoData);
-              this.memoData['text'] = '';
+              memo['timeStamp'] = Date.now();
+              memo['text'] = data.text;
+              this.firestore.memoSet(memo.id, memo);
             }
           },
         },
