@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyDqUUxVll5ySqDkCquuL1yiC8e2tP2Kj40',
-    authDomain: 'brosis-43014.firebaseapp.com',
-    projectId: 'brosis-43014',
-    storageBucket: 'brosis-43014.appspot.com',
-    messagingSenderId: '420183768315',
-    appId: '1:420183768315:web:0737511fdbd4e1f249445e',
-    measurementId: 'G-GKHK2SV5S5',
+    apiKey: 'AIzaSyBXhWcirWc4iX3Sb1gBZLjazP4lY3C5hm8',
+    authDomain: 'friend-memo-1.firebaseapp.com',
+    projectId: 'friend-memo-1',
+    storageBucket: 'friend-memo-1.appspot.com',
+    messagingSenderId: '235690514664',
+    appId: '1:235690514664:web:ffce697ca9727e3e3e915d',
+    measurementId: 'G-CJN8FVTLRJ',
   },
 };
 
