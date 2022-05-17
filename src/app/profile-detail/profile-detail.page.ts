@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActionSheetController, ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
-import { FirestoreService, IProfile, IMemo } from '../firestore.service';
-import { Tab1Page } from '../../tab1/tab1.page';
+import { FirestoreService, IProfile, IMemo } from '../shared/firestore.service';
+import { Tab1Page } from '../tab1/tab1.page';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-profile-detail',

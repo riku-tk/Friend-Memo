@@ -4,9 +4,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-import { SharedModule } from '../shared/shared.module';
+import { RouterModule, Routes } from '@angular/router';
 
-import { Tab1PageRoutingModule } from './tab1-routing.module';
+import { ProfileDetailPage } from '../profile-detail/profile-detail.page';
 
 @NgModule({
   imports: [
@@ -14,9 +14,14 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab1PageRoutingModule,
-    SharedModule,
+    RouterModule.forChild([
+      { path: '', component: Tab1Page },
+      {
+        path: 'profile-detail',
+        component: ProfileDetailPage,
+      },
+    ]),
   ],
-  declarations: [Tab1Page],
+  declarations: [Tab1Page, ProfileDetailPage],
 })
 export class Tab1PageModule {}

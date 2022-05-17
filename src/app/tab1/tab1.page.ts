@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController, ToastController } from '@ionic/angular';
 import { CreatePage } from '../shared/create/create.page';
-import { ProfileDetailPage } from '../shared/profile-detail/profile-detail.page';
+import { ProfileDetailPage } from '../profile-detail/profile-detail.page';
 import { AuthService } from '../auth/auth.service';
 import { FirestoreService, IProfile, IMemo } from '../shared/firestore.service';
 import { Observable } from 'rxjs';
