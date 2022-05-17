@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {
   collection,
   doc,
-  docData,
   DocumentReference,
   CollectionReference,
   Firestore,
@@ -18,21 +17,20 @@ import { Observable } from 'rxjs';
 export interface IProfile {
   id?: string;
   uid: string;
-  name?: string;
+  name: string;
   profilePhotoDataUrl?: string;
   profession: string;
-  gender?: string;
-  hobby?: string;
-  favoriteFood?: string;
-  birthMonthAndDay?: string;
-  birthMonth?: string;
-  birthDay?: string;
-  birthPlace?: string;
-  dislikes?: string;
-  pinningFlg?: boolean;
+  gender: string;
+  hobby: string;
+  favoriteFood: string;
+  birthMonthAndDay: string;
+  birthMonth: string;
+  birthDay: string;
+  birthPlace: string;
+  dislikes: string;
+  pinningFlg: boolean;
   timeStamp: number;
 }
-
 export interface IMemo {
   id?: string;
   profileId?: string;
@@ -40,22 +38,6 @@ export interface IMemo {
   timeStamp?: number;
   pinningFlg?: boolean;
 }
-export class ProfileObject implements IProfile {
-  uid = '';
-  name = '';
-  profilePhotoDataUrl = '';
-  profession = '';
-  gender = '';
-  hobby = '';
-  favoriteFood = '';
-  birthMonthAndDay = '';
-  birthMonth = '';
-  birthDay = '';
-  birthPlace = '';
-  dislikes = '';
-  timeStamp = Date.now();
-}
-
 @Injectable({
   providedIn: 'root',
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
-import { FirestoreService, IProfile, ProfileObject } from '../shared/firestore.service';
+import { FirestoreService, IProfile } from '../shared/firestore.service';
 import { Observable } from 'rxjs';
 import { Camera, CameraResultType } from '@capacitor/camera';
 
@@ -14,10 +14,24 @@ export class CreatePage implements OnInit {
   uid: string;
   photo: string;
   profile: Observable<IProfile[]>;
-  profileObject: ProfileObject;
   birthMonthArray: Array<number>;
   birthDayArray: Array<number>;
   ageArray: Array<number>;
+  profileObject: IProfile = {
+    uid: '',
+    name: '',
+    profession: '',
+    gender: '',
+    hobby: '',
+    favoriteFood: '',
+    birthMonthAndDay: '',
+    birthMonth: '',
+    birthDay: '',
+    birthPlace: '',
+    dislikes: '',
+    pinningFlg: false,
+    timeStamp: Date.now(),
+  };
 
   constructor(
     public modalController: ModalController,
@@ -28,7 +42,6 @@ export class CreatePage implements OnInit {
     this.birthMonthArray = [...Array(12).keys()].map((i) => ++i);
     this.birthDayArray = [...Array(31).keys()].map((i) => ++i);
     this.ageArray = [...Array(124).keys()];
-    this.profileObject = new ProfileObject();
   }
 
   ngOnInit() {}
@@ -62,22 +75,8 @@ export class CreatePage implements OnInit {
     if (this.profileObject['name'] === '') {
       this.presentToast('名前に1文字以上、入力して下さい');
     } else {
-      this.firestore.profileAdd({
-        uid: this.uid,
-        timeStamp: Date.now(),
-        name: this.profileObject['name'],
-        profilePhotoDataUrl: this.profileObject['profilePhotoDataUrl'],
-        profession: this.profileObject['profession'],
-        gender: this.profileObject['gender'],
-        hobby: this.profileObject['hobby'],
-        favoriteFood: this.profileObject['favoriteFood'],
-        birthMonthAndDay: this.profileObject['birthMonthAndDay'],
-        birthMonth: this.profileObject['birthMonth'],
-        birthDay: this.profileObject['birthDay'],
-        birthPlace: this.profileObject['birthPlace'],
-        dislikes: this.profileObject['dislikes'],
-        pinningFlg: false,
-      });
+      this.profileObject['uid'] = this.uid;
+      this.firestore.profileAdd(this.profileObject);
       this.modalController.dismiss();
     }
   }
