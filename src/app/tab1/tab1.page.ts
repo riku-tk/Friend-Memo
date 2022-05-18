@@ -6,15 +6,11 @@ import { ToastService } from '../shared/toast.service';
 import { AuthService } from '../auth/auth.service';
 import { FirestoreService, IProfile, IMemo } from '../shared/firestore.service';
 import { Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-})
-@Injectable({
-  providedIn: 'root',
 })
 export class Tab1Page implements OnInit {
   email: string;
@@ -30,14 +26,8 @@ export class Tab1Page implements OnInit {
     private toastService: ToastService,
   ) {}
 
-  async ngOnInit() {}
-
-  async ionViewWillEnter() {
-    this.profile = this.firestore.profileInit(await this.auth.getUserId());
-  }
-
-  async getProfiles() {
-    return await this.profile;
+  ngOnInit(): void {
+    this.profile = this.firestore.profileInit(this.auth.getUserId());
   }
 
   async openCreatePage() {
