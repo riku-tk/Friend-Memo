@@ -11,6 +11,12 @@ import { IonicModule } from '@ionic/angular';
 import { Tab3PageRoutingModule } from './tab3-routing.module';
 import { Tab3Page } from './tab3.page';
 
+import localeJa from '@angular/common/locales/ja';
+import { registerLocaleData } from '@angular/common';
+import { LOCALE_ID } from '@angular/core';
+
+registerLocaleData(localeJa);
+
 @NgModule({
   imports: [
     CommonModule,
@@ -24,6 +30,7 @@ import { Tab3Page } from './tab3.page';
       useFactory: adapterFactory,
     }),
   ],
+  providers: [{ provide: LOCALE_ID, useValue: 'ja-JP' }],
   declarations: [Tab3Page],
 })
 export class Tab3PageModule {}

@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef } fr
 import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Platform } from '@ionic/angular';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
 
 const colors: any = {
@@ -28,6 +29,8 @@ const colors: any = {
 export class Tab3Page implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
+  isMobile: boolean;
+
   view: CalendarView = CalendarView.Month;
 
   CalendarView = CalendarView;
@@ -39,97 +42,42 @@ export class Tab3Page implements OnInit {
     event: CalendarEvent;
   };
 
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      },
-    },
-    {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      },
-    },
-  ];
-
   refresh = new Subject<void>();
 
   events: CalendarEvent[] = [
     {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
+      start: new Date(),
+      end: new Date(),
+      title: '●●',
       color: colors.red,
-      actions: this.actions,
       allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
       draggable: true,
     },
     {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
+      start: new Date(),
+      end: new Date(),
+      title: 'テスト',
+      color: colors.red,
       allDay: true,
+      draggable: true,
     },
     {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
+      start: addDays(new Date(), 1),
+      end: addDays(new Date(), 1),
+      title: 'ひとり',
+      color: colors.red,
+      allDay: true,
       draggable: true,
     },
   ];
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal) {}
+  constructor(private modal: NgbModal, private platform: Platform) {
+    this.isMobile = platform.is('mobile') && !platform.is('tablet');
+  }
 
   ngOnInit() {}
-
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-      }
-      this.viewDate = date;
-    }
-  }
-
-  eventTimesChanged({ event, newStart, newEnd }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map((iEvent) => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
-      }
-      return iEvent;
-    });
-    this.handleEvent('Dropped or resized', event);
-  }
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
@@ -153,8 +101,15 @@ export class Tab3Page implements OnInit {
     ];
   }
 
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter((event) => event !== eventToDelete);
+  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    if (isSameMonth(date, this.viewDate)) {
+      if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
+        this.activeDayIsOpen = false;
+      } else {
+        this.activeDayIsOpen = true;
+      }
+      this.viewDate = date;
+    }
   }
 
   setView(view: CalendarView) {
@@ -163,5 +118,13 @@ export class Tab3Page implements OnInit {
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
+  }
+
+  getTitle(events: CalendarEvent[]) {
+    const names: string[] = [];
+    for (const e of events) {
+      names.push(e.title + 'さん');
+    }
+    return names.join(',') + 'の誕生日です。';
   }
 }

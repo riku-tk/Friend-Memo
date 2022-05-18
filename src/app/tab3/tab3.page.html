@@ -1,6 +1,53 @@
-<ion-content>
-  <div class="row text-center">
-    <!-- <div class="col-md-4">
+<ng-template
+  #customCellTemplate
+  let-day="day"
+  let-openDay="openDay"
+  let-locale="locale"
+  let-tooltipPlacement="tooltipPlacement"
+  let-highlightDay="highlightDay"
+  let-unhighlightDay="unhighlightDay"
+  let-eventClicked="eventClicked"
+  let-tooltipTemplate="tooltipTemplate"
+  let-tooltipAppendToBody="tooltipAppendToBody"
+  ><div class="cal-cell-top">
+    <span class="cal-day-number">{{ day.date | calendarDate: 'monthViewDayNumber':locale }}</span>
+  </div>
+  <div class="cal-events" *ngIf="day.events.length > 1">
+    <ion-avatar
+      [ngClass]="isMobile ? 'mobile' : 'other'"
+      *ngFor="let event of day.events.slice(0, 1)"
+      (mouseenter)="highlightDay.emit({ event: event })"
+      (mouseleave)="unhighlightDay.emit({ event: event })"
+      [mwlCalendarTooltip]="getTitle(day.events)"
+      [tooltipPlacement]="tooltipPlacement"
+      [tooltipEvent]="event"
+      [tooltipTemplate]="tooltipTemplate"
+      [tooltipAppendToBody]="tooltipAppendToBody"
+    >
+      <img src="/assets/shapes.svg" />
+    </ion-avatar>
+    <ion-icon [ngClass]="isMobile ? 'mobile' : 'other'" name="ellipsis-horizontal"></ion-icon>
+  </div>
+  <div class="cal-events" *ngIf="day.events.length == 1">
+    <ion-avatar
+      [ngClass]="isMobile ? 'mobile' : 'other'"
+      *ngFor="let event of day.events"
+      (mouseenter)="highlightDay.emit({ event: event })"
+      (mouseleave)="unhighlightDay.emit({ event: event })"
+      [mwlCalendarTooltip]="getTitle(day.events)"
+      [tooltipPlacement]="tooltipPlacement"
+      [tooltipEvent]="event"
+      [tooltipTemplate]="tooltipTemplate"
+      [tooltipAppendToBody]="tooltipAppendToBody"
+    >
+      <img src="/assets/shapes.svg" />
+    </ion-avatar>
+  </div>
+</ng-template>
+
+<ion-header>
+  <div class="header">
+    <div class="col-md-4">
       <div class="btn-group">
         <div
           class="btn btn-primary"
@@ -9,9 +56,9 @@
           [(viewDate)]="viewDate"
           (viewDateChange)="closeOpenMonthViewDay()"
         >
-          Previous
+          前月
         </div>
-        <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">Today</div>
+        <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">今日</div>
         <div
           class="btn btn-primary"
           mwlCalendarNextView
@@ -19,57 +66,21 @@
           [(viewDate)]="viewDate"
           (viewDateChange)="closeOpenMonthViewDay()"
         >
-          Next
+          次月
         </div>
+        <h3>{{ viewDate.getMonth() + 1 }}月</h3>
       </div>
-    </div> -->
-    <div class="col-md-4">
-      <h3>{{ viewDate | calendarDate: view + 'ViewTitle':'en' }}</h3>
     </div>
-    <!-- <div class="col-md-4">
-      <div class="btn-group">
-        <div class="btn btn-primary" (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month">
-          Month
-        </div>
-        <div class="btn btn-primary" (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week">
-          Week
-        </div>
-        <div class="btn btn-primary" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
-          Day
-        </div>
-      </div>
-    </div> -->
   </div>
-  <br />
-  <div [ngSwitch]="view">
-    <mwl-calendar-month-view
-      *ngSwitchCase="CalendarView.Month"
-      [viewDate]="viewDate"
-      [events]="events"
-      [refresh]="refresh"
-      [activeDayIsOpen]="activeDayIsOpen"
-      (dayClicked)="dayClicked($event.day)"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-    >
-    </mwl-calendar-month-view>
-    <mwl-calendar-week-view
-      *ngSwitchCase="CalendarView.Week"
-      [viewDate]="viewDate"
-      [events]="events"
-      [refresh]="refresh"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-    >
-    </mwl-calendar-week-view>
-    <mwl-calendar-day-view
-      *ngSwitchCase="CalendarView.Day"
-      [viewDate]="viewDate"
-      [events]="events"
-      [refresh]="refresh"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-    >
-    </mwl-calendar-day-view>
-  </div>
+</ion-header>
+
+<ion-content>
+  <mwl-calendar-month-view
+    [cellTemplate]="customCellTemplate"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    (dayClicked)="dayClicked($event.day)"
+  >
+  </mwl-calendar-month-view>
 </ion-content>
