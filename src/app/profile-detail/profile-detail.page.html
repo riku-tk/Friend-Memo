@@ -26,8 +26,8 @@
     </ion-segment-button>
   </ion-segment>
 
-  <div [ngSwitch]="scene">
-    <div *ngSwitchCase="'memo'">
+  <div>
+    <div [hidden]="scene !== 'memo'">
       <ion-card style="margin: 8px 8px; box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px">
         <ion-item lines="none">
           <ion-input
@@ -61,7 +61,7 @@
         <ion-card-content (click)="changeMemo(memo)">{{ memo.text }}</ion-card-content>
       </ion-card>
     </div>
-    <div *ngSwitchCase="'profile'">
+    <div [hidden]="scene !== 'profile'">
       <form #f="ngForm" *ngIf="profileDataCopy">
         <ion-item lines="full">
           <div slot="start"></div>

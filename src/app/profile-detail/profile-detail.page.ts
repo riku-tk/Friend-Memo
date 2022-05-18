@@ -3,7 +3,6 @@ import { ActionSheetController, ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { FirestoreService, IProfile, IMemo } from '../shared/firestore.service';
 import { ToastService } from '../shared/toast.service';
-import { Tab1Page } from '../tab1/tab1.page';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { AlertController, NavController } from '@ionic/angular';
 import { Observable } from 'rxjs';
@@ -30,7 +29,6 @@ export class ProfileDetailPage implements OnInit {
     public modalController: ModalController,
     public route: ActivatedRoute,
     public firestore: FirestoreService,
-    public tab1Class: Tab1Page,
     public alertController: AlertController,
     public navController: NavController,
     private toastService: ToastService,
