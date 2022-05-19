@@ -29,28 +29,12 @@
   min-height: 0;
 }
 
-body
-  > app-root
-  > ion-app
-  > ion-router-outlet
-  > app-tabs
-  > ion-tabs
-  > div
-  > ion-router-outlet
-  > app-tab3
-  > ion-content
-  > mwl-calendar-month-view {
-  height: 100%;
+.cal-days > .ng-star-inserted > .cal-cell-row {
+  height: 96px;
 }
 
-// .cal-month-view .cal-cell-top {
-//   height: 90%;
-//   max-height: 48px;
-//   max-width: 48px;
-// }
-
 .cal-month-view .cal-cell-top {
-  min-height: 36px;
+  min-height: 0px;
 }
 
 .cal-month-view .cal-day-cell.cal-today .cal-day-number {

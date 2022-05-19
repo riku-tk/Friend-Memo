@@ -1,10 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
-import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Platform } from '@ionic/angular';
-import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
-import { FirestoreService, IProfile, IMemo } from '../shared/firestore.service';
+import { CalendarEvent, CalendarView } from 'angular-calendar';
+import { FirestoreService, IProfile } from '../shared/firestore.service';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { first } from 'rxjs/operators';
@@ -31,7 +30,6 @@ const colors: any = {
   styleUrls: ['./tab3.page.scss'],
 })
 export class Tab3Page implements OnInit {
-  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   profile: Observable<IProfile[]>;
   events$: Observable<CalendarEvent[]>;
   eventSubject: Subject<CalendarEvent[]>;
@@ -49,7 +47,7 @@ export class Tab3Page implements OnInit {
     public auth: AuthService,
     public firestore: FirestoreService,
   ) {
-    this.isMobile = this.platform.is('mobile') && !this.platform.is('tablet');
+    this.isMobile = platform.is('mobile') && !platform.is('tablet');
     this.eventSubject = new Subject<CalendarEvent[]>();
     this.events$ = this.eventSubject.asObservable();
   }
