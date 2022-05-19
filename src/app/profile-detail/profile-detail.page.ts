@@ -11,7 +11,7 @@ import { AuthService } from '../auth/auth.service';
 @Component({
   selector: 'app-profile-detail',
   templateUrl: './profile-detail.page.html',
-  styleUrls: ['../profile-detail.page.scss'],
+  styleUrls: ['./profile-detail.page.scss'],
 })
 export class ProfileDetailPage implements OnInit {
   @Input() profileData: IProfile;
