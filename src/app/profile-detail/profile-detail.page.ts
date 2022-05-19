@@ -146,11 +146,13 @@ export class ProfileDetailPage implements OnInit {
   pinning(profileData: IProfile) {
     profileData.pinningFlg = true;
     this.firestore.profileSet(profileData.id, profileData);
+    this.profileDataCopy.pinningFlg = true;
     this.toastService.presentToast('ピン留めしました');
   }
   removePin(profileData: IProfile) {
     profileData.pinningFlg = false;
     this.firestore.profileSet(profileData.id, profileData);
+    this.profileDataCopy.pinningFlg = false;
     this.toastService.presentToast('ピン留めを外しました');
   }
 
