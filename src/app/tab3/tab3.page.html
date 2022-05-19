@@ -1,0 +1,86 @@
+<ng-template
+  #customCellTemplate
+  let-day="day"
+  let-openDay="openDay"
+  let-locale="locale"
+  let-tooltipPlacement="tooltipPlacement"
+  let-highlightDay="highlightDay"
+  let-unhighlightDay="unhighlightDay"
+  let-eventClicked="eventClicked"
+  let-tooltipTemplate="tooltipTemplate"
+  let-tooltipAppendToBody="tooltipAppendToBody"
+  ><div class="cal-cell-top">
+    <span class="cal-day-number">{{ day.date | calendarDate: 'monthViewDayNumber':locale }}</span>
+  </div>
+  <div class="cal-events" *ngIf="day.events.length > 1">
+    <ion-avatar
+      [ngClass]="isMobile ? 'mobile' : 'other'"
+      *ngFor="let event of day.events.slice(0, 1)"
+      (mouseenter)="highlightDay.emit({ event: event })"
+      (mouseleave)="unhighlightDay.emit({ event: event })"
+      [mwlCalendarTooltip]="getTitle(day.events)"
+      [tooltipPlacement]="tooltipPlacement"
+      [tooltipEvent]="event"
+      [tooltipTemplate]="tooltipTemplate"
+      [tooltipAppendToBody]="tooltipAppendToBody"
+    >
+      <img [src]="event?.profilePhotoDataUrl || '/assets/shapes.svg'" />
+    </ion-avatar>
+    <ion-icon [ngClass]="isMobile ? 'mobile' : 'other'" name="ellipsis-horizontal"></ion-icon>
+  </div>
+  <div class="cal-events" *ngIf="day.events.length === 1">
+    <ion-avatar
+      [ngClass]="isMobile ? 'mobile' : 'other'"
+      *ngFor="let event of day.events"
+      (mouseenter)="highlightDay.emit({ event: event })"
+      (mouseleave)="unhighlightDay.emit({ event: event })"
+      [mwlCalendarTooltip]="getTitle(day.events)"
+      [tooltipPlacement]="tooltipPlacement"
+      [tooltipEvent]="event"
+      [tooltipTemplate]="tooltipTemplate"
+      [tooltipAppendToBody]="tooltipAppendToBody"
+    >
+      <img [src]="event?.profilePhotoDataUrl || '/assets/shapes.svg'" />
+    </ion-avatar>
+  </div>
+</ng-template>
+
+<ion-header>
+  <div class="header">
+    <div class="col-md-4">
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          mwlCalendarPreviousView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()"
+        >
+          前月
+        </div>
+        <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">今日</div>
+        <div
+          class="btn btn-primary"
+          mwlCalendarNextView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()"
+        >
+          次月
+        </div>
+        <h3>{{ viewDate.getMonth() + 1 }}月</h3>
+      </div>
+    </div>
+  </div>
+</ion-header>
+
+<ion-content *ngIf="events$ | async as event">
+  <mwl-calendar-month-view
+    [cellTemplate]="customCellTemplate"
+    [viewDate]="viewDate"
+    [events]="event"
+    [refresh]="refresh"
+    (beforeViewRender)="updateEvent()"
+  >
+  </mwl-calendar-month-view>
+</ion-content>

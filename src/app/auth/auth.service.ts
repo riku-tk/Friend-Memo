@@ -10,8 +10,8 @@ import { firebaseError } from './firebase.error';
 export class AuthService {
   constructor(public afAuth: Auth, public navController: NavController, public alertController: AlertController) {}
 
-  async getUserId(): Promise<string> {
-    return (await this.afAuth.currentUser).uid;
+  getUserId(): string {
+    return this.afAuth.currentUser.uid;
   }
 
   async getUserEmail(): Promise<string> {
@@ -40,7 +40,7 @@ export class AuthService {
 
   authSignOut() {
     return signOut(this.afAuth).then(() => {
-      this.navController.navigateForward('/auth/signin').catch((error) => {
+      this.navController.navigateRoot('/auth/signin').catch((error) => {
         console.log(error.message);
         this.alertError(error);
         throw error;

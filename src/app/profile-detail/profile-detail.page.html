@@ -6,7 +6,7 @@
     <ion-title *ngIf="profileDataCopy"
       ><ion-input
         [value]="profileDataCopy.name"
-        [(ngModel)]="profileDataCopy['name']"
+        [(ngModel)]="profileDataCopy.name"
         [ngModelOptions]="{ standalone: true }"
       ></ion-input
     ></ion-title>
@@ -26,13 +26,13 @@
     </ion-segment-button>
   </ion-segment>
 
-  <div [ngSwitch]="scene">
-    <div *ngSwitchCase="'memo'">
+  <div>
+    <div [hidden]="scene !== 'memo'">
       <ion-card style="margin: 8px 8px; box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px">
         <ion-item lines="none">
           <ion-input
             placeholder="メモを追加"
-            [(ngModel)]="memoData['text']"
+            [(ngModel)]="memoData.text"
             [ngModelOptions]="{ standalone: true }"
           ></ion-input>
           <ion-button slot="end" name="add-circle-outline" (click)="addMemoData()">
@@ -61,7 +61,7 @@
         <ion-card-content (click)="changeMemo(memo)">{{ memo.text }}</ion-card-content>
       </ion-card>
     </div>
-    <div *ngSwitchCase="'profile'">
+    <div [hidden]="scene !== 'profile'">
       <form #f="ngForm" *ngIf="profileDataCopy">
         <ion-item lines="full">
           <div slot="start"></div>
@@ -100,13 +100,13 @@
         <ion-item lines="full">
           <ion-icon slot="start" size="small" class="profileIcon" name="gift-outline"></ion-icon>
           <ion-item lines="none">
-            <ion-select value="12" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileDataCopy['birthMonth']">
+            <ion-select value="12" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileDataCopy.birthMonth">
               <ion-select-option *ngFor="let month of birthMonthArray">{{ month }}</ion-select-option>
             </ion-select>
           </ion-item>
           月
           <ion-item lines="none">
-            <ion-select value="31" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileDataCopy['birthDay']">
+            <ion-select value="31" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileDataCopy.birthDay">
               <ion-select-option *ngFor="let day of birthDayArray">{{ day }}</ion-select-option>
             </ion-select>
           </ion-item>
@@ -116,7 +116,7 @@
           <ion-label position="floating">
             <ion-icon slot="start" class="profileIcon" name="transgender-outline"></ion-icon>性別</ion-label
           >
-          <ion-select [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileDataCopy['gender']">
+          <ion-select [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileDataCopy.gender">
             <ion-select-option>男性</ion-select-option>
             <ion-select-option>女性</ion-select-option>
             <ion-select-option>その他</ion-select-option>
@@ -129,7 +129,7 @@
           </ion-label>
           <ion-input
             [value]="profileDataCopy.profession"
-            [(ngModel)]="profileDataCopy['profession']"
+            [(ngModel)]="profileDataCopy.profession"
             [ngModelOptions]="{ standalone: true }"
             placeholder="職業"
           ></ion-input>
@@ -140,7 +140,7 @@
           >
           <ion-input
             [value]="profileDataCopy.birthPlace"
-            [(ngModel)]="profileDataCopy['birthPlace']"
+            [(ngModel)]="profileDataCopy.birthPlace"
             [ngModelOptions]="{ standalone: true }"
             placeholder="出身地"
           ></ion-input>
@@ -151,7 +151,7 @@
           >
           <ion-input
             [value]="profileDataCopy.hobby"
-            [(ngModel)]="profileDataCopy['hobby']"
+            [(ngModel)]="profileDataCopy.hobby"
             [ngModelOptions]="{ standalone: true }"
             placeholder="趣味"
           ></ion-input
@@ -162,7 +162,7 @@
           >
           <ion-input
             [value]="profileDataCopy.favoriteFood"
-            [(ngModel)]="profileDataCopy['favoriteFood']"
+            [(ngModel)]="profileDataCopy.favoriteFood"
             [ngModelOptions]="{ standalone: true }"
             placeholder="好きなもの"
           ></ion-input
@@ -173,7 +173,7 @@
           >
           <ion-input
             [value]="profileDataCopy.dislikes"
-            [(ngModel)]="profileDataCopy['dislikes']"
+            [(ngModel)]="profileDataCopy.dislikes"
             [ngModelOptions]="{ standalone: true }"
             placeholder="嫌いなもの"
           ></ion-input

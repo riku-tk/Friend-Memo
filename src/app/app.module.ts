@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -11,6 +11,7 @@ import { provideFirebaseApp, initializeApp, getApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth, initializeAuth, indexedDBLocalPersistence } from '@angular/fire/auth';
 import { AuthGuard } from '@angular/fire/auth-guard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { environment } from 'src/environments/environment';
 import { Capacitor } from '@capacitor/core';
@@ -20,9 +21,10 @@ import { Capacitor } from '@capacitor/core';
   entryComponents: [],
   bootstrap: [AppComponent],
   imports: [
-    BrowserModule,
+    // BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    BrowserAnimationsModule,
 
     provideFirebaseApp(() => initializeApp(environment.firebase)),
 
