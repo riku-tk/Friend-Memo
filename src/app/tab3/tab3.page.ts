@@ -4,6 +4,10 @@ import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Platform } from '@ionic/angular';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
+import { FirestoreService, IProfile, IMemo } from '../shared/firestore.service';
+import { Observable } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
+import { first } from 'rxjs/operators';
 
 const colors: any = {
   red: {
@@ -28,103 +32,72 @@ const colors: any = {
 })
 export class Tab3Page implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
-
+  profile: Observable<IProfile[]>;
+  events$: Observable<CalendarEvent[]>;
+  eventSubject: Subject<CalendarEvent[]>;
   isMobile: boolean;
-
   view: CalendarView = CalendarView.Month;
-
-  CalendarView = CalendarView;
-
   viewDate: Date = new Date();
+  activeDayIsOpen = true;
+  eventProfileIdList: string[] = [];
 
-  modalData: {
-    action: string;
-    event: CalendarEvent;
-  };
+  private events: CalendarEvent[] = [];
 
-  refresh = new Subject<void>();
-
-  events: CalendarEvent[] = [
-    {
-      start: new Date(),
-      end: new Date(),
-      title: '●●',
-      color: colors.red,
-      allDay: true,
-      draggable: true,
-    },
-    {
-      start: new Date(),
-      end: new Date(),
-      title: 'テスト',
-      color: colors.red,
-      allDay: true,
-      draggable: true,
-    },
-    {
-      start: addDays(new Date(), 1),
-      end: addDays(new Date(), 1),
-      title: 'ひとり',
-      color: colors.red,
-      allDay: true,
-      draggable: true,
-    },
-  ];
-
-  activeDayIsOpen: boolean = true;
-
-  constructor(private modal: NgbModal, private platform: Platform) {
-    this.isMobile = platform.is('mobile') && !platform.is('tablet');
+  constructor(
+    private modal: NgbModal,
+    private platform: Platform,
+    public auth: AuthService,
+    public firestore: FirestoreService,
+  ) {
+    this.isMobile = this.platform.is('mobile') && !this.platform.is('tablet');
+    this.eventSubject = new Subject<CalendarEvent[]>();
+    this.events$ = this.eventSubject.asObservable();
   }
 
-  ngOnInit() {}
-
-  handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
-  }
-
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
-  }
-
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-      }
-      this.viewDate = date;
-    }
-  }
-
-  setView(view: CalendarView) {
-    this.view = view;
+  ngOnInit() {
+    this.profile = this.firestore.profileInit(this.auth.getUserId());
+    this.profile.subscribe((profiles) => {
+      this.events = [];
+      this.eventProfileIdList = [];
+      this.updateEvent();
+    });
   }
 
   closeOpenMonthViewDay() {
+    //this.updateEvent();
     this.activeDayIsOpen = false;
   }
 
   getTitle(events: CalendarEvent[]) {
     const names: string[] = [];
     for (const e of events) {
-      names.push(e.title + 'さん');
+      names.push(e.title);
     }
     return names.join(',') + 'の誕生日です。';
+  }
+
+  updateEvent() {
+    this.profile.pipe(first()).forEach((profiles) => {
+      for (const profileDate of profiles) {
+        if (this.eventProfileIdList.includes(profileDate.id + this.viewDate.getFullYear())) {
+          continue;
+        }
+        this.eventProfileIdList.push(profileDate.id + this.viewDate.getFullYear());
+        const date: Date = new Date(`${this.viewDate.getFullYear()}-${profileDate.birthMonth}-${profileDate.birthDay}`);
+        this.events = [
+          ...this.events,
+          {
+            start: date,
+            end: date,
+            title: profileDate.name,
+            profilePhotoDataUrl: profileDate.profilePhotoDataUrl,
+            color: colors.red,
+            allDay: true,
+            draggable: true,
+          },
+        ];
+      }
+      this.eventSubject.next(this.events);
+    });
   }
 }

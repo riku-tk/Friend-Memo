@@ -24,11 +24,11 @@
       [tooltipTemplate]="tooltipTemplate"
       [tooltipAppendToBody]="tooltipAppendToBody"
     >
-      <img src="/assets/shapes.svg" />
+      <img [src]="event?.profilePhotoDataUrl || '/assets/shapes.svg'" />
     </ion-avatar>
     <ion-icon [ngClass]="isMobile ? 'mobile' : 'other'" name="ellipsis-horizontal"></ion-icon>
   </div>
-  <div class="cal-events" *ngIf="day.events.length == 1">
+  <div class="cal-events" *ngIf="day.events.length === 1">
     <ion-avatar
       [ngClass]="isMobile ? 'mobile' : 'other'"
       *ngFor="let event of day.events"
@@ -40,7 +40,7 @@
       [tooltipTemplate]="tooltipTemplate"
       [tooltipAppendToBody]="tooltipAppendToBody"
     >
-      <img src="/assets/shapes.svg" />
+      <img [src]="event?.profilePhotoDataUrl || '/assets/shapes.svg'" />
     </ion-avatar>
   </div>
 </ng-template>
@@ -74,13 +74,13 @@
   </div>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="events$ | async as event">
   <mwl-calendar-month-view
     [cellTemplate]="customCellTemplate"
     [viewDate]="viewDate"
-    [events]="events"
+    [events]="event"
     [refresh]="refresh"
-    (dayClicked)="dayClicked($event.day)"
+    (beforeViewRender)="updateEvent()"
   >
   </mwl-calendar-month-view>
 </ion-content>
