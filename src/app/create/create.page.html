@@ -24,7 +24,7 @@
         <ion-label>名前: </ion-label>
         <ion-input
           type="text"
-          [(ngModel)]="profileObject['name']"
+          [(ngModel)]="profileObject.name"
           [ngModelOptions]="{ standalone: true }"
           name="name"
           required
@@ -34,20 +34,20 @@
       <ion-item lines="full">
         <ion-label>誕生日: </ion-label>
         <ion-item lines="none">
-          <ion-select value="12" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileObject['birthMonth']">
+          <ion-select value="12" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileObject.birthMonth">
             <ion-select-option *ngFor="let month of birthMonthArray">{{ month }}</ion-select-option>
           </ion-select>
         </ion-item>
         月
         <ion-item lines="none">
-          <ion-select value="31" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileObject['birthDay']">
+          <ion-select value="31" [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileObject.birthDay">
             <ion-select-option *ngFor="let day of birthDayArray">{{ day }}</ion-select-option>
           </ion-select>
         </ion-item>
         日 </ion-item
       ><ion-item lines="full">
         <ion-label>性別: </ion-label>
-        <ion-select [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileObject['gender']">
+        <ion-select [ngModelOptions]="{ standalone: true }" [(ngModel)]="profileObject.gender">
           <ion-select-option>男性</ion-select-option>
           <ion-select-option>女性</ion-select-option>
           <ion-select-option>その他</ion-select-option>
@@ -57,7 +57,7 @@
         <ion-label>職業: </ion-label>
         <ion-input
           type="text"
-          [(ngModel)]="profileObject['profession']"
+          [(ngModel)]="profileObject.profession"
           [ngModelOptions]="{ standalone: true }"
           name="profession"
           required
@@ -67,7 +67,7 @@
         <ion-label>出身地: </ion-label>
         <ion-input
           type="text"
-          [(ngModel)]="profileObject['birthPlace']"
+          [(ngModel)]="profileObject.birthPlace"
           [ngModelOptions]="{ standalone: true }"
           name="birthPlace"
           required
@@ -76,7 +76,7 @@
         <ion-label>趣味: </ion-label>
         <ion-input
           type="text"
-          [(ngModel)]="profileObject['hobby']"
+          [(ngModel)]="profileObject.hobby"
           [ngModelOptions]="{ standalone: true }"
           name="hobby"
           required
@@ -85,7 +85,7 @@
         <ion-label>好きなもの: </ion-label>
         <ion-input
           type="text"
-          [(ngModel)]="profileObject['favoriteFood']"
+          [(ngModel)]="profileObject.favoriteFood"
           [ngModelOptions]="{ standalone: true }"
           name="favoriteFood"
           required
@@ -95,7 +95,7 @@
         <ion-label>嫌いなもの: </ion-label>
         <ion-input
           type="text"
-          [(ngModel)]="profileObject['dislikes']"
+          [(ngModel)]="profileObject.dislikes"
           [ngModelOptions]="{ standalone: true }"
           name="dislikes"
           required

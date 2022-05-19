@@ -41,7 +41,7 @@ export class Tab1Page implements OnInit {
     const modal = await this.modalController.create({
       component: ProfileDetailPage,
       componentProps: {
-        profileData: profileData,
+        profileData,
         memoList: this.firestore.memoInit(profileData.id),
       },
     });
@@ -53,7 +53,7 @@ export class Tab1Page implements OnInit {
   }
 
   removePin(profileData: IProfile) {
-    profileData['pinningFlg'] = false;
+    profileData.pinningFlg = false;
     this.toastService.presentToast('ピン留めを外しました');
     this.firestore.profileSet(profileData.id, profileData);
   }
