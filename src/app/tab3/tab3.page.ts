@@ -39,6 +39,28 @@ export class Tab3Page implements OnInit {
   activeDayIsOpen = true;
   eventProfileIdList: string[] = [];
 
+  monthArray: number[] = [...Array(12).keys()].map((i) => ++i);
+  dayArray: number[] = [...Array(31).keys()].map((i) => ++i);
+  headFlg: boolean;
+  mobileEvent: object = {};
+  mobileEvents: Observable<object>;
+  mobileEventSubject: Subject<object>;
+  profileObject: IProfile = {
+    uid: '',
+    name: '',
+    profession: '',
+    gender: '',
+    hobby: '',
+    favoriteFood: '',
+    birthMonthAndDay: '',
+    birthMonth: '',
+    birthDay: '',
+    birthPlace: '',
+    dislikes: '',
+    pinningFlg: false,
+    timeStamp: Date.now(),
+  };
+
   private events: CalendarEvent[] = [];
 
   constructor(
@@ -50,19 +72,23 @@ export class Tab3Page implements OnInit {
     this.isMobile = platform.is('mobile') && !platform.is('tablet');
     this.eventSubject = new Subject<CalendarEvent[]>();
     this.events$ = this.eventSubject.asObservable();
+
+    this.mobileEventSubject = new Subject<object>();
+    this.mobileEvents = this.mobileEventSubject.asObservable();
   }
 
   ngOnInit() {
-    this.profile = this.firestore.profileInit(this.auth.getUserId());
+    this.profile = this.firestore.profileInitOrderByBirthDay(this.auth.getUserId());
     this.profile.subscribe((profiles) => {
       this.events = [];
       this.eventProfileIdList = [];
       this.updateEvent();
+      this.mobileEvent = {};
+      this.updateEventMobile();
     });
   }
 
   closeOpenMonthViewDay() {
-    //this.updateEvent();
     this.activeDayIsOpen = false;
   }
 
@@ -97,5 +123,37 @@ export class Tab3Page implements OnInit {
       }
       this.eventSubject.next(this.events);
     });
+  }
+
+  updateEventMobile() {
+    this.profile.pipe(first()).forEach((profiles) => {
+      for (const profileDate of profiles) {
+        if (profileDate.birthDay !== '' && profileDate.birthMonth !== '') {
+          if (this.isKeyExists(this.mobileEvent, Number(profileDate.birthMonth) * 100 + Number(profileDate.birthDay))) {
+            this.mobileEvent[Number(profileDate.birthMonth) * 100 + Number(profileDate.birthDay)] = [
+              ...this.mobileEvent[Number(profileDate.birthMonth) * 100 + Number(profileDate.birthDay)],
+              profileDate,
+            ];
+          } else {
+            this.mobileEvent[Number(profileDate.birthMonth) * 100 + Number(profileDate.birthDay)] = [profileDate];
+          }
+        }
+      }
+      console.log(this.mobileEvent);
+      this.mobileEventSubject.next(this.mobileEvent);
+    });
+    console.log(this.mobileEvent);
+  }
+
+  getMonthBirthDayDate(month: number, day: number) {
+    if (this.isKeyExists(this.mobileEvent, month * 100 + day)) {
+      return this.mobileEvent[month * 100 + day];
+    } else {
+      return [];
+    }
+  }
+
+  private isKeyExists(obj, key) {
+    return !(obj[key] === undefined);
   }
 }

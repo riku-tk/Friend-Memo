@@ -86,7 +86,7 @@
   </div>
 </ion-header>
 
-<ion-content *ngIf="events$ | async as event">
+<ion-content *ngIf="isMobile === false && events$ | async as event">
   <mwl-calendar-month-view
     *ngIf="isMobile === false"
     [cellTemplate]="customCellTemplate"
@@ -95,4 +95,31 @@
     (beforeViewRender)="updateEvent()"
   >
   </mwl-calendar-month-view>
+</ion-content>
+
+<ion-content *ngIf="isMobile">
+  <ion-item-group *ngIf="mobileEvents | async as event">
+    <ng-container *ngFor="let month of monthArray">
+      <ion-item-divider style="background-color: #eeeeee">
+        <ion-label style="font-weight: bold; color: black">{{ month }}月</ion-label>
+      </ion-item-divider>
+      <ng-container *ngFor="let day of dayArray">
+        <ion-list lines="none" *ngIf="getMonthBirthDayDate(month, day).length !== 0">
+          <ion-label *ngIf="getMonthBirthDayDate(month, day).length !== 0" style="padding-left: 20px"
+            >{{ day }}日</ion-label
+          >
+          <ng-container *ngFor="let p of getMonthBirthDayDate(month, day)">
+            <ion-item lines="none" slot="start">
+              <ion-avatar slot="start" style="width: 36px; height: 36px">
+                <ion-img [src]="p?.profilePhotoDataUrl || '/assets/shapes.svg'"></ion-img>
+              </ion-avatar>
+              <ion-item slot="" lines="none" style="width: 100%">
+                <ion-label>{{ p.name }}</ion-label>
+              </ion-item>
+            </ion-item>
+          </ng-container>
+        </ion-list>
+      </ng-container>
+    </ng-container>
+  </ion-item-group>
 </ion-content>
