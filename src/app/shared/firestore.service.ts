@@ -112,7 +112,14 @@ export class FirestoreService {
 
   profileInitOrderByBirthDay(uid: string): Observable<IProfile[]> {
     return collectionData(
-      query(this.profileCollection, where('uid', '==', uid), orderBy('birthMonth', 'asc'), orderBy('birthDay', 'asc')),
+      query(
+        this.profileCollection,
+        where('uid', '==', uid),
+        orderBy('pinningFlg', 'desc'),
+        orderBy('timeStamp', 'desc'),
+        orderBy('birthMonth', 'asc'),
+        orderBy('birthDay', 'asc'),
+      ),
       {
         idField: 'id',
       },

@@ -44,3 +44,31 @@
 .cal-month-view .cal-events {
   align-items: flex-end;
 }
+
+.cal-events {
+  position: relative;
+  ion-avatar.first {
+    position: absolute;
+    left: 10px;
+    z-index: 3;
+    border: 5px;
+  }
+  ion-avatar.second {
+    position: absolute;
+    left: 25px;
+    z-index: 2;
+  }
+  ion-avatar.other {
+    position: absolute;
+    left: 40px;
+    z-index: 1;
+  }
+}
+
+ion-avatar {
+  img {
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    border: 3px solid white !important;
+  }
+}

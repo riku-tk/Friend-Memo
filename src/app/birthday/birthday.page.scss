@@ -2,26 +2,36 @@ h3 {
   margin-left: 20px;
 }
 
-ion-avatar {
-  &.other {
-    height: auto;
-    width: 20%;
-    aspect-ratio: 1/1;
-  }
-}
+// ion-avatar {
+//   &.other {
+//     height: auto;
+//     width: 20%;
+//     aspect-ratio: 1/1;
+//   }
+// }
 
-ion-icon {
-  &.other {
-    height: auto;
-    width: 20%;
-    aspect-ratio: 1/1;
-    display: grid;
-    place-items: center;
-  }
-}
+// ion-icon {
+//   &.other {
+//     height: auto;
+//     width: 20%;
+//     aspect-ratio: 1/1;
+//     display: grid;
+//     place-items: center;
+//   }
+// }
 
 hr {
   border: 0;
   border-top: 1px solid #a0a0a0;
   margin: 5px 10px;
 }
+
+// img.first {
+//   position: absolute;
+//   left: 30px;
+// }
+
+// img.other {
+//   position: absolute;
+//   left: 30px;
+// }

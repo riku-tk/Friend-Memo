@@ -19,33 +19,39 @@ export class AuthService {
   }
 
   authSignUp(login: { email: string; password: string }) {
-    return createUserWithEmailAndPassword(this.afAuth, login.email, login.password).then(() => {
-      this.navController.navigateForward('/').catch((error) => {
+    return createUserWithEmailAndPassword(this.afAuth, login.email, login.password)
+      .then(() => {
+        this.navController.navigateForward('/');
+      })
+      .catch((error) => {
         console.log(error.message);
         this.alertError(error);
         throw error;
       });
-    });
   }
 
   authSignIn(login: { email: string; password: string }) {
-    return signInWithEmailAndPassword(this.afAuth, login.email, login.password).then(() => {
-      this.navController.navigateForward('/').catch((error) => {
+    return signInWithEmailAndPassword(this.afAuth, login.email, login.password)
+      .then(() => {
+        this.navController.navigateForward('/');
+      })
+      .catch((error) => {
         console.log(error.message);
         this.alertError(error);
         throw error;
       });
-    });
   }
 
   authSignOut() {
-    return signOut(this.afAuth).then(() => {
-      this.navController.navigateRoot('/auth/signin').catch((error) => {
+    return signOut(this.afAuth)
+      .then(() => {
+        this.navController.navigateRoot('/auth/signin');
+      })
+      .catch((error) => {
         console.log(error.message);
         this.alertError(error);
         throw error;
       });
-    });
   }
 
   async alertError(e) {
