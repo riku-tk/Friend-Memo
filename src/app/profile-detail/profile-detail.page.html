@@ -16,13 +16,12 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-segment [(ngModel)]="scene">
-    <ion-segment-button value="memo">
-      <ion-icon name="chatbubbles-outline"></ion-icon>
-    </ion-segment-button>
-
-    <ion-segment-button value="profile">
+  <ion-segment *ngIf="profileDataCopy" [(ngModel)]="scene">
+    <ion-segment-button value="profile" (click)="saveScene(profileDataCopy.id, 'profile')">
       <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="memo" (click)="saveScene(profileDataCopy.id, 'memo')">
+      <ion-icon name="chatbubbles-outline"></ion-icon>
     </ion-segment-button>
   </ion-segment>
 

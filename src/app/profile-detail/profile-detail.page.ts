@@ -37,13 +37,16 @@ export class ProfileDetailPage implements OnInit {
   ) {
     console.log('test');
     this.memoData = { profileId: '', text: '', pinningFlg: false };
-    this.scene = 'memo';
     this.birthMonthArray = [...Array(12).keys()].map((i) => ++i);
     this.birthDayArray = [...Array(31).keys()].map((i) => ++i);
   }
 
   async ngOnInit() {
     this.profileDataCopy = await Object.assign({}, this.profileData);
+    this.scene = localStorage.getItem(this.profileData.id);
+    if (this.scene === null) {
+      this.scene = 'profile';
+    }
   }
 
   modalDismiss() {
@@ -196,5 +199,9 @@ export class ProfileDetailPage implements OnInit {
       ],
     });
     prompt.present();
+  }
+
+  saveScene(id: string, scene: string) {
+    localStorage.setItem(id, scene);
   }
 }
