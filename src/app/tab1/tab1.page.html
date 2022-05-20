@@ -16,7 +16,7 @@
   </ion-button>
 
   <ion-list>
-    <ion-item lines="full" *ngFor="let c of profile | async">
+    <ion-item lines="full" *ngFor="let c of profile | async; trackBy: trackByFn">
       <ion-avatar slot="start" style="width: 36px; height: 36px" (click)="openDetailPage(c)">
         <ion-img [src]="c?.profilePhotoDataUrl || '/assets/shapes.svg'"></ion-img>
       </ion-avatar>

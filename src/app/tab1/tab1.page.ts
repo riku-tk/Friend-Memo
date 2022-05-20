@@ -57,4 +57,8 @@ export class Tab1Page implements OnInit {
     this.toastService.presentToast('ピン留めを外しました');
     this.firestore.profileSet(profileData.id, profileData);
   }
+
+  trackByFn(index: number, profile: IProfile) {
+    return profile.id;
+  }
 }
