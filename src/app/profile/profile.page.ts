@@ -8,11 +8,11 @@ import { FirestoreService, IProfile, IMemo } from '../shared/firestore.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss'],
+  selector: 'app-profile',
+  templateUrl: 'profile.page.html',
+  styleUrls: ['profile.page.scss'],
 })
-export class Tab1Page implements OnInit {
+export class ProfilePage implements OnInit {
   email: string;
   profile: Observable<IProfile[]>;
   profileData: IProfile;

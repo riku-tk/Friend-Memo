@@ -3,11 +3,11 @@ import { FirestoreService } from '../shared/firestore.service';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss'],
+  selector: 'app-Setting',
+  templateUrl: 'Setting.page.html',
+  styleUrls: ['Setting.page.scss'],
 })
-export class Tab2Page implements OnInit {
+export class SettingPage implements OnInit {
   uid: string;
   email: string;
 
@@ -15,10 +15,10 @@ export class Tab2Page implements OnInit {
 
   async ngOnInit() {
     this.uid = await this.auth.getUserId();
+    this.email = await this.auth.getUserEmail();
   }
 
   async signOut() {
-    this.email = await this.auth.getUserEmail();
     this.auth.authSignOut();
   }
 }

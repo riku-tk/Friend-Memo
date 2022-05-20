@@ -8,8 +8,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { IonicModule } from '@ionic/angular';
-import { Tab3PageRoutingModule } from './tab3-routing.module';
-import { Tab3Page } from './tab3.page';
+import { BirthdayPageRoutingModule } from './birthday-routing.module';
+import { BirthdayPage } from './birthday.page';
 
 import localeJa from '@angular/common/locales/ja';
 import { registerLocaleData } from '@angular/common';
@@ -22,7 +22,7 @@ registerLocaleData(localeJa);
     CommonModule,
     FormsModule,
     IonicModule,
-    Tab3PageRoutingModule,
+    BirthdayPageRoutingModule,
     NgbModalModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
@@ -31,6 +31,6 @@ registerLocaleData(localeJa);
     }),
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'ja-JP' }],
-  declarations: [Tab3Page],
+  declarations: [BirthdayPage],
 })
-export class Tab3PageModule {}
+export class BirthdayPageModule {}

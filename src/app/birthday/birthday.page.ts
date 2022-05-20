@@ -24,12 +24,12 @@ const colors: any = {
 };
 
 @Component({
-  selector: 'app-tab3',
+  selector: 'app-Birthday',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './tab3.page.html',
-  styleUrls: ['./tab3.page.scss'],
+  templateUrl: './Birthday.page.html',
+  styleUrls: ['./Birthday.page.scss'],
 })
-export class Tab3Page implements OnInit {
+export class BirthdayPage implements OnInit {
   profile: Observable<IProfile[]>;
   events$: Observable<CalendarEvent[]>;
   eventSubject: Subject<CalendarEvent[]>;
