@@ -23,7 +23,6 @@ export interface IProfile {
   gender: string;
   hobby: string;
   favoriteFood: string;
-  birthMonthAndDay: string;
   birthMonth: string;
   birthDay: string;
   birthPlace: string;

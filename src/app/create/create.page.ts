@@ -24,7 +24,6 @@ export class CreatePage implements OnInit {
     gender: '',
     hobby: '',
     favoriteFood: '',
-    birthMonthAndDay: '',
     birthMonth: '',
     birthDay: '',
     birthPlace: '',
@@ -54,14 +53,6 @@ export class CreatePage implements OnInit {
   }
 
   async updateProfile() {
-    console.log(this.profileObject);
-    if (this.profileObject.birthMonth !== '' && this.profileObject.birthDay !== '') {
-      this.profileObject.birthMonthAndDay = this.profileObject.birthMonth + '/' + this.profileObject.birthDay;
-    } else if (this.profileObject.birthDay !== '') {
-      this.profileObject.birthMonthAndDay = '??月' + this.profileObject.birthDay + '日';
-    } else if (this.profileObject.birthMonth !== '') {
-      this.profileObject.birthMonthAndDay = this.profileObject.birthMonth + '月' + '??日';
-    }
     if (this.profileObject.name === '') {
       this.toastService.presentToast('名前に1文字以上、入力して下さい');
     } else {

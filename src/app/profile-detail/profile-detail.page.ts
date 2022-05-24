@@ -54,13 +54,6 @@ export class ProfileDetailPage implements OnInit {
   }
 
   setProfileData() {
-    if (this.profileDataCopy.birthMonth !== '' && this.profileDataCopy.birthDay !== '') {
-      this.profileDataCopy.birthMonthAndDay = this.profileDataCopy.birthMonth + '/' + this.profileDataCopy.birthDay;
-    } else if (this.profileDataCopy.birthDay !== '') {
-      this.profileDataCopy.birthMonthAndDay = '??月' + this.profileDataCopy.birthDay + '日';
-    } else if (this.profileDataCopy.birthMonth !== '') {
-      this.profileDataCopy.birthMonthAndDay = this.profileDataCopy.birthMonth + '月' + '??日';
-    }
     if (this.profileDataCopy.name === '') {
       this.toastService.presentToast('名前に1文字以上入力して下さい');
     } else {

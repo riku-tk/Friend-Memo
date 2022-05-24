@@ -52,7 +52,6 @@ export class BirthdayPage implements OnInit {
     gender: '',
     hobby: '',
     favoriteFood: '',
-    birthMonthAndDay: '',
     birthMonth: '',
     birthDay: '',
     birthPlace: '',
