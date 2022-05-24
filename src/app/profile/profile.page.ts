@@ -59,19 +59,17 @@ export class ProfilePage implements OnInit {
   }
 
   async pinning(profileData: IProfile, i: number) {
+    await this.slidings.get(i).close();
     profileData.pinningFlg = true;
     this.firestore.profileSet(profileData.id, profileData);
     this.toastService.presentToast('ピン留めしました');
-    // this.list.closeSlidingItems();
-    await this.slidings.get(i).closeOpened();
   }
 
   async removePin(profileData: IProfile, i: number) {
+    await this.slidings.get(i).close();
     profileData.pinningFlg = false;
     this.toastService.presentToast('ピン留めを外しました');
     this.firestore.profileSet(profileData.id, profileData);
-    // this.list.closeSlidingItems();
-    await this.slidings.get(i).closeOpened();
   }
 
   trackByFn(index: number, profile: IProfile) {

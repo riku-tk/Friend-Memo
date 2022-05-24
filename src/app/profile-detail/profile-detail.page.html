@@ -27,14 +27,14 @@
 
   <div>
     <div [hidden]="scene !== 'memo'">
-      <ion-card style="margin: 8px 8px; box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px">
+      <ion-card style="margin: 8px 8px; box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px; padding: 16px 12px">
         <ion-card-content style="padding: 0px 0px">
           <ion-item
             lines="none"
             style="display: flex; flex-flow: wrap; justify-content: space-around; align-items: center"
           >
             <ion-textarea
-              style="min-height: 69px"
+              style="min-height: 45px"
               auto-grow="true"
               [(ngModel)]="memoData.text"
               [ngModelOptions]="{ standalone: true }"
@@ -52,20 +52,20 @@
       </ion-card>
       <ng-container *ngFor="let memo of memoList | async">
         <ion-card
-          style="position: relative; box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px; padding: 24px 14px"
+          style="position: relative; box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px; padding: 16px 12px"
           (click)="changeMemo(memo)"
         >
           <ion-card-content style="white-space: break-spaces">{{ memo.text }}</ion-card-content>
-          <div style="position: absolute; top: 16px; right: 16px; z-index: 5">
+          <div style="position: absolute; top: 7px; right: 5px; z-index: 5">
             <ion-icon
-              style="font-size: 20px; margin: 0 0 0 5px; cursor: pointer"
+              style="font-size: 24px; margin: 0 0 0 5px; cursor: pointer"
               name="pin-outline"
               *ngIf="memo.pinningFlg === false"
               (click)="pinningMemo($event, memo)"
               slot="end"
             ></ion-icon>
             <ion-icon
-              style="font-size: 20px; margin: 0 0 0 5px; cursor: pointer"
+              style="font-size: 24px; margin: 0 0 0 5px; cursor: pointer"
               name="pin-sharp"
               *ngIf="memo.pinningFlg"
               (click)="removePinMemo($event, memo)"
