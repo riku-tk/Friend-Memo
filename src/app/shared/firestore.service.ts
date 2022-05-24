@@ -28,6 +28,7 @@ export interface IProfile {
   birthPlace: string;
   dislikes: string;
   pinningFlg: boolean;
+  relationship: string;
   timeStamp: number;
 }
 export interface IMemo {

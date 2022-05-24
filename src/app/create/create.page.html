@@ -54,6 +54,16 @@
         </ion-select>
       </ion-item>
       <ion-item lines="full">
+        <ion-label>関係性: </ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="profileObject.relationship"
+          [ngModelOptions]="{ standalone: true }"
+          name="relationship"
+          required
+        ></ion-input
+      ></ion-item>
+      <ion-item lines="full">
         <ion-label>職業: </ion-label>
         <ion-input
           type="text"

@@ -29,6 +29,7 @@ export class CreatePage implements OnInit {
     birthPlace: '',
     dislikes: '',
     pinningFlg: false,
+    relationship: '',
     timeStamp: Date.now(),
   };
 

@@ -56,6 +56,7 @@ export class BirthdayPage implements OnInit {
     birthDay: '',
     birthPlace: '',
     dislikes: '',
+    relationship: '',
     pinningFlg: false,
     timeStamp: Date.now(),
   };
