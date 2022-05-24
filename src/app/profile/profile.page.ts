@@ -1,5 +1,5 @@
 import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { IonItemSliding, ModalController, NavController } from '@ionic/angular';
+import { IonItemSliding, IonList, ModalController, NavController } from '@ionic/angular';
 import { CreatePage } from '../create/create.page';
 import { ProfileDetailPage } from '../profile-detail/profile-detail.page';
 import { ToastService } from '../shared/toast.service';
@@ -15,6 +15,9 @@ import { Observable } from 'rxjs';
 export class ProfilePage implements OnInit {
   @ViewChildren(IonItemSliding)
   slidings: QueryList<IonItemSliding>;
+
+  // @ViewChild(IonList)
+  // list: IonList;
 
   email: string;
   profile: Observable<IProfile[]>;
@@ -55,18 +58,20 @@ export class ProfilePage implements OnInit {
     this.navController.navigateForward(['profile', itemId]);
   }
 
-  pinning(profileData: IProfile, i: number) {
+  async pinning(profileData: IProfile, i: number) {
     profileData.pinningFlg = true;
     this.firestore.profileSet(profileData.id, profileData);
     this.toastService.presentToast('ピン留めしました');
-    this.slidings.get(i).closeOpened();
+    // this.list.closeSlidingItems();
+    await this.slidings.get(i).closeOpened();
   }
 
-  removePin(profileData: IProfile, i: number) {
+  async removePin(profileData: IProfile, i: number) {
     profileData.pinningFlg = false;
     this.toastService.presentToast('ピン留めを外しました');
     this.firestore.profileSet(profileData.id, profileData);
-    this.slidings.get(i).closeOpened();
+    // this.list.closeSlidingItems();
+    await this.slidings.get(i).closeOpened();
   }
 
   trackByFn(index: number, profile: IProfile) {
