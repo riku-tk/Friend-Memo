@@ -159,13 +159,15 @@ export class ProfileDetailPage implements OnInit {
     this.toastService.presentToast('ピン留めを外しました');
   }
 
-  pinningMemo(memoData: IMemo) {
+  pinningMemo($event, memoData: IMemo) {
+    $event.stopPropagation();
     memoData.pinningFlg = true;
     this.firestore.memoSet(memoData.id, memoData);
     this.toastService.presentToast('ピン留めしました');
   }
 
-  removePinMemo(memoData: IMemo) {
+  removePinMemo($event, memoData: IMemo) {
+    $event.stopPropagation();
     memoData.pinningFlg = false;
     this.firestore.memoSet(memoData.id, memoData);
     this.toastService.presentToast('ピン留めを外しました');

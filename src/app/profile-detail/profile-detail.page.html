@@ -28,37 +28,52 @@
   <div>
     <div [hidden]="scene !== 'memo'">
       <ion-card style="margin: 8px 8px; box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px">
-        <ion-item lines="none">
-          <ion-input
-            placeholder="メモを追加"
-            [(ngModel)]="memoData.text"
-            [ngModelOptions]="{ standalone: true }"
-          ></ion-input>
-          <ion-button slot="end" name="add-circle-outline" (click)="addMemoData()">
-            <ion-icon name="add-circle-sharp"></ion-icon>
-          </ion-button>
-        </ion-item>
+        <ion-card-content style="padding: 0px 0px">
+          <ion-item
+            lines="none"
+            style="display: flex; flex-flow: wrap; justify-content: space-around; align-items: center"
+          >
+            <ion-textarea
+              style="min-height: 69px"
+              auto-grow="true"
+              [(ngModel)]="memoData.text"
+              [ngModelOptions]="{ standalone: true }"
+            ></ion-textarea>
+            <ion-button
+              style="margin-inline-start: 0px; font-size: 14px; margin: 0px 0px"
+              size="large"
+              slot="end"
+              (click)="addMemoData()"
+            >
+              <ion-icon name="add-circle-sharp" size="large"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-card-content>
       </ion-card>
-      <ion-card
-        *ngFor="let memo of memoList | async"
-        style="margin: 16px 8px; box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px"
-      >
-        <ion-card-header style="padding: 3px 3px 0 0; text-align: right">
-          <ion-icon
-            style="font-size: 20px"
-            name="pin-outline"
-            *ngIf="memo.pinningFlg === false"
-            (click)="pinningMemo(memo)"
-          ></ion-icon>
-          <ion-icon
-            style="font-size: 20px"
-            name="pin-sharp"
-            *ngIf="memo.pinningFlg"
-            (click)="removePinMemo(memo)"
-          ></ion-icon>
-        </ion-card-header>
-        <ion-card-content (click)="changeMemo(memo)">{{ memo.text }}</ion-card-content>
-      </ion-card>
+      <ng-container *ngFor="let memo of memoList | async">
+        <ion-card
+          style="position: relative; box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px; padding: 24px 14px"
+          (click)="changeMemo(memo)"
+        >
+          <ion-card-content style="white-space: break-spaces">{{ memo.text }}</ion-card-content>
+          <div style="position: absolute; top: 16px; right: 16px; z-index: 5">
+            <ion-icon
+              style="font-size: 20px; margin: 0 0 0 5px; cursor: pointer"
+              name="pin-outline"
+              *ngIf="memo.pinningFlg === false"
+              (click)="pinningMemo($event, memo)"
+              slot="end"
+            ></ion-icon>
+            <ion-icon
+              style="font-size: 20px; margin: 0 0 0 5px; cursor: pointer"
+              name="pin-sharp"
+              *ngIf="memo.pinningFlg"
+              (click)="removePinMemo($event, memo)"
+              slot="end"
+            ></ion-icon>
+          </div>
+        </ion-card>
+      </ng-container>
     </div>
     <div [hidden]="scene !== 'profile'">
       <form #f="ngForm" *ngIf="profileDataCopy">
