@@ -23,6 +23,10 @@ const colors: any = {
   },
 };
 
+interface CustomCalendarEvent extends CalendarEvent {
+  profilePhotoDataUrl?: string;
+}
+
 @Component({
   selector: 'app-Birthday',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,8 +35,8 @@ const colors: any = {
 })
 export class BirthdayPage implements OnInit {
   profile: Observable<IProfile[]>;
-  events$: Observable<CalendarEvent[]>;
-  eventSubject: Subject<CalendarEvent[]>;
+  events$: Observable<CustomCalendarEvent[]>;
+  eventSubject: Subject<CustomCalendarEvent[]>;
   isMobile: boolean;
   view: CalendarView = CalendarView.Month;
   viewDate: Date = new Date();
@@ -61,7 +65,7 @@ export class BirthdayPage implements OnInit {
     timeStamp: Date.now(),
   };
 
-  private events: CalendarEvent[] = [];
+  private events: CustomCalendarEvent[] = [];
 
   constructor(
     private modal: NgbModal,
@@ -70,7 +74,7 @@ export class BirthdayPage implements OnInit {
     public firestore: FirestoreService,
   ) {
     this.isMobile = platform.is('mobile') && !platform.is('tablet');
-    this.eventSubject = new Subject<CalendarEvent[]>();
+    this.eventSubject = new Subject<CustomCalendarEvent[]>();
     this.events$ = this.eventSubject.asObservable();
 
     this.mobileEventSubject = new Subject<object>();
@@ -92,7 +96,7 @@ export class BirthdayPage implements OnInit {
     this.activeDayIsOpen = false;
   }
 
-  getTitle(events: CalendarEvent[]) {
+  getTitle(events: CustomCalendarEvent[]) {
     const names: string[] = [];
     for (const e of events) {
       names.push(e.title);
