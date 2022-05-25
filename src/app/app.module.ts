@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { environment } from 'src/environments/environment';
 import { Capacitor } from '@capacitor/core';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,6 +40,12 @@ import { Capacitor } from '@capacitor/core';
     }),
 
     provideFirestore(() => getFirestore()),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
   providers: [AuthGuard, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
 })
