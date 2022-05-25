@@ -49,19 +49,23 @@
   position: relative;
   ion-avatar.first {
     position: absolute;
-    left: 10px;
-    z-index: 3;
-    border: 5px;
+    left: 5px;
+    z-index: 5;
   }
   ion-avatar.second {
     position: absolute;
-    left: 25px;
-    z-index: 2;
+    left: 40px;
+    z-index: 4;
+  }
+  ion-avatar.third {
+    position: absolute;
+    left: 75px;
+    z-index: 3;
   }
   ion-avatar.other {
     position: absolute;
-    left: 40px;
-    z-index: 1;
+    left: 110px;
+    z-index: 2;
   }
 }
 

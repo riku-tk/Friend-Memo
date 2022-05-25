@@ -25,7 +25,7 @@ const colors: any = {
 };
 
 interface CustomCalendarEvent extends CalendarEvent {
-  profilePhotoDataUrl?: string;
+  profileData: IProfile;
 }
 
 @Component({
@@ -103,7 +103,7 @@ export class BirthdayPage implements OnInit {
     for (const e of events) {
       names.push(e.title);
     }
-    return names.join(',') + 'の誕生日です。';
+    return names.join(', ') + 'の誕生日です。';
   }
 
   updateEvent() {
@@ -120,7 +120,7 @@ export class BirthdayPage implements OnInit {
             start: date,
             end: date,
             title: profileDate.name,
-            profilePhotoDataUrl: profileDate.profilePhotoDataUrl,
+            profileData: profileDate,
             color: colors.red,
             allDay: true,
             draggable: true,
@@ -172,5 +172,9 @@ export class BirthdayPage implements OnInit {
       },
     });
     await modal.present();
+  }
+
+  onClick() {
+    console.log('click test');
   }
 }

@@ -14,11 +14,12 @@
   </div>
   <div class="cal-events" *ngIf="day.events.length > 1">
     <ion-avatar
+      (click)="openDetailPage(event?.profileData)"
       class="event-avatar"
       *ngFor="let event of day.events; let i = index"
       (mouseenter)="highlightDay.emit({ event: event })"
       (mouseleave)="unhighlightDay.emit({ event: event })"
-      [ngClass]="{ first: i == 0, second: i == 1, other: i > 1 }"
+      [ngClass]="{ first: i == 0, second: i == 1, third: i == 2, other: i > 2 }"
       [mwlCalendarTooltip]="getTitle(day.events)"
       [tooltipPlacement]="tooltipPlacement"
       [tooltipEvent]="event"
@@ -26,18 +27,14 @@
       [tooltipAppendToBody]="tooltipAppendToBody"
     >
       <img
-        [src]="event?.profilePhotoDataUrl || '/assets/shapes.svg'"
+        [src]="event?.profileData.profilePhotoDataUrl || '/assets/shapes.svg'"
         style="width: 48px; height: auto; aspect-ratio: 1/1"
       />
     </ion-avatar>
-    <!-- <ion-icon
-      style="margin-right: auto"
-      [ngClass]="isMobile ? 'mobile' : 'other'"
-      name="ellipsis-horizontal"
-    ></ion-icon> -->
   </div>
   <div class="cal-events" *ngIf="day.events.length === 1">
     <ion-avatar
+      (click)="openDetailPage(event?.profileData)"
       class="first"
       *ngFor="let event of day.events"
       (mouseenter)="highlightDay.emit({ event: event })"
@@ -49,7 +46,7 @@
       [tooltipAppendToBody]="tooltipAppendToBody"
     >
       <img
-        [src]="event?.profilePhotoDataUrl || '/assets/shapes.svg'"
+        [src]="event?.profileData.profilePhotoDataUrl || '/assets/shapes.svg'"
         style="width: 48px; height: auto; aspect-ratio: 1/1"
       />
     </ion-avatar>
@@ -57,31 +54,40 @@
 </ng-template>
 
 <ion-header [hidden]="toggle === false">
-  <div *ngIf="isMobile === false" class="header">
+  <div *ngIf="isMobile === false" class="header" style="display: flex">
     <div class="col-md-4">
-      <div class="btn-group">
+      <div class="btn-group" style="display: flex; align-items: center">
         <div
           class="btn btn-primary"
           mwlCalendarPreviousView
           [view]="view"
           [(viewDate)]="viewDate"
           (viewDateChange)="closeOpenMonthViewDay()"
+          style="display: flex; align-items: center; justify-content: center"
         >
           前月
         </div>
-        <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">今日</div>
+        <div
+          style="display: flex; align-items: center; justify-content: center"
+          class="btn btn-outline-secondary"
+          mwlCalendarToday
+          [(viewDate)]="viewDate"
+        >
+          今日
+        </div>
         <div
           class="btn btn-primary"
           mwlCalendarNextView
           [view]="view"
           [(viewDate)]="viewDate"
           (viewDateChange)="closeOpenMonthViewDay()"
+          style="display: flex; align-items: center; justify-content: center"
         >
           次月
         </div>
-        <h3>{{ viewDate.getMonth() + 1 }}月</h3>
       </div>
     </div>
+    <h3>{{ viewDate.getFullYear() }}年 {{ viewDate.getMonth() + 1 }}月</h3>
   </div>
 </ion-header>
 
