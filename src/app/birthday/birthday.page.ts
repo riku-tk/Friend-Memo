@@ -1,12 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Platform } from '@ionic/angular';
+import { Platform, ModalController } from '@ionic/angular';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { FirestoreService, IProfile } from '../shared/firestore.service';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { first } from 'rxjs/operators';
+import { ProfileDetailPage } from '../profile-detail/profile-detail.page';
 
 const colors: any = {
   red: {
@@ -68,6 +69,7 @@ export class BirthdayPage implements OnInit {
   private events: CustomCalendarEvent[] = [];
 
   constructor(
+    public modalController: ModalController,
     private modal: NgbModal,
     private platform: Platform,
     public auth: AuthService,
@@ -159,5 +161,16 @@ export class BirthdayPage implements OnInit {
 
   private isKeyExists(obj, key) {
     return !(obj[key] === undefined);
+  }
+
+  async openDetailPage(profileData: IProfile) {
+    const modal = await this.modalController.create({
+      component: ProfileDetailPage,
+      componentProps: {
+        profileData,
+        memoList: this.firestore.memoInit(profileData.id),
+      },
+    });
+    await modal.present();
   }
 }

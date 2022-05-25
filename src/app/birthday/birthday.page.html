@@ -108,7 +108,7 @@
             >{{ day }}日</ion-label
           >
           <ng-container *ngFor="let p of getMonthBirthDayDate(month, day)">
-            <ion-item lines="none" slot="start">
+            <ion-item lines="none" slot="start" (click)="openDetailPage(p)">
               <ion-avatar slot="start" style="width: 36px; height: 36px">
                 <ion-img [src]="p?.profilePhotoDataUrl || '/assets/shapes.svg'"></ion-img>
               </ion-avatar>
