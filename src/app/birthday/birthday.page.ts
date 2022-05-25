@@ -43,7 +43,7 @@ export class BirthdayPage implements OnInit {
   viewDate: Date = new Date();
   activeDayIsOpen = true;
   eventProfileIdList: string[] = [];
-
+  toggle = false;
   monthArray: number[] = [...Array(12).keys()].map((i) => ++i);
   dayArray: number[] = [...Array(31).keys()].map((i) => ++i);
   headFlg: boolean;

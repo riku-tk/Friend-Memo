@@ -56,7 +56,7 @@
   </div>
 </ng-template>
 
-<ion-header>
+<ion-header [hidden]="toggle === false">
   <div *ngIf="isMobile === false" class="header">
     <div class="col-md-4">
       <div class="btn-group">
@@ -85,19 +85,17 @@
   </div>
 </ion-header>
 
-<ion-content *ngIf="isMobile === false && events$ | async as event">
+<ion-content>
   <mwl-calendar-month-view
-    *ngIf="isMobile === false"
+    [hidden]="toggle === false"
+    *ngIf="events$ | async as event"
     [cellTemplate]="customCellTemplate"
     [viewDate]="viewDate"
     [events]="event"
     (beforeViewRender)="updateEvent()"
   >
   </mwl-calendar-month-view>
-</ion-content>
-
-<ion-content *ngIf="isMobile">
-  <ion-item-group *ngIf="mobileEvents | async as event">
+  <ion-item-group [hidden]="toggle === true" *ngIf="mobileEvents | async as event">
     <ng-container *ngFor="let month of monthArray">
       <ion-item-divider style="background-color: #eeeeee">
         <ion-label style="font-weight: bold; color: black">{{ month }}月</ion-label>
@@ -122,3 +120,10 @@
     </ng-container>
   </ion-item-group>
 </ion-content>
+
+<ion-footer *ngIf="isMobile === false">
+  <ion-item lines="none">
+    <ion-label slot="end">カレンダー</ion-label>
+    <ion-toggle slot="end" [(ngModel)]="toggle"></ion-toggle>
+  </ion-item>
+</ion-footer>
